@@ -1,0 +1,537 @@
+/* Barefoot Fishing Safaris — brand stylesheet (v5).
+   Eleven uplift FOLDED IN 10 Aug 2026 after GW approved the prototype:
+   Fraunces light serif display for H1/H2, Montserrat demoted to small tracked
+   uppercase UI (eyebrows/buttons/nav), quieter pill buttons, sticky
+   section-nav, scroll-reveal motion, eucalypt/charcoal dark-band variants.
+   Pre-Eleven version kept at styles-v4-preEleven.css.bak.
+   Palette + accessibility rules unchanged from the brand reference. */
+
+/* Fonts bundled locally (assets/fonts/) — never hotlinked, so they can't fail
+   to load on poor mobile data. Montserrat + Open Sans are variable fonts:
+   one file each covers every weight we use. */
+@font-face{
+  font-family:'Montserrat';
+  src:url('assets/fonts/montserrat.woff2') format('woff2');
+  font-weight:600 800;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Open Sans';
+  src:url('assets/fonts/opensans.woff2') format('woff2');
+  font-weight:400 600;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Lora';
+  src:url('assets/fonts/lora-italic.woff2') format('woff2');
+  font-weight:400;font-style:italic;font-display:swap;
+}
+/* Fraunces — light display serif for H1/H2 (Eleven uplift item 1).
+   Variable font: weights 300–400 + optical-size axis in one 66KB file,
+   bundled locally like the others — never hotlinked. */
+@font-face{
+  font-family:'Fraunces';
+  src:url('assets/fonts/fraunces.woff2') format('woff2');
+  font-weight:300 400;font-style:normal;font-display:swap;
+}
+
+:root{
+  --copper:#C97B47;      /* hero accent — CTAs (large only) */
+  --navy:#16314E;        /* primary dark — headings, nav */
+  --cream:#F6F1E7;       /* warm page background */
+  --dune:#E5D6C0;        /* cards, panels, dividers */
+  --charcoal:#211C17;    /* body text */
+  --slate:#5E6B72;       /* secondary text */
+  --orange:#DA5A1E;      /* spark — emphasis only */
+  --sage:#6E8169;        /* eco note — sparingly */
+  --white:#fff;
+  --maxw:1120px;
+  --radius:14px;
+  --shadow:0 6px 24px rgba(22,49,78,.08);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:'Open Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--charcoal);background:var(--white);line-height:1.6;font-size:17px;
+}
+h1,h2,h3,h4{font-family:'Montserrat',system-ui,sans-serif;color:var(--navy);line-height:1.15;margin:0 0 .5em}
+/* Display serif at light weights — the Eleven move. The variable font's
+   optical-size axis sharpens the big sizes automatically. */
+h1{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(2.5rem,5.5vw,4rem);line-height:1.05}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(1.75rem,3.4vw,2.55rem);line-height:1.12}
+h3{font-weight:700;font-size:1.25rem}
+p{margin:0 0 1rem}
+a{color:var(--navy)}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.eyebrow{font-family:'Montserrat';font-weight:600;text-transform:uppercase;letter-spacing:.22em;
+  font-size:.72rem;color:var(--copper)}
+
+/* buttons — per brand accessibility rules.
+   Eleven uplift item 4: quieter — 12–13px uppercase, tracked out, same
+   copper/navy fills, pill radius kept (brand rule). */
+.btn{display:inline-block;font-family:'Montserrat';font-weight:700;text-decoration:none;
+  text-transform:uppercase;letter-spacing:.08em;
+  padding:1.15em 2.2em;border-radius:40px;font-size:.74rem;
+  transition:filter .7s cubic-bezier(.4,0,.2,1),background-color .7s cubic-bezier(.4,0,.2,1),
+    color .7s cubic-bezier(.4,0,.2,1),border-color .7s cubic-bezier(.4,0,.2,1)}
+/* Eleven-measured hovers: slow silky fades (700ms), no position jumps */
+.btn:hover{filter:brightness(1.1)}
+.btn-primary{background:var(--navy);color:var(--cream)}       /* everyday CTA (high contrast) */
+.btn-primary:hover{filter:brightness(1.15)}
+.btn-hero{background:var(--copper);color:var(--navy);box-shadow:var(--shadow)} /* signature, large only */
+.btn-ghost{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn-ghost.on-dark{color:var(--cream);border-color:rgba(255,255,255,.6)}
+
+/* header / nav */
+header.site{position:sticky;top:0;z-index:50;background:rgba(22,49,78,.88);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:3px solid var(--copper)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px 22px;max-width:var(--maxw);margin:0 auto}
+.nav img{height:104px;width:auto}
+@media(max-width:820px){.nav img{height:72px}}
+.nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0;align-items:center}
+.nav a{color:var(--cream);text-decoration:none;font-family:'Montserrat';font-weight:600;font-size:.74rem;
+  text-transform:uppercase;letter-spacing:.14em;transition:color .7s cubic-bezier(.4,0,.2,1)}
+.nav a:hover{color:var(--copper)}
+.nav .btn-primary{background:var(--copper);color:var(--navy);padding:.75em 1.4em}
+@media(max-width:820px){.nav ul{display:none}}
+
+/* hero */
+.hero{background:linear-gradient(180deg,#16314E 0%,#1d3f63 100%);color:var(--cream);
+  padding:88px 0 96px;position:relative;overflow:hidden}
+.hero h1{color:var(--white);max-width:16ch}
+.hero .lead{font-size:1.25rem;max-width:52ch;color:#e9e1d3;margin-bottom:1.8rem}
+.hero .cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+.hero .eyebrow{color:var(--copper)}
+
+/* sections — Eleven-measured breathing room (their modules pad up to 184px;
+   we scale between 76px on a phone and 150px on desktop) */
+section{padding:clamp(76px,9vw,150px) 0}
+section.cream{background:var(--cream)}
+.section-head{max-width:640px;margin-bottom:3.2rem}
+.grid{display:grid;gap:1.4rem}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:840px){.grid-3,.grid-2{grid-template-columns:1fr}}
+
+/* cards */
+.card{background:var(--white);border:1px solid var(--dune);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow)}
+.card.sand{background:var(--dune);border-color:transparent}
+.card .season{font-family:'Montserrat';font-weight:700;color:var(--copper);font-size:.85rem;text-transform:uppercase;letter-spacing:.06em}
+.card h3{margin:.3rem 0 .5rem}
+.card p{color:var(--slate);font-size:.97rem;margin-bottom:0}
+
+/* cross-sell / strip */
+.strip{background:var(--navy);color:var(--cream);border-radius:var(--radius);padding:40px;display:flex;
+  gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.strip h2{color:var(--white)}
+.strip p{color:#dfe6ec;max-width:52ch;margin:0}
+
+/* media centre teaser */
+.media-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:840px){.media-tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--dune);border-radius:12px;padding:20px;text-align:center;font-family:'Montserrat';font-weight:700;color:var(--navy)}
+.tile span{display:block;font-size:1.9rem;margin-bottom:.3rem}
+
+/* testimonials */
+.quote{background:var(--white);border-left:4px solid var(--copper);border-radius:0 12px 12px 0;padding:20px 24px;box-shadow:var(--shadow)}
+.quote p{font-family:'Lora',Georgia,serif;font-style:italic;color:var(--charcoal);font-size:1.05rem}
+.quote .who{font-family:'Montserrat';font-style:normal;font-weight:700;color:var(--slate);font-size:.85rem}
+
+/* footer */
+footer.site{background:var(--charcoal);color:#d9cfc0;padding:56px 0 28px;font-size:.92rem}
+footer.site img{height:54px;margin-bottom:1rem}
+footer.site a{color:#e9e1d3}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2rem}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr}}
+footer h4{color:var(--cream)}
+footer ul{list-style:none;padding:0;margin:0;line-height:2}
+.foot-note{border-top:1px solid #3a332b;margin-top:2.4rem;padding-top:1.2rem;color:#8f857a;font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+
+.center{text-align:center}
+.mt{margin-top:1.6rem}
+
+/* mobile nav */
+.nav-toggle{display:none;background:none;border:0;color:var(--cream);font-size:1.7rem;cursor:pointer;line-height:1;padding:.15em .4em}
+@media(max-width:820px){
+  .nav-toggle{display:block}
+  .nav{flex-wrap:wrap}
+  .nav ul{display:none;flex-direction:column;width:100%;gap:0;padding:.3rem 0 .4rem}
+  .nav ul.open{display:flex}
+  .nav ul li{width:100%}
+  .nav ul a{display:block;padding:.75em 0;border-top:1px solid rgba(255,255,255,.14)}
+  .nav .btn-primary{width:100%;text-align:center;margin-top:.5rem}
+}
+
+/* responsive images (AVIF + JPEG via <picture>) */
+img.resp{width:100%;height:auto;display:block}
+.ratio{aspect-ratio:16/9;background:var(--dune);border-radius:var(--radius);overflow:hidden}
+.ratio img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* article / media sub-pages */
+.subhero{background:linear-gradient(180deg,#16314E,#1d3f63);color:var(--cream);padding:56px 0 46px}
+.subhero .eyebrow{color:var(--copper)}
+.subhero h1{color:#fff;max-width:22ch;margin-top:.3rem}
+.article{max-width:760px;margin:0 auto;padding:52px 22px}
+.article p,.article li{font-size:1.06rem}
+.article h2{margin-top:2.2rem}
+.article h3{margin-top:1.5rem;color:var(--copper)}
+.article blockquote{border-left:4px solid var(--copper);margin:1.6rem 0;padding:.3rem 0 .3rem 1.2rem;font-family:'Lora',Georgia,serif;font-style:italic;color:var(--charcoal);font-size:1.15rem}
+.article ul{padding-left:1.1rem}
+.byline{color:var(--slate);font-size:.9rem;margin-bottom:.4rem}
+.pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.6rem 0}
+@media(max-width:640px){.pillars{grid-template-columns:1fr}}
+.pillar{background:var(--dune);border-radius:12px;padding:18px 20px}
+.pillar h4{color:var(--navy);margin:0 0 .3rem;font-size:1.02rem}
+.pillar p{font-size:.93rem;color:var(--slate);margin:0}
+
+/* media library */
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.filters button{font-family:'Montserrat';font-weight:600;font-size:.85rem;padding:.45em 1em;border-radius:30px;border:2px solid var(--dune);background:var(--white);color:var(--navy);cursor:pointer}
+.filters button.active{background:var(--navy);color:var(--cream);border-color:var(--navy)}
+.libgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media(max-width:840px){.libgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.libgrid{grid-template-columns:1fr}}
+.libcard{background:var(--white);border:1px solid var(--dune);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.libcard .thumb{aspect-ratio:16/9;background:var(--navy);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+.libcard .body{padding:18px;display:flex;flex-direction:column;flex:1}
+.libcard .type{font-family:'Montserrat';font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--copper)}
+.libcard h3{font-size:1.02rem;margin:.3rem 0 .4rem}
+.libcard p{font-size:.9rem;color:var(--slate);margin:0 0 1rem}
+.libcard a{margin-top:auto;font-family:'Montserrat';font-weight:700;color:var(--navy);text-decoration:none;font-size:.9rem}
+.libcard a:hover{color:var(--copper)}
+
+/* pricing tables */
+.priceintro{background:var(--dune);border-radius:var(--radius);padding:22px 24px;margin:1.4rem 0}
+.priceintro p{margin:0;color:var(--charcoal)}
+.pricepkg{margin:1.8rem 0}
+.pricepkg h3{color:var(--navy);margin-bottom:.15rem}
+.pricenote{color:var(--slate);font-size:.9rem;margin:.1rem 0 .8rem}
+.pricetable{overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow)}
+.pricetable table{width:100%;border-collapse:collapse;background:var(--white);min-width:440px}
+.pricetable th,.pricetable td{padding:.65em 1.1em;text-align:right;border-bottom:1px solid var(--dune);font-size:.95rem}
+.pricetable th:first-child,.pricetable td:first-child{text-align:left}
+.pricetable thead th{background:var(--navy);color:var(--cream);font-family:'Montserrat';font-weight:700;border-bottom:none;position:sticky;top:0}
+.pricetable tbody tr:nth-child(even){background:var(--cream)}
+.pricetable td:first-child{font-weight:600;color:var(--navy)}
+.pricefrom{font-family:'Montserrat';font-weight:800;color:var(--copper);font-size:1.05rem}
+
+/* at-a-glance spec tiles */
+.spectiles{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+@media(max-width:900px){.spectiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.spectiles{grid-template-columns:1fr}}
+.spectile{background:var(--white);border:1px solid var(--dune);border-radius:14px;padding:18px 14px;text-align:center}
+.spectile .ic{line-height:1;margin-bottom:.5rem}
+.spectile .ic svg{width:34px;height:34px;stroke:var(--copper);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.spectile .lbl{font-family:'Montserrat';font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--copper);margin-bottom:.3rem}
+.spectile .val{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:1rem;line-height:1.25}
+.spectile .sub{font-size:.75rem;color:var(--slate);margin-top:.15rem}
+/* grouped pricing table */
+.pricetable.grouped tbody tr{background:var(--white)}
+.pricetable.grouped tr.newgrp td{border-top:2px solid #c9d2da}
+.pricetable.grouped td:first-child{font-weight:400;color:var(--charcoal)}
+.pricetable.grouped .grouphdr td{background:var(--dune);color:var(--navy);font-family:'Montserrat';font-weight:700;text-align:left;font-size:.9rem;letter-spacing:.02em;border-bottom:none}
+
+/* photo hero */
+.photohero{position:relative;overflow:hidden;min-height:clamp(360px,54vh,560px);display:flex;align-items:flex-end;padding:0}
+.photohero .hero-bg{position:absolute;inset:0;z-index:0}
+.photohero .hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.photohero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(22,49,78,.12) 0%,rgba(22,49,78,.32) 45%,rgba(22,49,78,.86) 100%)}
+.photohero .hero-content{position:relative;z-index:2;width:100%;padding:0 22px 38px;max-width:var(--maxw);margin:0 auto}
+.photohero .eyebrow{color:var(--copper)}
+.photohero h1{color:#fff;margin-top:.25rem;text-shadow:0 2px 22px rgba(0,0,0,.4)}
+/* in-content photos */
+figure.shot{margin:2rem 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+figure.shot img{width:100%;height:auto;display:block}
+figure.shot figcaption{font-family:'Open Sans';font-size:.82rem;color:var(--slate);font-style:italic;padding:.55rem .9rem;background:var(--dune)}
+/* warm background for charter pages */
+body.charter{background:var(--cream)}
+body.charter .article{background:transparent}
+
+/* lead capture */
+.leadband{background:linear-gradient(120deg,#16314E,#1d3f63);color:var(--cream);border-radius:var(--radius);padding:44px 32px;text-align:center}
+.leadband h2{color:#fff}
+.leadband p{color:#e4dccd;max-width:54ch;margin:0 auto 1.4rem}
+.leadform{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;max-width:540px;margin:0 auto}
+.leadform input{flex:1 1 200px;padding:.85em 1.1em;border-radius:40px;border:2px solid transparent;font:inherit;font-size:1rem;color:var(--charcoal)}
+.leadform input:focus{outline:none;border-color:var(--copper)}
+.leadform .btn{flex:0 0 auto;border:none;cursor:pointer}
+.leadband .small{font-size:.8rem;color:#b9c4cd;margin-top:.9rem}
+
+/* lead-magnet landing page */
+.lp-hero{background:var(--navy);text-align:center;padding:20px 0;border-bottom:3px solid var(--copper)}
+.lp-hero img{height:44px;margin:0 auto}
+.lp{max-width:660px;margin:0 auto;padding:56px 22px;text-align:center}
+.lp .lead{font-size:1.2rem;color:var(--slate);max-width:52ch;margin:0 auto 1.4rem}
+.lp ul{list-style:none;padding:0;text-align:left;max-width:440px;margin:1.6rem auto 2rem;display:grid;gap:.7rem}
+.lp li{padding-left:1.7rem;position:relative;font-weight:600}
+.lp li:before{content:"✓";position:absolute;left:0;color:var(--copper);font-weight:800}
+.lp .card{background:var(--dune);border:none;text-align:left}
+
+/* ===== full-width band system — charter pages ===== */
+.photohero.tall{min-height:clamp(480px,78vh,760px)}
+.photohero .eyebrow{text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.photohero .hero-sub{font-family:'Montserrat';font-weight:600;color:#e9e1d3;margin:.35rem 0 1.2rem;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.photohero .cta-row{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:.2rem}
+
+section.navy{background:linear-gradient(120deg,#16314E,#1d3f63);color:var(--cream)}
+section.navy h2,section.navy h3{color:#fff}
+section.navy p{color:#dfe6ec}
+section.navy .card p{color:var(--slate)}
+section.navy .card h3{color:var(--navy)}
+section.navy .eyebrow{color:var(--copper)}
+
+.splitband{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,3.5rem);align-items:center}
+.splitband .media figure.shot{margin:0}
+.splitband.flip .media{order:-1}
+@media(max-width:900px){
+  .splitband{grid-template-columns:1fr;gap:1.8rem}
+  .splitband.flip .media{order:0}
+}
+
+.videoframe{max-width:960px;margin:0 auto;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000}
+.videoframe video{display:block;width:100%;height:auto;aspect-ratio:16/9}
+
+.wrap-wide{max-width:1400px;margin:0 auto;padding:0 22px}
+.gallery{display:grid;gap:12px}
+.gallery figure{margin:0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-4{grid-template-columns:repeat(4,1fr)}
+.gallery-4 figure{aspect-ratio:1/1}
+.gallery-3{grid-template-columns:repeat(3,1fr)}
+.gallery-3 figure{aspect-ratio:3/2}
+@media(max-width:840px){.gallery-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.gallery-3{grid-template-columns:1fr}}
+
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.timeline.cols4{grid-template-columns:repeat(2,1fr)} /* 4 cards → balanced 2×2 */
+.timeline .day{font-family:'Montserrat';font-weight:700;color:var(--copper);font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+@media(max-width:840px){.timeline{grid-template-columns:1fr}}
+
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;text-align:center;margin:2rem 0}
+.stat .num{font-family:'Montserrat';font-weight:800;font-size:clamp(2.1rem,4vw,3.1rem);color:var(--copper);line-height:1.1}
+.stat .cap{color:#dfe6ec;font-size:.95rem;margin-top:.3rem}
+@media(max-width:640px){.statrow{grid-template-columns:1fr;gap:1.6rem}}
+
+.pricecols{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem;align-items:start;margin-top:1.6rem}
+.pricecols .pricepkg{margin:0}
+@media(max-width:980px){.pricecols{grid-template-columns:1fr;gap:2.6rem}}
+.checklist{list-style:none;padding:0;margin:.6rem 0 1.2rem;display:grid;gap:.35rem}
+.checklist li{padding-left:1.6rem;position:relative;font-size:.95rem}
+.checklist li:before{content:"✓";position:absolute;left:0;color:var(--copper);font-weight:800}
+
+@media(max-width:520px){
+  .pricetable table{min-width:0}
+  .pricetable th,.pricetable td{padding:.55em .55em;font-size:.82rem}
+}
+
+.cta-photo{align-items:center;text-align:center;min-height:clamp(380px,52vh,540px)}
+.cta-photo::after{background:linear-gradient(180deg,rgba(22,49,78,.55),rgba(22,49,78,.72))}
+.cta-photo .hero-content{padding:56px 22px}
+.cta-photo h2{color:#fff}
+.cta-photo p{color:#e9e1d3;max-width:54ch;margin:.6rem auto 1.4rem}
+.cta-photo .cta-row{justify-content:center}
+
+/* ===== conversion layer — charter pages ===== */
+.hero-loc{display:block;font-size:.82em;font-weight:400;opacity:.92;margin-top:.3rem}
+
+.faq{max-width:820px;margin:0 auto}
+.faq details{background:var(--white);border:1px solid var(--dune);border-radius:var(--radius);padding:16px 20px;margin-bottom:.8rem;box-shadow:var(--shadow)}
+.faq summary{font-family:'Montserrat';font-weight:700;color:var(--navy);cursor:pointer;list-style:none;position:relative;padding-right:2.2rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);color:var(--copper);font-weight:800;font-size:1.35rem;line-height:1}
+.faq details[open] summary::after{content:"\2013"}
+.faq details p{margin:.7rem 0 0;color:var(--slate)}
+
+.pricetable .pop{float:right;background:var(--copper);color:#fff;border-radius:99px;padding:.18em .75em;font-size:.7rem;font-family:'Montserrat';font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.pricetable.grouped tbody tr.hl{background:#FBF3E6}
+
+.enquiry{display:grid;grid-template-columns:1.1fr .9fr;gap:2.4rem;align-items:start}
+@media(max-width:900px){.enquiry{grid-template-columns:1fr}}
+.enqform{display:grid;gap:.85rem;background:var(--white);border:1px solid var(--dune);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.enqform label{font-family:'Montserrat';font-weight:700;font-size:.85rem;color:var(--navy);display:block;margin-bottom:.25rem}
+.enqform input,.enqform select,.enqform textarea{padding:.7em .9em;border:1px solid var(--dune);border-radius:10px;font:inherit;width:100%;background:var(--cream);color:var(--charcoal)}
+.enqform input:focus,.enqform select:focus,.enqform textarea:focus{outline:none;border-color:var(--copper)}
+.enqform .row2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+@media(max-width:520px){.enqform .row2{grid-template-columns:1fr}}
+.enqform .btnrow{display:flex;gap:.7rem;flex-wrap:wrap}
+.enqform .btnrow .btn{border:none;cursor:pointer;flex:1 1 180px}
+.enq-direct .btn{display:block;text-align:center;margin-bottom:.75rem}
+.enq-note{color:var(--slate);font-size:.9rem}
+
+.stickycall{display:none}
+@media(max-width:760px){
+  .stickycall{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(22,49,78,.97);box-shadow:0 -4px 18px rgba(0,0,0,.3)}
+  .stickycall .btn{flex:1;text-align:center;padding:.7em .5em;font-size:.92rem}
+  body.charter{padding-bottom:70px}
+}
+
+/* as-seen-on logo strip */
+.logoband{display:flex;align-items:center;justify-content:center;gap:clamp(1.4rem,4vw,3rem);flex-wrap:wrap}
+.logoband img{height:90px;width:auto;display:block}
+@media(max-width:640px){.logoband img{height:64px}}
+.logoband-lbl{text-align:center;margin-bottom:1.1rem}
+
+/* ---- MARQUEE: reusable rolling band (media logos, client album) ----
+   Markup: .marquee > .marquee-track > (.marquee-row + duplicate .marquee-row aria-hidden)
+   Two identical rows scroll left; when the first is fully off, the loop resets
+   seamlessly. Duplicate row is required — don't remove it.
+   Pauses on hover/focus, and stops entirely for reduced-motion users. */
+.marquee{position:relative;overflow:hidden;width:100%}
+.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:clamp(40px,8vw,120px);z-index:2;pointer-events:none}
+.marquee::before{left:0;background:linear-gradient(to right,var(--cream),transparent)}
+.marquee::after{right:0;background:linear-gradient(to left,var(--cream),transparent)}
+.marquee.on-white::before{background:linear-gradient(to right,var(--white),transparent)}
+.marquee.on-white::after{background:linear-gradient(to left,var(--white),transparent)}
+.marquee.on-navy::before{background:linear-gradient(to right,var(--navy),transparent)}
+.marquee.on-navy::after{background:linear-gradient(to left,var(--navy),transparent)}
+.marquee-track{display:flex;width:max-content;animation:marquee-scroll 42s linear infinite}
+.marquee:hover .marquee-track,.marquee:focus-within .marquee-track{animation-play-state:paused}
+.marquee-row{display:flex;align-items:center;flex:0 0 auto}
+@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* media-logo flavour — real logos, desaturated + darkened to a uniform tone
+   (assets/img/press/, each a 900×300 transparent PNG). To ADD a logo later:
+   drop a matching PNG in that folder and add one <img> line to BOTH marquee-rows. */
+.marquee.logos .marquee-row{gap:clamp(2.6rem,6vw,5.2rem);padding-right:clamp(2.6rem,6vw,5.2rem)}
+.marquee.logos img{height:92px;width:auto;display:block;flex:0 0 auto;opacity:.82;
+  filter:saturate(0)}
+@media(max-width:640px){.marquee.logos img{height:66px}}
+
+/* press flavour — uniform monochrome wordmarks (YETI/Alphonse "featured in" look).
+   No raster logos: every credential is set in the brand font, one navy tone, matched
+   height — so it's razor-sharp at any size and perfectly consistent. */
+.marquee.press .marquee-row{gap:clamp(2.2rem,5vw,4.4rem);padding-right:clamp(2.2rem,5vw,4.4rem);align-items:center}
+.press-mark{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex:0 0 auto;white-space:nowrap;color:var(--navy);opacity:.5;transition:opacity .25s ease}
+.marquee.press:hover .press-mark{opacity:.62}
+.press-mark .nm{font-family:'Montserrat';font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;font-size:clamp(1.05rem,2.3vw,1.5rem);line-height:1}
+.press-mark .sub{font-family:'Montserrat';font-weight:600;text-transform:uppercase;
+  letter-spacing:.22em;font-size:.6rem;margin-top:.32em;opacity:.85}
+.press-mark .amp{font-weight:500}
+
+/* client-album flavour — smiling faces, not logos */
+.marquee.album{border-radius:var(--radius)}
+.marquee.album .marquee-row{gap:14px;padding-right:14px}
+.marquee.album img{height:clamp(190px,26vw,290px);width:auto;display:block;flex:0 0 auto;
+  border-radius:12px;object-fit:cover}
+.marquee.album .marquee-track{animation-duration:66s}
+
+@media(prefers-reduced-motion:reduce){
+  .marquee-track{animation:none;flex-wrap:wrap;width:100%;justify-content:center}
+  .marquee-row[aria-hidden="true"]{display:none}
+  .marquee-row{flex-wrap:wrap;justify-content:center;gap:1.6rem}
+  .marquee::before,.marquee::after{display:none}
+}
+
+/* ---- Photo band — a navy band with a full-bleed background photo ----
+   Reusable on any section: <section class="navy bandphoto"> with a
+   <picture class="band-bg"> as the FIRST child, then the usual .wrap.
+   The navy scrim keeps text at full contrast (brand accessibility rule);
+   the photo reads as texture underneath, like the live site's section
+   backgrounds. */
+.bandphoto{position:relative;overflow:hidden}
+.bandphoto .band-bg{position:absolute;inset:0;z-index:0}
+.bandphoto .band-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.bandphoto::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(120deg,rgba(22,49,78,.9),rgba(22,49,78,.78))}
+.bandphoto .wrap{position:relative;z-index:2}
+
+/* ---- Photo-led season rows (homepage) — GW's rules (21 Jul 2026): charter/season
+   cards are photo-led, stacked full-width, image beside copy, NEVER text-only,
+   and the whole row is clickable. Eleven-quiet hover: lift + shadow, 700ms. */
+.seasonrow{display:grid;grid-template-columns:1.1fr 1fr;gap:0;align-items:stretch;
+  background:var(--white);border:1px solid var(--dune);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:var(--charcoal);
+  margin-bottom:1.6rem;
+  transition:box-shadow .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.seasonrow:hover{box-shadow:0 12px 34px rgba(22,49,78,.16);transform:translateY(-3px)}
+.seasonrow .srmedia{position:relative;min-height:300px}
+.seasonrow .srmedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.seasonrow .srcopy{padding:clamp(26px,3.5vw,48px);display:flex;flex-direction:column;justify-content:center}
+.seasonrow .srcopy h3{font-family:'Fraunces',Georgia,serif;font-weight:350;
+  font-size:clamp(1.5rem,2.6vw,2rem);color:var(--navy);margin:.35rem 0 .6rem}
+.seasonrow .srcopy p{color:var(--slate);margin:0 0 1rem}
+.seasonrow .go{font-family:'Montserrat';font-weight:700;font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--copper)}
+.seasonrow.flip .srmedia{order:2}
+@media(max-width:840px){.seasonrow{grid-template-columns:1fr}
+  .seasonrow .srmedia{min-height:230px;order:0!important}}
+
+/* ---- Dark eucalypt + charcoal band variants — Eleven uplift item 5
+   (GW approved the Eleven direction 10 Aug 2026). Dusk rhythm: on long pages
+   the dark bands should VARY (navy → eucalypt → navy → charcoal), never repeat
+   one colour all the way down. Warm dark green cousin of Sage — not cold grey.
+   Add the class next to .navy: <section class="navy eucalypt bandphoto">.
+   Use each variant at most once per page. */
+section.navy.eucalypt{background:linear-gradient(120deg,#17251D,#1F3026)}
+section.navy.eucalypt.bandphoto::before{
+  background:linear-gradient(120deg,rgba(23,37,29,.9),rgba(23,37,29,.78))}
+section.navy.charcoalband{background:linear-gradient(120deg,#211C17,#2A241C)}
+section.navy.charcoalband.bandphoto::before{
+  background:linear-gradient(120deg,rgba(33,28,23,.9),rgba(33,28,23,.78))}
+
+/* ---- Textured cream band — GW's "texture, not boring cream" (21 Jul 2026) ----
+   A cream section with a FAINT real-photo underlay (~92% cream over the top, so
+   it reads as warm texture, not a photo — keeps the no-stock, no-busy-pattern
+   brand rules and full text contrast). Same markup as .bandphoto:
+   <section class="bandtexture"> + <picture class="band-bg"> first child. */
+.bandtexture{position:relative;overflow:hidden}
+.bandtexture .band-bg{position:absolute;inset:0;z-index:0}
+.bandtexture .band-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.bandtexture::before{content:"";position:absolute;inset:0;z-index:1;background:rgba(246,241,231,.92)}
+.bandtexture>.wrap,.bandtexture>.wrap-wide{position:relative;z-index:2}
+
+/* Softer texture wash for busy/colourful underlays (e.g. fly-box macro) */
+.bandtexture.soft::before{background:rgba(246,241,231,.965)}
+
+/* ===== ELEVEN PROTOTYPE additions (uplift items 2 & 3) ===== */
+
+/* Hero title row — line-art fish beside the H1 (same barra as the spec-tile
+   icon language), stroked cream so it reads on the photo. */
+.hero-titlerow{display:flex;align-items:center;gap:clamp(.8rem,2vw,1.3rem)}
+.hero-titlerow h1{margin-bottom:0}
+.hero-fish{flex:0 0 auto;width:clamp(46px,6vw,70px);height:auto;stroke:var(--cream);
+  stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 2px 12px rgba(0,0,0,.4))}
+/* Demoted hero sub-line: tiny tracked uppercase under the serif title */
+.photohero .hero-sub.quiet{font-size:.74rem;text-transform:uppercase;letter-spacing:.18em;
+  margin:.9rem 0 .4rem}
+
+/* Sticky section-nav bar — desktop + mobile (replaces stickycall).
+   Highlights · Itinerary · Pricing · FAQs + one Enquire button. */
+.sectionnav{position:fixed;bottom:0;left:0;right:0;z-index:60;
+  background:rgba(22,49,78,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  box-shadow:0 -4px 18px rgba(0,0,0,.25)}
+.sectionnav .inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;
+  justify-content:center;gap:clamp(.8rem,2.6vw,2.1rem);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.sectionnav .snlink{font-family:'Montserrat';font-weight:600;font-size:.68rem;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--cream);text-decoration:none;opacity:.85;
+  transition:color .7s cubic-bezier(.4,0,.2,1),opacity .7s cubic-bezier(.4,0,.2,1)}
+.sectionnav .snlink:hover{color:var(--copper);opacity:1}
+.sectionnav .btn{padding:.85em 1.7em;font-size:.68rem}
+.sectionnav .btn:hover{transform:none;filter:brightness(1.06)}
+body.has-sectionnav{padding-bottom:64px}
+@media(max-width:520px){
+  .sectionnav .inner{gap:.65rem;padding:9px 8px calc(9px + env(safe-area-inset-bottom))}
+  .sectionnav .snlink{font-size:.6rem;letter-spacing:.08em}
+  .sectionnav .btn{padding:.8em 1.05em;font-size:.6rem;letter-spacing:.06em}
+}
+
+/* ---- Motion (Eleven uplift item 6, measured off elevenexperience.com) ----
+   Per-element rise-and-fade on scroll: elements start 46px low at opacity 0
+   and settle over ~0.9s, staggered ~110ms within their section. The .rv class
+   is added ONLY by JavaScript (progressive enhancement — no JS means no class
+   and everything is simply visible), and only when the visitor hasn't asked
+   for reduced motion. Lazy images fade in as they load (.lf/.ld), same rule. */
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0;transform:translateY(46px);
+    transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1);
+    transition-delay:var(--rvd,0s);will-change:opacity,transform}
+  .rv.in{opacity:1;transform:none}
+  img.lf{opacity:0;transition:opacity .7s ease}
+  img.lf.ld{opacity:1}
+}

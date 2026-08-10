@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Centre — Podcast, Video &amp; Barra Know-How | Barefoot Fishing Safaris</title>
+<meta name="description" content="Watty's Media Centre — the podcast, YouTube appearances, radio spots and Top End barra know-how, all in one searchable library.">
+<link rel="icon" type="image/png" href="assets/fish-icon.png">
+<link rel="stylesheet" href="styles.css?v=7">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Barefoot Media Centre — Watty on the airwaves">
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a href="index.html"><img src="assets/logo-white.png" alt="Barefoot Fishing Safaris"></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var u=document.getElementById('navmenu');u.classList.toggle('open');this.setAttribute('aria-expanded',u.classList.contains('open'))">&#9776;</button>
+    <ul id="navmenu">
+      <li><a href="index.html#charters">Charters</a></li>
+      <li><a href="index.html#courses">Courses</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="about-barefoot.html">About</a></li>
+      <li><a href="index.html#contact" class="btn btn-primary">Book a Trip</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <p class="eyebrow">Media Centre</p>
+    <h1>Watty on the airwaves — and everything he knows about barra</h1>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="filters" id="filters">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="article">Know-How</button>
+      <button data-filter="podcast">Podcast</button>
+      <button data-filter="video">Video</button>
+      <button data-filter="radio">Radio</button>
+    </div>
+
+    <div class="libgrid" id="libgrid">
+
+      <div class="libcard" data-type="article">
+        <div class="thumb">🎣</div>
+        <div class="body">
+          <span class="type">Know-How</span>
+          <h3>The Four Pillars of Top End Barra Fishing</h3>
+          <p>The framework Watty uses to plan every session — Where &amp; When, Wind &amp; Weather, Time &amp; Tide, Techniques &amp; Tactics.</p>
+          <a href="four-pillars-of-top-end-barra.html">Read the article →</a>
+        </div>
+      </div>
+
+      <div class="libcard" data-type="article">
+        <div class="thumb">🗓️</div>
+        <div class="body">
+          <span class="type">Know-How</span>
+          <h3>Best Time to Fish for Barra in the Top End</h3>
+          <p>A season-by-season guide — run-off, dry and build-up — and how to pick the trip that suits you.</p>
+          <a href="best-time-to-fish-top-end-barra.html">Read the article →</a>
+        </div>
+      </div>
+
+      <div class="libcard" data-type="podcast">
+        <div class="thumb">🎙️</div>
+        <div class="body">
+          <span class="type">Podcast</span>
+          <h3>The Barefoot Outdoors Podcast</h3>
+          <p>Two episodes a week on Top End fishing, gear and stories. The full back-catalogue lands here — auto-pulled from the feed.</p>
+          <a href="index.html#contact">Coming soon →</a>
+        </div>
+      </div>
+
+      <div class="libcard" data-type="video">
+        <div class="thumb">▶️</div>
+        <div class="body">
+          <span class="type">Video</span>
+          <h3>YouTube — sessions &amp; appearances</h3>
+          <p>Real Top End sessions and Watty's guest appearances, each with a summary so the fish stories are easy to find.</p>
+          <a href="https://www.youtube.com/@barefootfishingsafaris">Visit the channel →</a>
+        </div>
+      </div>
+
+      <div class="libcard" data-type="radio">
+        <div class="thumb">📻</div>
+        <div class="body">
+          <span class="type">Radio</span>
+          <h3>Radio spots</h3>
+          <p>Watty's fishing segments and interviews — each written up so they're searchable long after they air.</p>
+          <a href="index.html#contact">Coming soon →</a>
+        </div>
+      </div>
+
+    </div>
+    <p style="color:var(--slate);font-size:.9rem;margin-top:1.8rem">More landing every week — podcast episodes auto-pull from the feed once it's wired in.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-note">
+      <span>© 2026 Barefoot Fishing Safaris · Coolalinga, Northern Territory</span>
+      <span>Fish with Watty · 0417 272 871</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('filters').addEventListener('click', function(e){
+    if(e.target.tagName!=='BUTTON') return;
+    var f=e.target.getAttribute('data-filter');
+    [].forEach.call(this.querySelectorAll('button'),function(b){b.classList.toggle('active',b===e.target)});
+    [].forEach.call(document.querySelectorAll('#libgrid .libcard'),function(c){
+      c.style.display=(f==='all'||c.getAttribute('data-type')===f)?'':'none';
+    });
+  });
+</script>
+
+</body>
+</html>
