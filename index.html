@@ -200,11 +200,13 @@
       <p class="eyebrow" style="color:var(--copper)">Launching later this year</p>
       <h2>Get first access to Barra Brain</h2>
       <p>Register for the launch list and be first in when the app opens its doors.</p>
-      <form class="leadform" id="bb-form">
-        <input type="text" id="bb-name" placeholder="First name" aria-label="First name" required>
-        <input type="email" id="bb-email" placeholder="Your email" aria-label="Email" required>
+      <!-- Kit form: NUMERIC id 9788367 ("Barra Brain Waitlist" — tags via Kit rule) -->
+      <form class="leadform" id="bb-form" action="https://app.kit.com/forms/9788367/subscriptions" method="post">
+        <input type="text" name="fields[first_name]" placeholder="First name" aria-label="First name" required>
+        <input type="email" name="email_address" placeholder="Your email" aria-label="Email" required>
         <button type="submit" class="btn btn-hero">Put me on the list</button>
       </form>
+      <p class="small" id="bb-status" hidden></p>
       <p class="small">No spam — just the launch news.</p>
     </div>
   </div>
@@ -361,18 +363,26 @@
   });
 })();
 
-/* Barra Brain launch list — composes a registration email until the Kit form
-   for the waitlist exists (then swap to the Kit pattern, numeric form id). */
+/* Barra Brain launch list — posts to Kit (form 9788367) in the background;
+   Kit's rule tags the subscriber "Barra Brain Waitlist". */
 (function(){
   var f = document.getElementById('bb-form');
+  var status = document.getElementById('bb-status');
   if(!f) return;
   f.addEventListener('submit', function(e){
     e.preventDefault();
-    var t = "Put me on the Barra Brain launch list." +
-      "\nName: " + document.getElementById('bb-name').value.trim() +
-      "\nEmail: " + document.getElementById('bb-email').value.trim();
-    location.href = 'mailto:glenn@barefootfishingsafaris.com.au?subject=' +
-      encodeURIComponent('Barra Brain waitlist') + '&body=' + encodeURIComponent(t);
+    var btn = f.querySelector('button[type=submit]');
+    btn.disabled = true; btn.textContent = 'Adding you\u2026';
+    fetch(f.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(f) })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.status === 'failed') throw new Error('kit rejected');
+        f.reset();
+        f.style.display = 'none';
+        status.hidden = false;
+        status.innerHTML = "<strong>You're on the list — check your inbox</strong> to confirm your email and you're locked in for launch.";
+      })
+      .catch(function(){ f.submit(); });
   });
 })();
 

@@ -42,14 +42,16 @@
         <li>Season-by-season timing — run-off, dry and build-up</li>
         <li>A dead-simple planner you'll pull out every trip</li>
       </ul>
-      <!-- Composes an email until the Kit form for this magnet exists
-           (then swap to the Kit pattern — numeric form id, background fetch). -->
-      <form class="leadform" id="tides-form" style="display:flex;gap:.7rem;flex-wrap:wrap">
-        <input type="text" id="tides-name" placeholder="First name" aria-label="First name" required style="flex:1;min-width:140px;padding:12px 14px;border:2px solid var(--dune);border-radius:10px;font-size:1rem;font-family:inherit">
-        <input type="email" id="tides-email" placeholder="Your email" aria-label="Email" required style="flex:1.4;min-width:180px;padding:12px 14px;border:2px solid var(--dune);border-radius:10px;font-size:1rem;font-family:inherit">
+      <!-- Kit form: NUMERIC id 9788359 ("Tides Cheat Sheet" — tags via Kit rule).
+           The PDF itself is delivered by Kit's confirmation/incentive email —
+           Watty to upload the cheat sheet PDF and link it there before go-live.
+           Canonical local spot reserved for it: assets/downloads/ -->
+      <form class="leadform" id="tides-form" action="https://app.kit.com/forms/9788359/subscriptions" method="post" style="display:flex;gap:.7rem;flex-wrap:wrap">
+        <input type="text" name="fields[first_name]" placeholder="First name" aria-label="First name" required style="flex:1;min-width:140px;padding:12px 14px;border:2px solid var(--dune);border-radius:10px;font-size:1rem;font-family:inherit">
+        <input type="email" name="email_address" placeholder="Your email" aria-label="Email" required style="flex:1.4;min-width:180px;padding:12px 14px;border:2px solid var(--dune);border-radius:10px;font-size:1rem;font-family:inherit">
         <button type="submit" class="btn btn-hero" style="flex:none">Send me the cheat sheet</button>
       </form>
-      <p style="font-size:.8rem;color:var(--slate);margin:0.9rem 0 0">Straight to your inbox. No spam, unsubscribe anytime.</p>
+      <p style="font-size:.8rem;color:var(--slate);margin:0.9rem 0 0" id="tides-status">Straight to your inbox. No spam, unsubscribe anytime.</p>
     </div>
 
     <p style="margin-top:2rem;color:#e9e1d3;text-align:center">— Watty, Barefoot Fishing Safaris · guiding the Top End since 2011</p>
@@ -66,16 +68,24 @@
 </footer>
 
 <script>
+/* Posts to Kit (form 9788359) in the background; Kit's rule tags the
+   subscriber "Tides Cheat Sheet" and Kit's email delivers the PDF. */
 (function(){
   var f = document.getElementById('tides-form');
+  var status = document.getElementById('tides-status');
   if(!f) return;
   f.addEventListener('submit', function(e){
     e.preventDefault();
-    var t = "Please send me the Top End Barra Tides Cheat Sheet." +
-      "\nName: " + document.getElementById('tides-name').value.trim() +
-      "\nEmail: " + document.getElementById('tides-email').value.trim();
-    location.href = 'mailto:glenn@barefootfishingsafaris.com.au?subject=' +
-      encodeURIComponent('Tides Cheat Sheet request') + '&body=' + encodeURIComponent(t);
+    var btn = f.querySelector('button[type=submit]');
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+    fetch(f.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(f) })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.status === 'failed') throw new Error('kit rejected');
+        f.style.display = 'none';
+        status.innerHTML = "<strong>Almost there — check your inbox.</strong> Confirm your email and the cheat sheet is on its way.";
+      })
+      .catch(function(){ f.submit(); });
   });
 })();
 </script>
