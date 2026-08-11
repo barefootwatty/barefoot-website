@@ -646,3 +646,18 @@ details.yr summary::after{content:"+";position:absolute;right:.2rem;top:50%;
 details.yr[open] summary::after{content:"\2013"}
 details.yr .cnt{font-weight:600;font-size:.76rem;letter-spacing:.08em;
   text-transform:uppercase;color:var(--slate);margin-left:.6rem}
+
+/* solo video on its own transcript page — same facade, full width */
+.vidcard.vsolo{border:0;box-shadow:none;background:transparent;cursor:pointer}
+.vidcard.vsolo:hover{transform:none;box-shadow:none}
+.vidcard.vsolo .vthumb{border-radius:var(--radius);box-shadow:var(--shadow)}
+.eplist .chan{display:block;font-family:'Montserrat';font-weight:600;font-size:.7rem;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--slate)}
+
+/* video card is now a div: the thumb plays inline, the title links to the
+   transcript page. Keeps anchors un-nested and both actions reachable. */
+.vidcard .vthumb{cursor:pointer}
+.vidcard .vthumb:focus-visible{outline:3px solid var(--copper);outline-offset:2px}
+.vidcard h3 a{color:var(--navy);text-decoration:none}
+.vidcard:hover h3 a{color:var(--copper)}
+.vidcard a.go{display:inline-block;margin-top:.5rem;text-decoration:none}
