@@ -583,3 +583,22 @@ a.libcard:hover .go{color:var(--copper)}
 .audiowrap audio{width:100%;margin:.4rem 0 0}
 .epmeta{max-width:820px;margin:0 auto 1.4rem;font-family:'Montserrat';font-weight:600;
   font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--slate)}
+
+/* ---- audio player panel (GW: "an image on the playback area, soundwaves,
+   ocean waves or something nice to look at"). Water photo underlay in the
+   existing .bandphoto language + a drawn waveform, so it needs no new asset
+   and stays quiet enough for the Eleven register. ---- */
+.player{position:relative;overflow:hidden;border-radius:var(--radius);
+  background:var(--navy);box-shadow:var(--shadow);margin:.6rem 0 0}
+.player .pbg{position:absolute;inset:0;z-index:0}
+.player .pbg img{width:100%;height:100%;object-fit:cover;display:block;opacity:.42}
+.player::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(22,49,78,.55),rgba(22,49,78,.88))}
+.player .pinner{position:relative;z-index:2;padding:20px 22px 18px}
+.player .wave{display:block;width:100%;height:54px;margin-bottom:14px;opacity:.85}
+.player .wave rect{fill:var(--copper)}
+.player .wave rect:nth-child(even){fill:#e9e1d3}
+.player audio{width:100%;height:38px}
+.player .plabel{font-family:'Montserrat';font-weight:700;font-size:.7rem;
+  text-transform:uppercase;letter-spacing:.14em;color:#e9e1d3;margin:0 0 .7rem}
+@media(max-width:520px){.player .wave{height:40px}}
