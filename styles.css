@@ -602,3 +602,29 @@ a.libcard:hover .go{color:var(--copper)}
 .player .plabel{font-family:'Montserrat';font-weight:700;font-size:.7rem;
   text-transform:uppercase;letter-spacing:.14em;color:#e9e1d3;margin:0 0 .7rem}
 @media(max-width:520px){.player .wave{height:40px}}
+
+/* ---- video wall: click-to-play facade. GW has embed permission from every
+   channel, but a page full of real <iframe>s would pull megabytes of YouTube
+   on load and set their cookies before anyone asks to watch. So we ship a
+   local thumbnail and swap in the iframe on click — fast page, no third-party
+   contact until the viewer opts in, and the view still counts for the channel.
+   Without JS each tile stays a plain link to YouTube. ---- */
+.vidgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media(max-width:860px){.vidgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.vidgrid{grid-template-columns:1fr}}
+.vidcard{display:block;text-decoration:none;color:inherit;background:var(--white);
+  border:1px solid var(--dune);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);transition:transform .28s ease,box-shadow .28s ease}
+.vidcard:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(22,49,78,.16)}
+.vidcard .vthumb{position:relative;aspect-ratio:16/9;background:var(--navy);overflow:hidden}
+.vidcard .vthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vidcard .vthumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vidcard .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:56px;height:56px;border-radius:50%;background:rgba(22,49,78,.82);
+  display:flex;align-items:center;justify-content:center;transition:background .2s ease}
+.vidcard:hover .play{background:var(--copper)}
+.vidcard .play svg{width:20px;height:20px;fill:#fff;margin-left:3px}
+.vidcard .vbody{padding:16px 18px}
+.vidcard .vchan{font-family:'Montserrat';font-weight:700;font-size:.68rem;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--copper)}
+.vidcard h3{font-size:.98rem;margin:.35rem 0 0;line-height:1.35}
