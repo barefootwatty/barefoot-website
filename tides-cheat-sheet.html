@@ -6,36 +6,79 @@
 <title>Free Top End Barra Tides Cheat Sheet | Barefoot Fishing Safaris</title>
 <meta name="description" content="Free download: the Top End Barra Tides Cheat Sheet — plan your barra trips at a glance, all year. The tides, seasons and timing that put you on the fish.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 <meta name="robots" content="noindex"><!-- landing page: keep out of search, drive traffic to it -->
 </head>
-<body>
+<body class="charter">
 
-<div class="lp-hero">
-  <a href="index.html"><img src="assets/logo-white.png" alt="Barefoot Fishing Safaris"></a>
-</div>
+<header class="site">
+  <nav class="nav">
+    <a href="index.html"><img src="assets/logo-white.png" alt="Barefoot Fishing Safaris"></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var u=document.getElementById('navmenu');u.classList.toggle('open');this.setAttribute('aria-expanded',u.classList.contains('open'))">&#9776;</button>
+    <ul id="navmenu">
+      <li><a href="index.html#charters">Charters</a></li>
+      <li><a href="index.html#courses">Courses</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="about-barefoot.html">About</a></li>
+      <li><a href="index.html#contact" class="btn btn-primary">Book a Trip</a></li>
+    </ul>
+  </nav>
+</header>
 
-<div class="lp">
-  <p class="eyebrow">Free download · Barefoot Fishing Safaris</p>
-  <h1>The Top End Barra Tides Cheat Sheet</h1>
-  <p class="lead">Stop guessing the tides. This is the one-page planner I use to line up the best barra sessions of the year — so you rock up when the fish are on, not when they're not.</p>
+<!-- Full-page photo band: tide drains on the flats, navy scrim, white card -->
+<section class="navy bandphoto" style="padding:clamp(60px,8vw,110px) 0">
+  <picture class="band-bg">
+    <source type="image/avif" srcset="assets/img/band-bynoe-flats-drone-640.avif 640w, assets/img/band-bynoe-flats-drone-1000.avif 1000w, assets/img/band-bynoe-flats-drone-1600.avif 1600w" sizes="100vw">
+    <img src="assets/img/band-bynoe-flats-drone-1600.jpg" srcset="assets/img/band-bynoe-flats-drone-640.jpg 640w, assets/img/band-bynoe-flats-drone-1000.jpg 1000w, assets/img/band-bynoe-flats-drone-1600.jpg 1600w" sizes="100vw" width="1600" height="1200" alt="" loading="eager" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="wrap" style="max-width:760px">
+    <p class="eyebrow" style="text-align:center">Free download · Barefoot Fishing Safaris</p>
+    <h1 style="color:#fff;text-align:center;font-size:clamp(2rem,4.5vw,3.1rem)">The Top End Barra Tides Cheat Sheet</h1>
+    <p style="text-align:center;max-width:56ch;margin:.8rem auto 1.8rem;color:#e9e1d3">Stop guessing the tides. This is the one-page planner I use to line up the best barra sessions of the year — so you rock up when the fish are on, not when they're not.</p>
 
-  <ul>
-    <li>The tide windows that actually fire for barra</li>
-    <li>Season-by-season timing — run-off, build-up and dry</li>
-    <li>A dead-simple planner you'll pull out every trip</li>
-  </ul>
+    <div style="background:var(--white);border-radius:var(--radius);padding:clamp(24px,4vw,40px);box-shadow:0 12px 40px rgba(0,0,0,.25)">
+      <ul style="margin:0 0 1.4rem;padding-left:1.2rem;color:var(--charcoal)">
+        <li>The tide windows that actually fire for barra</li>
+        <li>Season-by-season timing — run-off, dry and build-up</li>
+        <li>A dead-simple planner you'll pull out every trip</li>
+      </ul>
+      <!-- Composes an email until the Kit form for this magnet exists
+           (then swap to the Kit pattern — numeric form id, background fetch). -->
+      <form class="leadform" id="tides-form" style="display:flex;gap:.7rem;flex-wrap:wrap">
+        <input type="text" id="tides-name" placeholder="First name" aria-label="First name" required style="flex:1;min-width:140px;padding:12px 14px;border:2px solid var(--dune);border-radius:10px;font-size:1rem;font-family:inherit">
+        <input type="email" id="tides-email" placeholder="Your email" aria-label="Email" required style="flex:1.4;min-width:180px;padding:12px 14px;border:2px solid var(--dune);border-radius:10px;font-size:1rem;font-family:inherit">
+        <button type="submit" class="btn btn-hero" style="flex:none">Send me the cheat sheet</button>
+      </form>
+      <p style="font-size:.8rem;color:var(--slate);margin:0.9rem 0 0">Straight to your inbox. No spam, unsubscribe anytime.</p>
+    </div>
 
-  <!-- Wire to Kit: set action to your Kit form URL and add the Kit form data-uid -->
-  <form class="leadform" action="#" method="post" data-kit-form="REPLACE_WITH_KIT_FORM_ID" style="justify-content:center">
-    <input type="text" name="first_name" placeholder="First name" aria-label="First name" required>
-    <input type="email" name="email_address" placeholder="Your email" aria-label="Email" required>
-    <button type="submit" class="btn btn-hero">Send me the cheat sheet</button>
-  </form>
-  <p style="font-size:.8rem;color:var(--slate);margin-top:.9rem">Straight to your inbox. No spam, unsubscribe anytime.</p>
+    <p style="margin-top:2rem;color:#e9e1d3;text-align:center">— Watty, Barefoot Fishing Safaris · guiding the Top End since 2011</p>
+  </div>
+</section>
 
-  <p style="margin-top:2.4rem;color:var(--slate)">— Watty, Barefoot Fishing Safaris · guiding the Top End since 2011</p>
-</div>
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-note">
+      <span>© 2026 Barefoot Fishing Safaris · Coolalinga, Northern Territory · <a href="privacy-policy.html" style="color:inherit">Privacy</a></span>
+      <span>Fish with Watty · 0417 272 871</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var f = document.getElementById('tides-form');
+  if(!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var t = "Please send me the Top End Barra Tides Cheat Sheet." +
+      "\nName: " + document.getElementById('tides-name').value.trim() +
+      "\nEmail: " + document.getElementById('tides-email').value.trim();
+    location.href = 'mailto:glenn@barefootfishingsafaris.com.au?subject=' +
+      encodeURIComponent('Tides Cheat Sheet request') + '&body=' + encodeURIComponent(t);
+  });
+})();
+</script>
 
 </body>
 </html>
