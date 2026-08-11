@@ -628,3 +628,21 @@ a.libcard:hover .go{color:var(--copper)}
 .vidcard .vchan{font-family:'Montserrat';font-weight:700;font-size:.68rem;
   text-transform:uppercase;letter-spacing:.1em;color:var(--copper)}
 .vidcard h3{font-size:.98rem;margin:.35rem 0 0;line-height:1.35}
+
+/* ---- archive index: 228 links need grouping, not a wall ---- */
+.eplist{list-style:none;padding:0;margin:.6rem 0 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem 1.4rem}
+@media(max-width:860px){.eplist{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.eplist{grid-template-columns:1fr}}
+.eplist a{color:var(--navy);text-decoration:none;font-size:.95rem;
+  border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease}
+.eplist a:hover{color:var(--copper);border-bottom-color:var(--copper)}
+details.yr{border-top:1px solid var(--dune);padding:.9rem 0}
+details.yr summary{font-family:'Montserrat';font-weight:700;color:var(--navy);
+  cursor:pointer;list-style:none;position:relative;padding-right:2rem}
+details.yr summary::-webkit-details-marker{display:none}
+details.yr summary::after{content:"+";position:absolute;right:.2rem;top:50%;
+  transform:translateY(-50%);color:var(--copper);font-weight:800;font-size:1.3rem;line-height:1}
+details.yr[open] summary::after{content:"\2013"}
+details.yr .cnt{font-weight:600;font-size:.76rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--slate);margin-left:.6rem}
