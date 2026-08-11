@@ -57,10 +57,17 @@
   </div>
 </section>
 
-<section>
-  <div class="audiowrap">
-    <div class="vidcard vsolo" data-yt="Eam-j-8x4qs">
-      <div class="vthumb">
+<!-- Player and transcript live in one textured band — split across two
+     sections the collapsed transcript left a near-empty stripe. -->
+<section class="bandtexture soft">
+  <picture class="band-bg">
+    <source type="image/avif" srcset="../assets/img/band-texture-flats-1000.avif 1000w, ../assets/img/band-texture-flats-1600.avif 1600w" sizes="100vw">
+    <img src="../assets/img/band-texture-flats-1600.jpg" sizes="100vw" width="1600" height="1200" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="wrap">
+    <div class="audiowrap">
+    <div class="vidcard vsolo">
+      <div class="vthumb" data-yt="Eam-j-8x4qs" role="button" tabindex="0" aria-label="Play video">
         <picture>
           <source type="image/avif" srcset="../assets/img/yt-Eam-j-8x4qs-640.avif 640w, ../assets/img/yt-Eam-j-8x4qs-1000.avif 1000w" sizes="(max-width:860px) 100vw, 820px">
           <img src="../assets/img/yt-Eam-j-8x4qs-640.jpg" srcset="../assets/img/yt-Eam-j-8x4qs-640.jpg 640w, ../assets/img/yt-Eam-j-8x4qs-1000.jpg 1000w" sizes="(max-width:860px) 100vw, 820px" width="1280" height="720" alt="Fishing for barramundi in the Top End — video still" loading="lazy" decoding="async">
@@ -69,13 +76,12 @@
       </div>
     </div>
     <p class="tnote">Originally broadcast on Fishing Addiction. <a href="https://www.youtube.com/watch?v=Eam-j-8x4qs" target="_blank" rel="noopener">Watch on Fishing Addiction</a>.</p>
-  </div>
-
-  <div class="transcript">
-    <details>
-      <summary>Read the full transcript (5,640 words)</summary>
-      <div class="tbody">
-      <p>I&#x27;m Mark Berg, and welcome to another week of fishing addiction. The show that surprises Fishos, all over the country with incredible fishing adventures. This week, we&#x27;re surprising a guy called Tyler, who lives just down the road, we&#x27;ve just snuck up in the D Max. We&#x27;re about to go to his house, knock on the door, and we&#x27;re going to take him to the Northern Territory chasing Barra with Barefoot Fishing Safaris.</p>
+    </div>
+    <div class="transcript">
+      <details>
+        <summary>Read the full transcript (5,640 words)</summary>
+        <div class="tbody">
+        <p>I&#x27;m Mark Berg, and welcome to another week of fishing addiction. The show that surprises Fishos, all over the country with incredible fishing adventures. This week, we&#x27;re surprising a guy called Tyler, who lives just down the road, we&#x27;ve just snuck up in the D Max. We&#x27;re about to go to his house, knock on the door, and we&#x27;re going to take him to the Northern Territory chasing Barra with Barefoot Fishing Safaris.</p>
       <p>It should be a fantastic trip. Now, his partner, she is freaking out, as most do. She&#x27;s been planning this for the last week or so with me. And hopefully she keeps it together for Tyler.</p>
       <p>Let&#x27;s go surprise. How&#x27;s the show? &#x27;s got no shoes. Hi, guys.</p>
       <p>Is Dad here? Who&#x27;s Dad? You watch me. Tyler!</p>
@@ -308,11 +314,37 @@
       <p>An absolute dream come true. Well, that&#x27;s it from us here at Bino Harbour in the Northern Territory. Great weeks fishing, with Barefoot Fishing Safaris. Their website is on the screen right now.</p>
       <p>Gleno&#x27;s are top blokes. If you&#x27;re coming up to the territory and you want to go for a fish, hook up with Gleno, check out his website. He&#x27;s a lovely, lovely bloke, and a great Fisher as well. Special thanks to Wilson, of course.</p>
       <p>For making the show possible and for their great prizes, we really appreciate you. And remember, to give yourself the chance to come on fishing addiction, you&#x27;ve got to be a member. Sign up today at fishingaddiction.com.au. Get a real, a fishing shirt, and all sorts of other goodies, and you never know, just like Tyler, I might come knocking on your door.</p>
-      </div>
-    </details>
+        </div>
+      </details>
+    </div>
   </div>
+</section>
 
-  <p class="epmeta" style="margin-top:2.4rem"><a href="../media.html">&larr; Back to the Media Centre</a></p>
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">More from the archive</p>
+      <h2>Keep listening</h2>
+    </div>
+    <div class="grid grid-3">
+      <a class="card sand epcard" href="video-GpyEWNm5FeI.html">
+        <div class="season">Starlo Gets Reel</div>
+        <h3>Surface action on saratoga and tarpon</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-BV3-A9KhUtk.html">
+        <div class="season">Peachy Fly Fishing</div>
+        <h3>Darwin fly fishing — I wasn&#x27;t expecting this</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-Q08FF8k0pSg.html">
+        <div class="season">The SegmeNT</div>
+        <h3>The Segment — Glenn Watt, Barefoot Fishing Safaris</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+    </div>
+    <p class="epmeta" style="margin-top:2.4rem"><a href="../radio-archive.html">The whole archive &rarr;</a> &nbsp;&middot;&nbsp; <a href="../media.html">Media Centre</a></p>
+  </div>
 </section>
 
 <footer class="site">
@@ -328,7 +360,7 @@
 document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
   function play(){
     var id=thumb.getAttribute('data-yt'); if(!id||thumb.querySelector('iframe')) return;
-    var card=thumb.closest('.vidcard'), h=card&&card.querySelector('h3');
+    var h=document.querySelector('h1');
     var f=document.createElement('iframe');
     f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
     f.title=h?h.textContent.trim():'Video';

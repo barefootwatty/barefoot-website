@@ -57,10 +57,17 @@
   </div>
 </section>
 
-<section>
-  <div class="audiowrap">
-    <div class="vidcard vsolo" data-yt="Q08FF8k0pSg">
-      <div class="vthumb">
+<!-- Player and transcript live in one textured band — split across two
+     sections the collapsed transcript left a near-empty stripe. -->
+<section class="bandtexture soft">
+  <picture class="band-bg">
+    <source type="image/avif" srcset="../assets/img/band-texture-flats-1000.avif 1000w, ../assets/img/band-texture-flats-1600.avif 1600w" sizes="100vw">
+    <img src="../assets/img/band-texture-flats-1600.jpg" sizes="100vw" width="1600" height="1200" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="wrap">
+    <div class="audiowrap">
+    <div class="vidcard vsolo">
+      <div class="vthumb" data-yt="Q08FF8k0pSg" role="button" tabindex="0" aria-label="Play video">
         <picture>
           <source type="image/avif" srcset="../assets/img/yt-Q08FF8k0pSg-640.avif 640w, ../assets/img/yt-Q08FF8k0pSg-1000.avif 1000w" sizes="(max-width:860px) 100vw, 820px">
           <img src="../assets/img/yt-Q08FF8k0pSg-640.jpg" srcset="../assets/img/yt-Q08FF8k0pSg-640.jpg 640w, ../assets/img/yt-Q08FF8k0pSg-1000.jpg 1000w" sizes="(max-width:860px) 100vw, 820px" width="1280" height="720" alt="The Segment — Glenn Watt, Barefoot Fishing Safaris — video still" loading="lazy" decoding="async">
@@ -69,13 +76,12 @@
       </div>
     </div>
     <p class="tnote">Originally broadcast on The SegmeNT. <a href="https://www.youtube.com/watch?v=Q08FF8k0pSg" target="_blank" rel="noopener">Watch on The SegmeNT</a>.</p>
-  </div>
-
-  <div class="transcript">
-    <details>
-      <summary>Read the full transcript (3,638 words)</summary>
-      <div class="tbody">
-      <p>This week is a great show on the segment, we have Mr. Glenn Watt from Barefoot Fishing Safaris. Great show. He&#x27;s a local fishing guide, great Northern territory business. Welcome to the show, Glenn.</p>
+    </div>
+    <div class="transcript">
+      <details>
+        <summary>Read the full transcript (3,638 words)</summary>
+        <div class="tbody">
+        <p>This week is a great show on the segment, we have Mr. Glenn Watt from Barefoot Fishing Safaris. Great show. He&#x27;s a local fishing guide, great Northern territory business. Welcome to the show, Glenn.</p>
       <p>Thanks, Chris. Mate, that was a bit more official. So tell us a story you went from working on Tipperary Station to being a fishing guide, mate. Obviously that was a bit of a transition. Yeah, a lot of people sort of see it as 2 very different worlds, but fishing is a big part of working on Tipperary Station.</p>
       <p>You might know the Daily River runs clean straight through the middle of it. So I guess people that work there and anywhere around the northern territory probably use the, you know, the work side of it as a front for actually going fishing a lot. So for me, it was, yeah, it was a big transition into something that I&#x27;ve never done before until now, but at the same time, the same sort of skills as working in a team on a fishing, on a cattle station, they transpose across to being a fishing guy where it&#x27;s about sort of looking after each other, helping each other out and all getting the job done together. So let&#x27;s talk, let&#x27;s talk about fishing.</p>
       <p>So obviously you&#x27;ve growing up as a kid and you love fishing. I guess you wouldn&#x27;t be doing your job if you didn&#x27;t love fishing. No, that&#x27;s right. You can&#x27;t do this job unless you love it and you&#x27;ve got to continue to love it.</p>
@@ -139,11 +145,37 @@
       <p>It&#x27;s just given me a way to sort of increase the business as well as increase the love. And where do people sign up or where do they go? So at the moment, you go straight through to the Barefoot Fishing Safaris, Facebook page or website? Outcast fishing clubs are going to have its own website launch within the next month or so, and it&#x27;ll all be on there.</p>
       <p>There&#x27;ll be forums and all sorts of other online activities to do in there as well as all the cool drawers. Awesome. Mate, being a pleasure having you on. Mate.</p>
       <p>I got to confess, I thought I was going to get a few more fishing tips for the harbour.</p>
-      </div>
-    </details>
+        </div>
+      </details>
+    </div>
   </div>
+</section>
 
-  <p class="epmeta" style="margin-top:2.4rem"><a href="../media.html">&larr; Back to the Media Centre</a></p>
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">More from the archive</p>
+      <h2>Keep listening</h2>
+    </div>
+    <div class="grid grid-3">
+      <a class="card sand epcard" href="video-BV3-A9KhUtk.html">
+        <div class="season">Peachy Fly Fishing</div>
+        <h3>Darwin fly fishing — I wasn&#x27;t expecting this</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-Nm3_tCGY3qQ.html">
+        <div class="season">Starlo Gets Reel</div>
+        <h3>Watty enjoys a beer with Starlo</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-iSMPMnN7c4M.html">
+        <div class="season">NextGen North</div>
+        <h3>NextGen North #63 — Glenn Watt</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+    </div>
+    <p class="epmeta" style="margin-top:2.4rem"><a href="../radio-archive.html">The whole archive &rarr;</a> &nbsp;&middot;&nbsp; <a href="../media.html">Media Centre</a></p>
+  </div>
 </section>
 
 <footer class="site">
@@ -159,7 +191,7 @@
 document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
   function play(){
     var id=thumb.getAttribute('data-yt'); if(!id||thumb.querySelector('iframe')) return;
-    var card=thumb.closest('.vidcard'), h=card&&card.querySelector('h3');
+    var h=document.querySelector('h1');
     var f=document.createElement('iframe');
     f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
     f.title=h?h.textContent.trim():'Video';

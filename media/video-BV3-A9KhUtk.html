@@ -57,10 +57,17 @@
   </div>
 </section>
 
-<section>
-  <div class="audiowrap">
-    <div class="vidcard vsolo" data-yt="BV3-A9KhUtk">
-      <div class="vthumb">
+<!-- Player and transcript live in one textured band — split across two
+     sections the collapsed transcript left a near-empty stripe. -->
+<section class="bandtexture soft">
+  <picture class="band-bg">
+    <source type="image/avif" srcset="../assets/img/band-texture-flats-1000.avif 1000w, ../assets/img/band-texture-flats-1600.avif 1600w" sizes="100vw">
+    <img src="../assets/img/band-texture-flats-1600.jpg" sizes="100vw" width="1600" height="1200" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="wrap">
+    <div class="audiowrap">
+    <div class="vidcard vsolo">
+      <div class="vthumb" data-yt="BV3-A9KhUtk" role="button" tabindex="0" aria-label="Play video">
         <picture>
           <source type="image/avif" srcset="../assets/img/yt-BV3-A9KhUtk-640.avif 640w, ../assets/img/yt-BV3-A9KhUtk-1000.avif 1000w" sizes="(max-width:860px) 100vw, 820px">
           <img src="../assets/img/yt-BV3-A9KhUtk-640.jpg" srcset="../assets/img/yt-BV3-A9KhUtk-640.jpg 640w, ../assets/img/yt-BV3-A9KhUtk-1000.jpg 1000w" sizes="(max-width:860px) 100vw, 820px" width="1280" height="720" alt="Darwin fly fishing — I wasn&#x27;t expecting this — video still" loading="lazy" decoding="async">
@@ -69,13 +76,12 @@
       </div>
     </div>
     <p class="tnote">Originally broadcast on Peachy Fly Fishing. <a href="https://www.youtube.com/watch?v=BV3-A9KhUtk" target="_blank" rel="noopener">Watch on Peachy Fly Fishing</a>.</p>
-  </div>
-
-  <div class="transcript">
-    <details>
-      <summary>Read the full transcript (2,055 words)</summary>
-      <div class="tbody">
-      <p>I was up in Darwin on a work trip for a couple of days, back in April, and considering how rarely I get to target northern tropical species, I was desperate to get out for a fish. A visit to fishing in outdoor world, got me some local info about where I could do a bit of land-based fly fishing for a morning in the city. But despite my best efforts, I wasn&#x27;t able to find any fish that day.</p>
+    </div>
+    <div class="transcript">
+      <details>
+        <summary>Read the full transcript (2,055 words)</summary>
+        <div class="tbody">
+        <p>I was up in Darwin on a work trip for a couple of days, back in April, and considering how rarely I get to target northern tropical species, I was desperate to get out for a fish. A visit to fishing in outdoor world, got me some local info about where I could do a bit of land-based fly fishing for a morning in the city. But despite my best efforts, I wasn&#x27;t able to find any fish that day.</p>
       <p>Fishing up here is highly tide dependent, and local knowledge is really important if you want to have a good chance of success. So I was stoked when on my 2nd day, I was lucky enough to score a spot on the boat with one of Darwin&#x27;s top guides. Glenn Watt from Barefoot Fishing Safaris. Glenn guides clients on a range of fisheries within a few hours of Darwin.</p>
       <p>But because I only had the one day with him to fish, we chose to target Darwin Harbour itself. G&#x27;day, guys. I&#x27;m up in Darwin today, fishing with Glenn Watt, from Barefoot Fishing Safaris. So I&#x27;ve never fished Darwin Harbour before.</p>
       <p>What are we sort of expecting to catch, mate? Well, I wasn&#x27;t expecting the cold windy conditions for a start, mate. But we&#x27;ll battle through it. Yeah, we&#x27;ve got a nice runout tide here today, down to about 2.5 metres, so we should be able to find some barr and snapper and maybe a jack dish up around the corner here on the flats and see what happens after that.</p>
@@ -163,11 +169,37 @@
       <p>Yeah, yeah, it&#x27;s a great time. Yeah, no, this is this is awesome. And, you know, some people would say we&#x27;re mad to leave fish biting like this, but mate, I&#x27;ve had a fantastic day and, you know, I&#x27;m ready to go and relax and have a swim and have a nice cold one. Yeah, I think I&#x27;m going to do this.</p>
       <p>Yeah, yeah. give that little bit of a Band-Aid on the thumb there. I got the old real handle trick from the Queenie, which was good. Yeah.</p>
       <p>Anyway, brilliant, mate. Thank you so much. Where can people find you? Oh, search up Barefoot Fishing Safaris anywhere?</p>
-      </div>
-    </details>
+        </div>
+      </details>
+    </div>
   </div>
+</section>
 
-  <p class="epmeta" style="margin-top:2.4rem"><a href="../media.html">&larr; Back to the Media Centre</a></p>
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">More from the archive</p>
+      <h2>Keep listening</h2>
+    </div>
+    <div class="grid grid-3">
+      <a class="card sand epcard" href="video-Eam-j-8x4qs.html">
+        <div class="season">Fishing Addiction</div>
+        <h3>Fishing for barramundi in the Top End</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-Q08FF8k0pSg.html">
+        <div class="season">The SegmeNT</div>
+        <h3>The Segment — Glenn Watt, Barefoot Fishing Safaris</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-Nm3_tCGY3qQ.html">
+        <div class="season">Starlo Gets Reel</div>
+        <h3>Watty enjoys a beer with Starlo</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+    </div>
+    <p class="epmeta" style="margin-top:2.4rem"><a href="../radio-archive.html">The whole archive &rarr;</a> &nbsp;&middot;&nbsp; <a href="../media.html">Media Centre</a></p>
+  </div>
 </section>
 
 <footer class="site">
@@ -183,7 +215,7 @@
 document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
   function play(){
     var id=thumb.getAttribute('data-yt'); if(!id||thumb.querySelector('iframe')) return;
-    var card=thumb.closest('.vidcard'), h=card&&card.querySelector('h3');
+    var h=document.querySelector('h1');
     var f=document.createElement('iframe');
     f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
     f.title=h?h.textContent.trim():'Video';

@@ -57,10 +57,17 @@
   </div>
 </section>
 
-<section>
-  <div class="audiowrap">
-    <div class="vidcard vsolo" data-yt="F-oghVGjd8A">
-      <div class="vthumb">
+<!-- Player and transcript live in one textured band — split across two
+     sections the collapsed transcript left a near-empty stripe. -->
+<section class="bandtexture soft">
+  <picture class="band-bg">
+    <source type="image/avif" srcset="../assets/img/band-texture-flats-1000.avif 1000w, ../assets/img/band-texture-flats-1600.avif 1600w" sizes="100vw">
+    <img src="../assets/img/band-texture-flats-1600.jpg" sizes="100vw" width="1600" height="1200" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="wrap">
+    <div class="audiowrap">
+    <div class="vidcard vsolo">
+      <div class="vthumb" data-yt="F-oghVGjd8A" role="button" tabindex="0" aria-label="Play video">
         <picture>
           <source type="image/avif" srcset="../assets/img/yt-F-oghVGjd8A-640.avif 640w, ../assets/img/yt-F-oghVGjd8A-1000.avif 1000w" sizes="(max-width:860px) 100vw, 820px">
           <img src="../assets/img/yt-F-oghVGjd8A-640.jpg" srcset="../assets/img/yt-F-oghVGjd8A-640.jpg 640w, ../assets/img/yt-F-oghVGjd8A-1000.jpg 1000w" sizes="(max-width:860px) 100vw, 820px" width="1280" height="720" alt="Pushing light tackle to the limit — video still" loading="lazy" decoding="async">
@@ -69,13 +76,12 @@
       </div>
     </div>
     <p class="tnote">Originally broadcast on Starlo Gets Reel. <a href="https://www.youtube.com/watch?v=F-oghVGjd8A" target="_blank" rel="noopener">Watch on Starlo Gets Reel</a>.</p>
-  </div>
-
-  <div class="transcript">
-    <details>
-      <summary>Read the full transcript (2,262 words)</summary>
-      <div class="tbody">
-      <p>First cast. Got him. 3D&#x27;s coming out towards me. All 3 just arrived.</p>
+    </div>
+    <div class="transcript">
+      <details>
+        <summary>Read the full transcript (2,262 words)</summary>
+        <div class="tbody">
+        <p>First cast. Got him. 3D&#x27;s coming out towards me. All 3 just arrived.</p>
       <p>promising. Go. That is so much fun. These are just a few highlights from my earlier episode about site fishing barra on the Top End tidal flats, using the same ultra light bait caster gear, I choose back home for brim, flatties, and bass.</p>
       <p>Check that one out. Anyway, after a pleasant night in our budget accommodation at nearby sand palms, Watty and I are headed back to Bino Harbour for another session with the light gear. Because of the later tides today. We really don&#x27;t need an especially early start, but we&#x27;re still on the water just after sunup.</p>
       <p>And it&#x27;s another classic Top End dry season morning, with the mercury already in the 20s and headed for the 30s. It&#x27;s a smooth run to our 1st likely creek, but we know that the high tide will make it challenging to find fish. Many of them will still be well back in the vegetation, beyond our reach. With this in mind, I&#x27;ve opted for a weedless rigged squidgy soft plastic this morning, strung on one of my son Tom&#x27;s 3D printed resin head wide gape setups with its adjustable keel weight. And of course, I doubt this offering with some S factor to increase its appeal. Hopefully it&#x27;ll make the fish hold on a bit longer.</p>
@@ -153,11 +159,37 @@
       <p>It lets you throw really light lures, and it&#x27;s a lot of fun. I don&#x27;t know how you&#x27;d go if you hooked a 80 or 90 centimetre one, you might run out of line pretty quickly. But yeah, I enjoyed that. We only spent half a day out there.</p>
       <p>Fantastic. Spending some time with Watty. He&#x27;s a great guide and good company to fish with as well. Anyway, until next time, this is Starlow wishing you tight lines. Check out what is business, too.</p>
       <p>Barefoot Fishing Safaris.</p>
-      </div>
-    </details>
+        </div>
+      </details>
+    </div>
   </div>
+</section>
 
-  <p class="epmeta" style="margin-top:2.4rem"><a href="../media.html">&larr; Back to the Media Centre</a></p>
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">More from the archive</p>
+      <h2>Keep listening</h2>
+    </div>
+    <div class="grid grid-3">
+      <a class="card sand epcard" href="video-7rpRs1V1Q8g.html">
+        <div class="season">Starlo Gets Reel</div>
+        <h3>Finding fish in Darwin Harbour</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-YFeyiLLm31w.html">
+        <div class="season">Oz Off Road TV</div>
+        <h3>Outback Beef and Barra — part 2</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+      <a class="card sand epcard" href="video-BRhw5r-zTe4.html">
+        <div class="season">Oz Off Road TV</div>
+        <h3>Outback Beef and Barra — part 1</h3>
+        <span class="go">Listen &amp; read &rarr;</span>
+      </a>
+    </div>
+    <p class="epmeta" style="margin-top:2.4rem"><a href="../radio-archive.html">The whole archive &rarr;</a> &nbsp;&middot;&nbsp; <a href="../media.html">Media Centre</a></p>
+  </div>
 </section>
 
 <footer class="site">
@@ -173,7 +205,7 @@
 document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
   function play(){
     var id=thumb.getAttribute('data-yt'); if(!id||thumb.querySelector('iframe')) return;
-    var card=thumb.closest('.vidcard'), h=card&&card.querySelector('h3');
+    var h=document.querySelector('h1');
     var f=document.createElement('iframe');
     f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
     f.title=h?h.textContent.trim():'Video';
