@@ -4,11 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Media Centre — Podcast, Video &amp; Barra Know-How | Barefoot Fishing Safaris</title>
-<meta name="description" content="Watty's Media Centre — the podcast, YouTube appearances, radio spots and Top End barra know-how, all in one searchable library.">
+<meta name="description" content="Watty's Media Centre — the podcast, YouTube sessions, radio spots and Top End barra know-how, all in one place.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
+<link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/band-bynoe-bluewater-birds-640.avif 640w, assets/img/band-bynoe-bluewater-birds-1000.avif 1000w, assets/img/band-bynoe-bluewater-birds-1600.avif 1600w" imagesizes="100vw">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Barefoot Media Centre — Watty on the airwaves">
+<meta property="og:description" content="The podcast, the videos, the radio spots and the barra know-how — all in one place.">
+<meta property="og:url" content="https://barefootfishingsafaris.com.au/media">
+<meta property="og:image" content="https://barefootfishingsafaris.com.au/assets/img/band-bynoe-bluewater-birds-1600.jpg">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CollectionPage",
+  "name":"Barefoot Media Centre",
+  "description":"Podcast episodes, video sessions, radio spots and written barra know-how from Top End guide Glenn \"Watty\" Watt.",
+  "inLanguage":"en-AU",
+  "publisher":{"@type":"Organization","name":"Barefoot Fishing Safaris"},
+  "about":["barramundi fishing","Top End fishing","Northern Territory","fishing podcast"]
+}
+</script>
 </head>
 <body>
 
@@ -26,15 +41,30 @@
   </nav>
 </header>
 
-<section class="subhero">
-  <div class="wrap">
+<!-- HERO -->
+<section class="subhero photohero tall">
+  <picture class="hero-bg">
+    <source type="image/avif" srcset="assets/img/band-bynoe-bluewater-birds-640.avif 640w, assets/img/band-bynoe-bluewater-birds-1000.avif 1000w, assets/img/band-bynoe-bluewater-birds-1600.avif 1600w" sizes="100vw">
+    <img src="assets/img/band-bynoe-bluewater-birds-1600.jpg" srcset="assets/img/band-bynoe-bluewater-birds-640.jpg 640w, assets/img/band-bynoe-bluewater-birds-1000.jpg 1000w, assets/img/band-bynoe-bluewater-birds-1600.jpg 1600w" sizes="100vw" width="1600" height="900" alt="Bird workup over a bait ball on the blue water off Bynoe Harbour" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="hero-content">
     <p class="eyebrow">Media Centre</p>
-    <h1>Watty on the airwaves — and everything he knows about barra</h1>
+    <div class="hero-titlerow">
+      <svg class="hero-fish" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c2.5-4 8-6 13-3.5 2.2 1.1 3.5 2.3 3.5 3.5s-1.3 2.4-3.5 3.5C11 18 5.5 16 3 12z"/><path d="M19.5 12L23 8v8z"/><circle cx="7" cy="10.8" r=".7"/></svg>
+      <h1>Watty, on the record</h1>
+    </div>
+    <p class="hero-sub quiet">The podcast, the sessions, the radio spots — and everything he knows about barra.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The library</p>
+      <h2>Fifteen years of Top End fishing, written down</h2>
+      <p>Some of this is the long-form stuff Watty teaches on the water. Some of it is him talking barra with people worth listening to. Filter it however suits.</p>
+    </div>
+
     <div class="filters" id="filters">
       <button class="active" data-filter="all">All</button>
       <button data-filter="article">Know-How</button>
@@ -45,63 +75,172 @@
 
     <div class="libgrid" id="libgrid">
 
-      <div class="libcard" data-type="article">
-        <div class="thumb">🎣</div>
+      <a class="libcard" data-type="article" href="four-pillars-of-top-end-barra.html">
+        <div class="thumb">
+          <picture>
+            <source type="image/avif" srcset="assets/img/band-enquire-topdown-turquoise-640.avif 640w, assets/img/band-enquire-topdown-turquoise-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw">
+            <img src="assets/img/band-enquire-topdown-turquoise-640.jpg" srcset="assets/img/band-enquire-topdown-turquoise-640.jpg 640w, assets/img/band-enquire-topdown-turquoise-1000.jpg 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw" width="1600" height="900" alt="Top-down view of a boat working a rock bar and shallow structure" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="body">
           <span class="type">Know-How</span>
           <h3>The Four Pillars of Top End Barra Fishing</h3>
           <p>The framework Watty uses to plan every session — Where &amp; When, Wind &amp; Weather, Time &amp; Tide, Techniques &amp; Tactics.</p>
-          <a href="four-pillars-of-top-end-barra.html">Read the article →</a>
+          <span class="go">Read the article →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="libcard" data-type="article">
-        <div class="thumb">🗓️</div>
+      <a class="libcard" data-type="article" href="best-time-to-fish-top-end-barra.html">
+        <div class="thumb">
+          <picture>
+            <source type="image/avif" srcset="assets/img/band-video-flats-drone-640.avif 640w, assets/img/band-video-flats-drone-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw">
+            <img src="assets/img/band-video-flats-drone-640.jpg" srcset="assets/img/band-video-flats-drone-640.jpg 640w, assets/img/band-video-flats-drone-1000.jpg 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw" width="1600" height="1066" alt="Drone view over Top End barra country at first light" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="body">
           <span class="type">Know-How</span>
           <h3>Best Time to Fish for Barra in the Top End</h3>
           <p>A season-by-season guide — run-off, dry and build-up — and how to pick the trip that suits you.</p>
-          <a href="best-time-to-fish-top-end-barra.html">Read the article →</a>
+          <span class="go">Read the guide →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="libcard" data-type="podcast">
-        <div class="thumb">🎙️</div>
+      <a class="libcard" data-type="article" href="tides-cheat-sheet.html">
+        <div class="thumb">
+          <picture>
+            <source type="image/avif" srcset="assets/img/band-pricing-glass-river-640.avif 640w, assets/img/band-pricing-glass-river-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw">
+            <img src="assets/img/band-pricing-glass-river-640.jpg" srcset="assets/img/band-pricing-glass-river-640.jpg 640w, assets/img/band-pricing-glass-river-1000.jpg 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw" width="1600" height="1066" alt="A boat working a glassed-off Top End river on a run-out tide" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="body">
-          <span class="type">Podcast</span>
-          <h3>The Barefoot Outdoors Podcast</h3>
-          <p>Two episodes a week on Top End fishing, gear and stories. The full back-catalogue lands here — auto-pulled from the feed.</p>
-          <a href="index.html#contact">Coming soon →</a>
+          <span class="type">Know-How</span>
+          <h3>The Tides Cheat Sheet</h3>
+          <p>The one-page planner Watty uses to line up the best sessions of the year — tides, seasons and timing at a glance.</p>
+          <span class="go">Grab it free →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="libcard" data-type="video">
-        <div class="thumb">▶️</div>
+      <a class="libcard" data-type="video" href="https://www.youtube.com/@barefootfishingsafaris" target="_blank" rel="noopener">
+        <div class="thumb">
+          <picture>
+            <source type="image/avif" srcset="assets/img/band-bynoe-bow-cast-640.avif 640w, assets/img/band-bynoe-bow-cast-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw">
+            <img src="assets/img/band-bynoe-bow-cast-640.jpg" srcset="assets/img/band-bynoe-bow-cast-640.jpg 640w, assets/img/band-bynoe-bow-cast-1000.jpg 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw" width="1600" height="900" alt="An angler casting from the bow on flat blue water off Bynoe Harbour" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="body">
           <span class="type">Video</span>
           <h3>YouTube — sessions &amp; appearances</h3>
-          <p>Real Top End sessions and Watty's guest appearances, each with a summary so the fish stories are easy to find.</p>
-          <a href="https://www.youtube.com/@barefootfishingsafaris" target="_blank" rel="noopener">Visit the channel →</a>
+          <p>Real Top End sessions and Watty's guest appearances, shot on the days they happened.</p>
+          <span class="go">Visit the channel →</span>
+        </div>
+      </a>
+
+      <div class="libcard soon" data-type="podcast">
+        <div class="thumb">
+          <picture>
+            <source type="image/avif" srcset="assets/img/about-mates-640.avif 640w, assets/img/about-mates-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw">
+            <img src="assets/img/about-mates-640.jpg" srcset="assets/img/about-mates-640.jpg 640w, assets/img/about-mates-1000.jpg 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw" width="1600" height="1202" alt="Three anglers laughing together over a barra in the mangroves" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="body">
+          <span class="type">Podcast</span>
+          <h3>The Barefoot Outdoors Podcast</h3>
+          <p>Top End fishing, gear and the stories behind the trips. The back-catalogue lands here as soon as the feed is wired in.</p>
+          <span class="go">Landing soon</span>
         </div>
       </div>
 
-      <div class="libcard" data-type="radio">
-        <div class="thumb">📻</div>
+      <div class="libcard soon" data-type="radio">
+        <div class="thumb">
+          <picture>
+            <source type="image/avif" srcset="assets/img/rig-boat-beach-640.avif 640w, assets/img/rig-boat-beach-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw">
+            <img src="assets/img/rig-boat-beach-640.jpg" srcset="assets/img/rig-boat-beach-640.jpg 640w, assets/img/rig-boat-beach-1000.jpg 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw" width="1600" height="1200" alt="The Barefoot rig pulled up on a Top End beach at low tide" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="body">
           <span class="type">Radio</span>
           <h3>Radio spots</h3>
-          <p>Watty's fishing segments and interviews — each written up so they're searchable long after they air.</p>
-          <a href="index.html#contact">Coming soon →</a>
+          <p>Watty's fishing segments on ABC Radio Darwin, Hot100 and 2GB — written up so they're searchable long after they air.</p>
+          <span class="go">Landing soon</span>
         </div>
       </div>
 
     </div>
-    <p style="color:var(--slate);font-size:.9rem;margin-top:1.8rem">More landing every week — podcast episodes auto-pull from the feed once it's wired in.</p>
+    <p class="small" style="color:var(--slate);margin-top:1.8rem">More landing every week — podcast episodes will auto-pull from the feed once it's connected.</p>
+  </div>
+</section>
+
+<!-- WHERE ELSE YOU'LL FIND HIM -->
+<section class="cream" style="padding:40px 0 36px">
+  <div class="wrap">
+    <p class="eyebrow logoband-lbl">As seen &amp; heard on</p>
+  </div>
+  <!-- To ADD a logo: drop a 900×300 transparent PNG in assets/img/press/
+       and add ONE <img> to BOTH .marquee-row blocks below (both are required
+       for the seamless loop). -->
+  <div class="marquee logos" aria-label="As seen and heard on">
+    <div class="marquee-track">
+      <div class="marquee-row">
+        <img src="assets/img/press/hot100.png" alt="Hot100 Darwin" decoding="async">
+        <img src="assets/img/press/abc-darwin.png" alt="ABC Radio Darwin" decoding="async">
+        <img src="assets/img/press/2gb.png" alt="2GB Sydney" decoding="async">
+        <img src="assets/img/press/fish-and-boat.png" alt="Fish &amp; Boat Magazine" decoding="async">
+        <img src="assets/img/press/igfa.png" alt="IGFA Captain &amp; Guide" decoding="async">
+        <img src="assets/img/press/barra-bass-bream.png" alt="Barra Bass &amp; Bream Magazine" decoding="async">
+        <img src="assets/img/press/fishing-australia.png" alt="Fishing Australia TV" decoding="async">
+      </div>
+      <div class="marquee-row" aria-hidden="true">
+        <img src="assets/img/press/hot100.png" alt="" decoding="async">
+        <img src="assets/img/press/abc-darwin.png" alt="" decoding="async">
+        <img src="assets/img/press/2gb.png" alt="" decoding="async">
+        <img src="assets/img/press/fish-and-boat.png" alt="" decoding="async">
+        <img src="assets/img/press/igfa.png" alt="" decoding="async">
+        <img src="assets/img/press/barra-bass-bream.png" alt="" decoding="async">
+        <img src="assets/img/press/fishing-australia.png" alt="" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="photohero cta-photo">
+  <picture class="hero-bg">
+    <source type="image/avif" srcset="assets/img/band-texture-flats-640.avif 640w, assets/img/band-texture-flats-1000.avif 1000w, assets/img/band-texture-flats-1600.avif 1600w" sizes="100vw">
+    <img src="assets/img/band-texture-flats-1600.jpg" srcset="assets/img/band-texture-flats-640.jpg 640w, assets/img/band-texture-flats-1000.jpg 1000w, assets/img/band-texture-flats-1600.jpg 1600w" sizes="100vw" width="1600" height="1200" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="hero-content">
+    <h2>Reading about it only gets you so far</h2>
+    <p>The rest of it you learn standing on the bow with someone who's been doing it since 2011.</p>
+    <div class="cta-row"><a href="index.html#contact" class="btn btn-hero">Check dates &amp; enquire</a></div>
   </div>
 </section>
 
 <footer class="site">
   <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo-white.png" alt="Barefoot Fishing Safaris">
+        <p>Guided barramundi &amp; sportfishing in Australia's Top End since 2011. Part of the Barefoot Outdoors family.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#charters">Charters</a></li>
+          <li><a href="index.html#courses">Online Courses</a></li>
+          <li><a href="media.html">Media Centre</a></li>
+          <li><a href="index.html#adventures">Angling Adventures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow along</h4>
+        <ul>
+          <li><a href="https://www.youtube.com/@barefootfishingsafaris" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://www.instagram.com/barefoot.fishing.safaris/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/barefootfishingsafaris/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.tiktok.com/@barefoot.fishing" target="_blank" rel="noopener">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="foot-note">
       <span>© 2026 Barefoot Fishing Safaris · Coolalinga, Northern Territory · <a href="privacy-policy.html" style="color:inherit">Privacy</a></span>
       <span>Fish with Watty · 0417 272 871</span>
@@ -118,6 +257,37 @@
       c.style.display=(f==='all'||c.getAttribute('data-type')===f)?'':'none';
     });
   });
+</script>
+
+<script>
+/* Motion system (Eleven pattern) — scroll-reveal + lazy-image fades. */
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+  var sel = ['.section-head','.splitband>.copy','.splitband>.media','.timeline>.card',
+    '.photohero .hero-content>*'];
+  var els = Array.prototype.slice.call(document.querySelectorAll(sel.join(',')));
+  var counts = new Map();
+  els.forEach(function(el){
+    var p = el.parentElement, i = counts.get(p) || 0;
+    counts.set(p, i + 1);
+    el.style.setProperty('--rvd', (Math.min(i, 4) * 110) + 'ms');
+    el.classList.add('rv');
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.01});
+  els.forEach(function(el){ io.observe(el); });
+  document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+    if (img.complete) return;
+    img.classList.add('lf');
+    var show = function(){ img.classList.add('ld'); };
+    img.addEventListener('load', show, {once: true});
+    img.addEventListener('error', show, {once: true});
+  });
+})();
 </script>
 
 </body>

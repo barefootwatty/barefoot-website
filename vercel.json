@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/runoff-barra-fishing", "destination": "/run-off-barra-fishing", "permanent": true },
+    { "source": "/bynoe-escape", "destination": "/dundee-bynoe-barra-bluewater", "permanent": true },
+    { "source": "/fly-fishing", "destination": "/fly-fishing-darwin", "permanent": true },
+    { "source": "/the-rig", "destination": "/about-barefoot#rig", "permanent": true },
+    { "source": "/about", "destination": "/about-barefoot", "permanent": true },
+    { "source": "/charters", "destination": "/#charters", "permanent": true },
+    { "source": "/contact", "destination": "/#contact", "permanent": true },
+    { "source": "/online-courses", "destination": "/#courses", "permanent": true },
+    { "source": "/courses", "destination": "/#courses", "permanent": true },
+    { "source": "/hosted-angling-adventures", "destination": "/#adventures", "permanent": true },
+    { "source": "/merch", "destination": "/", "permanent": false },
+    { "source": "/products-list", "destination": "/", "permanent": false }
+  ]
+}
