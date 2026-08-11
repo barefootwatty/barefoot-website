@@ -6,7 +6,7 @@
 <title>Darwin fly fishing — I wasn&#x27;t expecting this | Barefoot Fishing Safaris</title>
 <meta name="description" content="Darwin fly fishing — I wasn&#x27;t expecting this &mdash; Peachy Fly Fishing on Peachy Fly Fishing, 2023-07-17. Full transcript and audio.">
 <link rel="icon" type="image/png" href="../assets/fish-icon.png">
-<link rel="stylesheet" href="../styles.css?v13">
+<link rel="stylesheet" href="../styles.css?v14">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Darwin fly fishing — I wasn&#x27;t expecting this">
 <script type="application/ld+json">
@@ -45,15 +45,19 @@
   </nav>
 </header>
 
-<section class="subhero">
-  <div class="wrap">
+<section class="subhero photohero">
+  <picture class="hero-bg">
+    <source type="image/avif" srcset="../assets/img/band-video-flats-drone-640.avif 640w, ../assets/img/band-video-flats-drone-1000.avif 1000w, ../assets/img/band-video-flats-drone-1600.avif 1600w" sizes="100vw">
+    <img src="../assets/img/band-video-flats-drone-1600.jpg" srcset="../assets/img/band-video-flats-drone-640.jpg 640w, ../assets/img/band-video-flats-drone-1000.jpg 1000w, ../assets/img/band-video-flats-drone-1600.jpg 1600w" sizes="100vw" width="1600" height="1066" alt="" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="hero-content">
     <p class="eyebrow">Peachy Fly Fishing</p>
     <h1>Darwin fly fishing — I wasn&#x27;t expecting this</h1>
+    <p class="hero-sub quiet">Monday 17 July 2023</p>
   </div>
 </section>
 
 <section>
-  <p class="epmeta">Monday 17 July 2023 &middot; Glenn &ldquo;Watty&rdquo; Watt</p>
   <div class="audiowrap">
     <div class="vidcard vsolo" data-yt="BV3-A9KhUtk">
       <div class="vthumb">
@@ -176,7 +180,6 @@
 </footer>
 
 <script>
-/* Click-to-play — the iframe is only created when the viewer asks for it. */
 document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
   function play(){
     var id=thumb.getAttribute('data-yt'); if(!id||thumb.querySelector('iframe')) return;
@@ -185,8 +188,7 @@ document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
     f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
     f.title=h?h.textContent.trim():'Video';
     f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-    f.setAttribute('allowfullscreen','');
-    thumb.innerHTML=''; thumb.appendChild(f);
+    f.setAttribute('allowfullscreen',''); thumb.innerHTML=''; thumb.appendChild(f);
   }
   thumb.addEventListener('click',play);
   thumb.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});

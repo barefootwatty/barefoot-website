@@ -6,7 +6,7 @@
 <title>NextGen North #63 — Glenn Watt | Barefoot Fishing Safaris</title>
 <meta name="description" content="NextGen North #63 — Glenn Watt &mdash; NextGen North on NextGen North, 2026-03-13. Full transcript and audio.">
 <link rel="icon" type="image/png" href="../assets/fish-icon.png">
-<link rel="stylesheet" href="../styles.css?v13">
+<link rel="stylesheet" href="../styles.css?v14">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NextGen North #63 — Glenn Watt">
 <script type="application/ld+json">
@@ -45,15 +45,19 @@
   </nav>
 </header>
 
-<section class="subhero">
-  <div class="wrap">
+<section class="subhero photohero">
+  <picture class="hero-bg">
+    <source type="image/avif" srcset="../assets/img/band-video-flats-drone-640.avif 640w, ../assets/img/band-video-flats-drone-1000.avif 1000w, ../assets/img/band-video-flats-drone-1600.avif 1600w" sizes="100vw">
+    <img src="../assets/img/band-video-flats-drone-1600.jpg" srcset="../assets/img/band-video-flats-drone-640.jpg 640w, ../assets/img/band-video-flats-drone-1000.jpg 1000w, ../assets/img/band-video-flats-drone-1600.jpg 1600w" sizes="100vw" width="1600" height="1066" alt="" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="hero-content">
     <p class="eyebrow">NextGen North</p>
     <h1>NextGen North #63 — Glenn Watt</h1>
+    <p class="hero-sub quiet">Friday 13 March 2026</p>
   </div>
 </section>
 
 <section>
-  <p class="epmeta">Friday 13 March 2026 &middot; Glenn &ldquo;Watty&rdquo; Watt</p>
   <div class="audiowrap">
     <div class="vidcard vsolo" data-yt="iSMPMnN7c4M">
       <div class="vthumb">
@@ -251,7 +255,6 @@
 </footer>
 
 <script>
-/* Click-to-play — the iframe is only created when the viewer asks for it. */
 document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
   function play(){
     var id=thumb.getAttribute('data-yt'); if(!id||thumb.querySelector('iframe')) return;
@@ -260,8 +263,7 @@ document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
     f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
     f.title=h?h.textContent.trim():'Video';
     f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-    f.setAttribute('allowfullscreen','');
-    thumb.innerHTML=''; thumb.appendChild(f);
+    f.setAttribute('allowfullscreen',''); thumb.innerHTML=''; thumb.appendChild(f);
   }
   thumb.addEventListener('click',play);
   thumb.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});

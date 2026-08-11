@@ -661,3 +661,18 @@ details.yr .cnt{font-weight:600;font-size:.76rem;letter-spacing:.08em;
 .vidcard h3 a{color:var(--navy);text-decoration:none}
 .vidcard:hover h3 a{color:var(--copper)}
 .vidcard a.go{display:inline-block;margin-top:.5rem;text-decoration:none}
+
+/* archive: episode cards. Whole-card links (GW's rule), same quiet lift as
+   the season rows — the old text-list read like a library catalogue. */
+.card.epcard{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  transition:transform .28s ease,box-shadow .28s ease}
+.card.epcard:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(22,49,78,.16)}
+.card.epcard h3{margin:.2rem 0 .8rem}
+.card.epcard .go{margin-top:auto;font-family:'Montserrat';font-weight:700;
+  font-size:.85rem;color:var(--navy)}
+.card.epcard:hover .go{color:var(--copper)}
+a.vidcard .vbody .go{display:block;margin-top:.6rem;font-family:'Montserrat';
+  font-weight:700;font-size:.85rem;color:var(--navy)}
+a.vidcard:hover .vbody .go{color:var(--copper)}
+/* year accordion sits on the cream band now */
+details.yr{border-top:1px solid rgba(22,49,78,.14)}
