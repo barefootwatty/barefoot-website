@@ -561,3 +561,25 @@ a.libcard:hover .go{color:var(--copper)}
 .pullband .who{display:block;margin-top:1rem;font-family:'Montserrat';
   font-weight:700;font-size:.74rem;text-transform:uppercase;
   letter-spacing:.16em;color:var(--copper)}
+
+/* ---- media transcripts — collapsed by default so the page stays clean, but the
+   text is real DOM content so search and AI crawlers read it either way (GW,
+   11 Aug: "can the real text be homed in a drop down so it's not ugly"). ---- */
+.transcript{max-width:820px;margin:2.2rem auto 0}
+.transcript details{background:var(--white);border:1px solid var(--dune);
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.transcript summary{font-family:'Montserrat';font-weight:700;font-size:.82rem;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--navy);cursor:pointer;
+  list-style:none;position:relative;padding:16px 3rem 16px 20px}
+.transcript summary::-webkit-details-marker{display:none}
+.transcript summary::after{content:"+";position:absolute;right:1.1rem;top:50%;
+  transform:translateY(-50%);color:var(--copper);font-weight:800;font-size:1.35rem;line-height:1}
+.transcript details[open] summary::after{content:"\2013"}
+.transcript summary:hover{color:var(--copper)}
+.transcript .tbody{padding:4px 20px 22px;border-top:1px solid var(--dune)}
+.transcript .tbody p{margin:1rem 0;color:var(--charcoal);font-size:1rem;line-height:1.72}
+.transcript .tnote{font-size:.82rem;color:var(--slate);margin:.9rem 0 0;font-style:italic}
+.audiowrap{max-width:820px;margin:0 auto}
+.audiowrap audio{width:100%;margin:.4rem 0 0}
+.epmeta{max-width:820px;margin:0 auto 1.4rem;font-family:'Montserrat';font-weight:600;
+  font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--slate)}
