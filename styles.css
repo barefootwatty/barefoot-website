@@ -676,3 +676,16 @@ a.vidcard .vbody .go{display:block;margin-top:.6rem;font-family:'Montserrat';
 a.vidcard:hover .vbody .go{color:var(--copper)}
 /* year accordion sits on the cream band now */
 details.yr{border-top:1px solid rgba(22,49,78,.14)}
+
+/* ---- topic pages: the quotes are the content, so give them room ---- */
+.tqlist{list-style:none;padding:0;margin:0;max-width:820px}
+.tq{border-top:1px solid var(--dune);padding:1.6rem 0}
+.tq:first-child{border-top:0}
+.tq blockquote{margin:0;font-family:'Lora',Georgia,serif;font-style:italic;
+  font-size:1.1rem;line-height:1.6;color:var(--charcoal)}
+.tq .src{margin:.8rem 0 0;font-size:.9rem}
+.tq .src a{color:var(--navy);font-family:'Montserrat';font-weight:700;text-decoration:none}
+.tq .src a:hover{color:var(--copper)}
+.tq .src span{display:block;font-family:'Montserrat';font-weight:600;font-size:.7rem;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--slate);margin-top:.15rem}
+.card.epcard p{font-size:.92rem;color:var(--slate);margin:0 0 1rem}
