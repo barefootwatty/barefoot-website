@@ -10,7 +10,9 @@
   <url><loc>https://barefootfishingsafaris.com.au/media</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
   <url><loc>https://barefootfishingsafaris.com.au/radio-archive</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
   <url><loc>https://barefootfishingsafaris.com.au/topics</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://barefootfishingsafaris.com.au/tides-cheat-sheet</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
+<!-- tides-cheat-sheet is deliberately noindex (lead-magnet landing page — we drive
+     traffic to it, we don't want it competing in search), so it is NOT listed here. -->
+  <url><loc>https://barefootfishingsafaris.com.au/booking-terms</loc><lastmod>2026-08-12</lastmod><priority>0.4</priority></url>
   <url><loc>https://barefootfishingsafaris.com.au/privacy-policy</loc><lastmod>2026-08-12</lastmod><priority>0.3</priority></url>
   <url><loc>https://barefootfishingsafaris.com.au/topics/adelaide-river</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://barefootfishingsafaris.com.au/topics/billabongs</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
