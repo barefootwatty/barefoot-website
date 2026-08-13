@@ -718,3 +718,26 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
   .dates .loc{order:2}
   .dates .st{order:1}
 }
+
+/* ---- Gallery (v17) --------------------------------------------------------
+   CSS-columns masonry so portrait and landscape shots sit together without
+   cropping. Dark ground on purpose — this page is the antidote to the white. */
+.gal{columns:4 250px;column-gap:14px}
+@media(max-width:900px){.gal{columns:2 150px;column-gap:10px}}
+.gal figure{break-inside:avoid;margin:0 0 14px;border-radius:10px;overflow:hidden;
+  background:#0e1a26;cursor:zoom-in;position:relative}
+.gal img{width:100%;height:auto;display:block;transition:transform .5s ease}
+.gal figure:hover img{transform:scale(1.04)}
+.lb{position:fixed;inset:0;z-index:200;background:rgba(8,14,20,.96);
+  display:none;align-items:center;justify-content:center;padding:20px}
+.lb.on{display:flex}
+.lb img{max-width:min(1400px,94vw);max-height:86vh;width:auto;height:auto;border-radius:8px}
+.lb .cap{position:absolute;left:0;right:0;bottom:16px;text-align:center;color:#e9e1d3;
+  font-size:.86rem;padding:0 24px;line-height:1.4}
+.lb button{position:absolute;background:none;border:0;color:#fff;font-size:2.3rem;
+  cursor:pointer;padding:.1em .45em;opacity:.7;line-height:1;font-family:inherit}
+.lb button:hover{opacity:1}
+.lb .x{top:6px;right:12px}
+.lb .prev{left:4px;top:50%;transform:translateY(-50%)}
+.lb .next{right:4px;top:50%;transform:translateY(-50%)}
+@media(prefers-reduced-motion:reduce){.gal img,.gal figure:hover img{transition:none;transform:none}}
