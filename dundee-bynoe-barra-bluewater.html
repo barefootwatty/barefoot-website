@@ -468,19 +468,22 @@
   </div>
 </section>
 
-<!-- LEAD MAGNET: Barra & Blue Water Black Book.
-     Direct Canva link (supplied by Watty 10 Aug 2026) — same behaviour as the
-     live page's download button. To gate it behind email capture later, swap
-     this for a Kit form following run-off-barra-fishing.html's pattern
-     (numeric Kit form id, background fetch, check `status` in the response). -->
+<!-- LEAD MAGNET: Barra & Blue Water Black Book — email-gated via Kit form 9797222 (13 Aug 2026). -->
 <section id="blackbook" style="padding:44px 0">
   <div class="wrap">
     <div class="leadband">
       <p class="eyebrow" style="color:var(--copper)">Free guide</p>
       <h2>Get the Barra &amp; Blue Water Black Book</h2>
-      <p>Everything worth knowing before a Dundee &amp; Bynoe trip — the fishing, the gear, what's included and how to plan for an awesome barra and bluewater week. Free.</p>
-      <p style="margin-top:1.2rem"><a class="btn btn-hero" href="https://canva.link/e09x3lmqx573t60" target="_blank" rel="noopener">Get the Black Book</a></p>
-      <p class="small">Opens the guide straight away — no sign-up needed.</p>
+      <p>Everything worth knowing before a Dundee &amp; Bynoe trip &mdash; where we fish, how the days run, what&rsquo;s included and what to bring. Free, straight to your inbox.</p>
+      <!-- Kit form posts to the NUMERIC id (9797222) — the embed UID endpoint 404s
+           silently. Rule "Barra & Blue Water Info Book" tags the subscriber; Kit's
+           confirmation email carries the Canva link. Created 13 Aug 2026. -->
+      <form class="leadform" id="blackbook-form" action="https://app.kit.com/forms/9797222/subscriptions" method="post">
+        <input type="text" name="fields[first_name]" placeholder="First name" aria-label="First name" required>
+        <input type="email" name="email_address" placeholder="Your email" aria-label="Email" required>
+        <button type="submit" class="btn btn-hero">Send me the Black Book</button>
+      </form>
+      <p class="small" id="blackbook-status">No spam &mdash; just good Top End fishing. Unsubscribe anytime.</p>
     </div>
   </div>
 </section>
@@ -596,6 +599,31 @@
     var show = function(){ img.classList.add('ld'); };
     img.addEventListener('load', show, {once: true});
     img.addEventListener('error', show, {once: true});
+  });
+})();
+</script>
+
+
+<script>
+/* Posts to Kit in the background; the Kit rule tags the subscriber and Kit's
+   confirmation email delivers the Black Book link. Falls back to a native
+   submit if the fetch is blocked. */
+(function(){
+  var f = document.getElementById('blackbook-form');
+  var status = document.getElementById('blackbook-status');
+  if (!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = f.querySelector('button[type=submit]');
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+    fetch(f.action, { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(f) })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.status === 'failed') throw new Error('kit rejected');
+        f.style.display = 'none';
+        status.innerHTML = "<strong>Almost there \u2014 check your inbox.</strong> Confirm your email and the Black Book is on its way.";
+      })
+      .catch(function(){ f.submit(); });
   });
 })();
 </script>
