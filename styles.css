@@ -689,3 +689,32 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
 .tq .src span{display:block;font-family:'Montserrat';font-weight:600;font-size:.7rem;
   text-transform:uppercase;letter-spacing:.09em;color:var(--slate);margin-top:.15rem}
 .card.epcard p{font-size:.92rem;color:var(--slate);margin:0 0 1rem}
+
+/* ---- Season availability list (v16) -------------------------------------
+   Replaces the external Teamup link as the primary availability display.
+   Lives inside a dark band; booked blocks read struck-through and dim so
+   the remaining dates carry the scarcity. Hand-maintained — roughly 15
+   date blocks a season, so a static list beats a calendar integration. */
+.dates{max-width:580px;margin:2.1rem auto 0;text-align:left}
+.dates .soldout{margin:0 0 1.3rem;font-family:'Montserrat';font-weight:700;font-size:.68rem;
+  letter-spacing:.13em;text-transform:uppercase;opacity:.72}
+.dates .yr{font-family:'Montserrat';font-weight:700;font-size:.68rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--copper);margin:0 0 .5rem}
+.dates ul{list-style:none;padding:0;margin:0}
+.dates li{display:flex;align-items:center;gap:.85rem;padding:.66rem 0;
+  border-bottom:1px solid rgba(255,255,255,.13)}
+.dates li:last-child{border-bottom:0}
+.dates .d{flex:1;font-size:1.02rem;line-height:1.3}
+.dates .loc{flex:none;font-size:.76rem;opacity:.58;letter-spacing:.02em}
+.dates .st{flex:none;font-family:'Montserrat';font-weight:700;font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:.36em .85em;border-radius:999px;white-space:nowrap}
+.dates .open .st{background:var(--copper);color:#fff}
+.dates .gone{opacity:.4}
+.dates .gone .d{text-decoration:line-through}
+.dates .gone .st{border:1px solid currentColor}
+@media(max-width:540px){
+  .dates li{flex-wrap:wrap;gap:.4rem .7rem}
+  .dates .d{flex:1 0 100%}
+  .dates .loc{order:2}
+  .dates .st{order:1}
+}

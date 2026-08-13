@@ -6,7 +6,7 @@
 <title>Run-Off Barra Fishing Charters — Top End NT | Barefoot Fishing Safaris</title>
 <meta name="description" content="Guided run-off barramundi fishing charters in the Top End with Watty — late Feb to early June, the peak barra season. Private lodge-based 3–8 day safaris for you and your crew. Free Run-Off Black Book guide.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=15">
+<link rel="stylesheet" href="styles.css?v=16">
 <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/run-off-barra-hero-640.avif 640w, assets/img/run-off-barra-hero-1000.avif 1000w, assets/img/run-off-barra-hero-1600.avif 1600w" imagesizes="100vw">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Run-Off Barra Fishing Charters — Top End NT">
@@ -382,10 +382,22 @@
       <div class="stat"><div class="num">2 yrs</div><div class="cap">how far ahead dates book out</div></div>
       <div class="stat"><div class="num">4</div><div class="cap">anglers max per boat — always private</div></div>
     </div>
-    <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
-      <a href="#enquire" class="btn btn-hero">Check dates &amp; enquire</a>
+    <!-- Hand-maintained availability. Update rows as dates sell; keep the
+         pattern: li.open + "Available", li.gone + "Booked". -->
+    <div class="dates">
+      <p class="soldout">2026 &mdash; fully booked</p>
+      <p class="yr">2027 run-off dates &middot; Kakadu</p>
+      <ul>
+        <li class="open"><span class="d">18 &ndash; 20 March</span><span class="st">Available</span></li>
+        <li class="gone"><span class="d">21 &ndash; 26 March</span><span class="st">Booked</span></li>
+        <li class="gone"><span class="d">3 &ndash; 6 April</span><span class="st">Booked</span></li>
+        <li class="open"><span class="d">7 &ndash; 11 April</span><span class="st">Available</span></li>
+        <li class="open"><span class="d">2 &ndash; 9 May</span><span class="st">Available</span></li>
+      </ul>
     </div>
-    <p class="small" style="margin-top:1rem;margin-bottom:0"><a href="https://teamup.com/ksniuix5uyk56qa3so" target="_blank" rel="noopener" style="color:#e9e1d3">Or see what's already booked on the live calendar →</a></p>
+    <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.9rem">
+      <a href="#enquire" class="btn btn-hero">Check availability</a>
+    </div>
   </div>
 </section>
 
@@ -394,11 +406,15 @@
   <div class="wrap">
     <div class="strip">
       <div>
-        <h2 style="font-size:1.5rem">Run-off dates gone for your year?</h2>
+        <h2 style="font-size:1.5rem">Missed out on your preferred dates?</h2>
         <p>The dry-season and build-up run at Bynoe &amp; Dundee fires from late August — sight-cast barra in clean shallow water, plus the big bluewater species, in the same trip.</p>
         <p style="margin-top:.8rem">Further afield, Watty is also a director of — and very active in — <a href="index.html#adventures" style="color:#e9e1d3">Angling Adventures</a>, hosting trips to the best fishing spots around Australia and the world. If they haven't been there, they won't send you there.</p>
       </div>
-      <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+        <picture>
+          <source type="image/avif" srcset="assets/img/bynoe-catch-trevally-640.avif 640w, assets/img/bynoe-catch-trevally-1000.avif 1000w" sizes="(max-width:840px) 100vw, 360px">
+          <img class="stripimg" src="assets/img/bynoe-catch-trevally-1000.jpg" srcset="assets/img/bynoe-catch-trevally-640.jpg 640w, assets/img/bynoe-catch-trevally-1000.jpg 1000w" sizes="(max-width:840px) 100vw, 360px" width="1600" height="1092" alt="Angler holding a golden trevally on clean dry-season water at Bynoe" loading="lazy" decoding="async">
+        </picture>
         <a href="dundee-bynoe-barra-bluewater.html" class="btn btn-hero">Dry season &amp; build-up trips</a>
       </div>
     </div>
