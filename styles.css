@@ -219,7 +219,7 @@ img.resp{width:100%;height:auto;display:block}
 .pricetable thead th{background:var(--navy);color:var(--cream);font-family:'Montserrat';font-weight:700;border-bottom:none;position:sticky;top:0}
 .pricetable tbody tr:nth-child(even){background:var(--cream)}
 .pricetable td:first-child{font-weight:600;color:var(--navy)}
-.pricefrom{font-family:'Montserrat';font-weight:800;color:var(--copper);font-size:1.05rem}
+.pricefrom{display:block;margin-top:.75rem;font-family:'Montserrat';font-weight:800;color:var(--copper);font-size:1.05rem}
 
 /* at-a-glance spec tiles */
 .spectiles{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
