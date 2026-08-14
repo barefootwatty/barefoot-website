@@ -6,7 +6,7 @@
 <title>Media Centre — Podcast, Video &amp; Barra Know-How | Barefoot Fishing Safaris</title>
 <meta name="description" content="Watty's Media Centre — the podcast, YouTube sessions, radio spots and Top End barra know-how, all in one place.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=18">
+<link rel="stylesheet" href="styles.css?v=19">
 <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/band-bynoe-bluewater-birds-640.avif 640w, assets/img/band-bynoe-bluewater-birds-1000.avif 1000w, assets/img/band-bynoe-bluewater-birds-1600.avif 1600w" imagesizes="100vw">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Barefoot Media Centre — Watty on the airwaves">
@@ -58,6 +58,23 @@
   </div>
 </section>
 
+<!-- FOLLOW ALONG — socials front and centre -->
+<section class="navy charcoalband" style="padding:64px 0">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:2.2rem">
+      <p class="eyebrow">Follow along</p>
+      <h2>The day-to-day stuff lands here first</h2>
+      <p>Fish, weather, what the water&rsquo;s doing — posted from the boat, most weeks of the year.</p>
+    </div>
+    <div class="grid grid-4">
+      <a class="card epcard" href="https://www.youtube.com/@barefootfishingsafaris" target="_blank" rel="noopener"><div class="season">YouTube</div><h3>Barefoot Fishing Safaris</h3><p>Full sessions, how-to and the odd bit of nonsense.</p><span class="go">Subscribe &rarr;</span></a>
+      <a class="card epcard" href="https://www.instagram.com/barefoot.fishing.safaris/" target="_blank" rel="noopener"><div class="season">Instagram</div><h3>@barefoot.fishing.safaris</h3><p>The day&rsquo;s best fish, most days of the season.</p><span class="go">Follow &rarr;</span></a>
+      <a class="card epcard" href="https://www.facebook.com/barefootfishingsafaris/" target="_blank" rel="noopener"><div class="season">Facebook</div><h3>Barefoot Fishing Safaris</h3><p>Trip reports, dates and the longer yarns.</p><span class="go">Follow &rarr;</span></a>
+      <a class="card epcard" href="https://www.tiktok.com/@barefoot.fishing" target="_blank" rel="noopener"><div class="season">TikTok</div><h3>@barefoot.fishing</h3><p>Short ones — strikes, jumps and near misses.</p><span class="go">Follow &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="section-head">
@@ -74,6 +91,22 @@
     </div>
 
     <div class="libgrid" id="libgrid">
+
+      <a class="libcard" data-type="article" href="media/article-choke-points.html">
+        <div class="thumb">
+          <picture>
+            <source type="image/avif" srcset="assets/img/band-bynoe-creek-texture-640.avif 640w, assets/img/band-bynoe-creek-texture-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw">
+            <img src="assets/img/band-bynoe-creek-texture-640.jpg" srcset="assets/img/band-bynoe-creek-texture-640.jpg 640w, assets/img/band-bynoe-creek-texture-1000.jpg 1000w" sizes="(max-width:520px) 100vw, (max-width:840px) 50vw, 33vw" width="1600" height="900" alt="Narrow mangrove creek draining on a falling tide" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="body">
+          <span class="type">Know-How</span>
+          <h3>Choke points: where barra wait for the bait</h3>
+          <p>Bottlenecks, saddles and drains &mdash; the most consistent barra structure up here, and how to spot it on a chart before you leave.</p>
+          <span class="go">Read the article &rarr;</span>
+        </div>
+      </a>
+
 
       <a class="libcard" data-type="article" href="four-pillars-of-top-end-barra.html">
         <div class="thumb">
@@ -807,7 +840,7 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="index.html#safaris">Safaris</a></li>
-          <li><a href="index.html#barrabrain">Barra Brain</a></li>
+          <li><a href="barra-brain.html">Barra Brain</a></li>
           <li><a href="media.html">Media Centre</a></li>
           <li><a href="index.html#adventures">Angling Adventures</a></li>
         </ul>
@@ -872,28 +905,70 @@
 </script>
 
 
+<!-- Video overlay player: videos play here, not on a page of their own.
+     Reuses the gallery's .lb overlay shell. -->
+<div class="lb" id="vlb" role="dialog" aria-modal="true" aria-label="Video player">
+  <button class="x" type="button" aria-label="Close">&times;</button>
+  <div class="vidwrap"></div>
+  <p class="cap"></p>
+</div>
+
 <script>
-/* Click-to-play: swap the still for a real player on demand. Uses the
-   nocookie host so nothing is set until the viewer actually presses play. */
-document.querySelectorAll('.vthumb[data-yt]').forEach(function(thumb){
-  function play(){
-    var id = thumb.getAttribute('data-yt');
-    if (!id || thumb.querySelector('iframe')) return;
-    var card = thumb.closest('.vidcard');
-    var h = card && card.querySelector('h3');
+/* Overlay play. The nocookie host means nothing is set until play is pressed.
+   The transcript links are left alone — those still go to their own page. */
+(function(){
+  var lb = document.getElementById('vlb');
+  if (!lb) return;
+  var wrap = lb.querySelector('.vidwrap');
+  var cap  = lb.querySelector('.cap');
+  var last = null;
+
+  function open(id, title, opener){
+    if (!id) return;
+    last = opener || null;
+    wrap.innerHTML = '';
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
-    f.title = h ? h.textContent.trim() : 'Video';
+    f.title = title || 'Video';
     f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
     f.setAttribute('allowfullscreen','');
-    thumb.innerHTML = '';
-    thumb.appendChild(f);
+    wrap.appendChild(f);
+    cap.textContent = title || '';
+    lb.classList.add('on');
+    document.body.style.overflow = 'hidden';
+    lb.querySelector('.x').focus();
   }
-  thumb.addEventListener('click', play);
-  thumb.addEventListener('keydown', function(e){
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+  function close(){
+    lb.classList.remove('on');
+    wrap.innerHTML = '';          /* stops playback */
+    document.body.style.overflow = '';
+    if (last && last.focus) last.focus();
+  }
+
+  document.querySelectorAll('.vidcard').forEach(function(card){
+    var thumb = card.querySelector('.vthumb[data-yt]');
+    if (!thumb) return;
+    var id = thumb.getAttribute('data-yt');
+    var h  = card.querySelector('h3');
+    var title = h ? h.textContent.trim() : 'Video';
+
+    thumb.addEventListener('click', function(){ open(id, title, thumb); });
+    thumb.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(id, title, thumb); }
+    });
+    /* The title opens the player too; without JS it still reaches the transcript. */
+    var titleLink = h && h.querySelector('a');
+    if (titleLink) titleLink.addEventListener('click', function(e){
+      e.preventDefault(); open(id, title, titleLink);
+    });
   });
-});
+
+  lb.querySelector('.x').addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lb.classList.contains('on')) close();
+  });
+})();
 </script>
 
 </body>

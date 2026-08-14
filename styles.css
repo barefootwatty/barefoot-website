@@ -742,6 +742,9 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
   cursor:pointer;padding:.1em .45em;opacity:.7;line-height:1;font-family:inherit}
 .lb button:hover{opacity:1}
 .lb .x{top:6px;right:12px}
+/* video variant of the same overlay shell (Media Centre) */
+.lb .vidwrap{width:min(1200px,94vw);aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden}
+.lb .vidwrap iframe{width:100%;height:100%;border:0;display:block}
 .lb .prev{left:4px;top:50%;transform:translateY(-50%)}
 .lb .next{right:4px;top:50%;transform:translateY(-50%)}
 @media(prefers-reduced-motion:reduce){.gal img,.gal figure:hover img{transition:none;transform:none}}
