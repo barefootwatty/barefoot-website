@@ -807,3 +807,14 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
   color:var(--copper);
   border-bottom-color:var(--copper);
 }
+
+/* Article pages: the .article rule constrains the block itself to 760px, which
+   is right for the old in-page articles but wrong once the section carries a
+   textured ground — the texture would sit in a narrow column with white either
+   side. On a banded article page the SECTION goes full width and the inner
+   .wrap does the measure instead. */
+.article.bandtexture{
+  max-width:none;
+  padding:clamp(64px,7vw,110px) 0;
+}
+.article.bandtexture>.wrap{padding-left:22px;padding-right:22px}
