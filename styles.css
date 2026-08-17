@@ -748,3 +748,62 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
 .lb .prev{left:4px;top:50%;transform:translateY(-50%)}
 .lb .next{right:4px;top:50%;transform:translateY(-50%)}
 @media(prefers-reduced-motion:reduce){.gal img,.gal figure:hover img{transition:none;transform:none}}
+
+/* ── Article FAQ + Read next (v20, 17 Aug 2026) ──────────────────────────
+   The Q&A block earns its place twice: readers scan it, and answer engines
+   quote it. So it has to look deliberate rather than appended — it gets the
+   dune panel treatment the rest of the site uses for cards and asides. */
+.article .faq{
+  background:var(--dune);
+  border-radius:var(--radius);
+  padding:30px 32px 34px;
+}
+.article .faq h2{
+  margin-top:0;
+  font-size:clamp(1.4rem,2.4vw,1.75rem);
+}
+.article .faq h3{
+  margin-top:1.7rem;
+  font-size:1.02rem;
+  font-family:'Montserrat',system-ui,sans-serif;
+  font-weight:700;
+  letter-spacing:.01em;
+  line-height:1.45;
+}
+.article .faq h3:first-of-type{margin-top:1.2rem}
+.article .faq p{
+  margin:.5rem 0 0;
+  color:var(--charcoal);
+  font-size:1.01rem;
+  line-height:1.62;
+}
+@media(max-width:640px){
+  .article .faq{padding:24px 20px 26px}
+}
+
+/* Read next — a quiet hand-off, not a call to action. Text links with a
+   copper marker, no bullets, so it never competes with the safari CTA
+   sitting directly beneath it. */
+.article .related{
+  border-top:1px solid rgba(22,49,78,.14);
+  padding-top:1.4rem;
+}
+.article .related .eyebrow{margin-bottom:.7rem}
+.article .related ul{list-style:none;padding-left:0;margin:0}
+.article .related li{margin:.45rem 0;font-size:1.02rem}
+.article .related li::before{
+  content:"→";
+  color:var(--copper);
+  margin-right:.55rem;
+  font-weight:700;
+}
+.article .related a{
+  color:var(--navy);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,123,71,.45);
+  padding-bottom:1px;
+}
+.article .related a:hover{
+  color:var(--copper);
+  border-bottom-color:var(--copper);
+}
