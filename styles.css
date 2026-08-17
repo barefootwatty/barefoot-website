@@ -818,3 +818,37 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
   padding:clamp(64px,7vw,110px) 0;
 }
 .article.bandtexture>.wrap{padding-left:22px;padding-right:22px}
+
+/* ── Enquiry form: honeypot + status (v22) ──────────────────────────────
+   The honeypot is a decoy field. It must be invisible and unfocusable for
+   people but still present in the DOM for bots to fill in — so it is moved
+   off-screen rather than display:none, which some bots detect and skip. */
+.enqform .hp{
+  position:absolute;
+  left:-9999px;
+  width:1px;height:1px;
+  overflow:hidden;
+}
+
+.enq-status{
+  margin:.9rem 0 0;
+  padding:.75rem .95rem;
+  border-radius:10px;
+  font-size:.97rem;
+  line-height:1.5;
+  /* The form sits on a light card, so these are dark-on-light. An earlier
+     version used light text for a navy ground and was invisible here. */
+  background:var(--dune);
+  border-left:3px solid var(--copper);
+  color:var(--charcoal);
+}
+.enq-status.ok{
+  background:rgba(110,129,105,.16);
+  border-left-color:var(--sage);
+  color:#2f3d2c;
+}
+.enq-status.warn{
+  background:rgba(218,90,30,.12);
+  border-left-color:var(--orange);
+  color:#7a2f0f;
+}

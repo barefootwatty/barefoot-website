@@ -6,7 +6,7 @@
 <title>Fly Fishing Safaris — Darwin &amp; Top End NT | Barefoot Fishing Safaris</title>
 <meta name="description" content="Guided tropical fly fishing with Watty, the Top End's specialist fly fishing guide — sight-cast barramundi, saratoga on surface flies and bluewater pelagics. Darwin Harbour, Bynoe Harbour, Kakadu and the Daly. Private 3–7 day trips.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=21">
+<link rel="stylesheet" href="styles.css?v=23">
 <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/fly-fishing-hero-640.avif 640w, assets/img/fly-fishing-hero-1000.avif 1000w, assets/img/fly-fishing-hero-1600.avif 1600w" imagesizes="100vw">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fly Fishing Safaris — Darwin &amp; Top End NT">
@@ -518,7 +518,11 @@
         </div>
         <p class="enq-note" style="color:#b9c4cd;margin-top:1rem">Out on the water most days — if I don't pick up, text or WhatsApp and I'll get back to you off the water.</p>
       </div>
-      <form class="enqform" id="enqform">
+      <form class="enqform" id="enqform" data-source="Fly fishing page">
+        <div class="row2">
+          <div><label for="enq-email">Email</label><input id="enq-email" type="email" placeholder="So Watty can reply" required></div>
+          <div><label for="enq-phone">Phone (optional)</label><input id="enq-phone" type="tel" placeholder="Mobile"></div>
+        </div>
         <div class="row2">
           <div><label for="enq-name">Name</label><input id="enq-name" type="text" placeholder="Your name" required></div>
           <div><label for="enq-size">Group size</label>
@@ -527,6 +531,8 @@
         </div>
         <div><label for="enq-when">When are you thinking?</label><input id="enq-when" type="text" placeholder="e.g. July 2027, or 'first window free'"></div>
         <div><label for="enq-msg">Anything else?</label><textarea id="enq-msg" rows="3" placeholder="Sight-cast barra, saratoga on the surface, pelagics on fly — or a bit of everything..."></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="enq-website">Website</label><input id="enq-website" type="text" tabindex="-1" autocomplete="off"></div>
+        <p id="enq-status" class="enq-status" hidden role="status" aria-live="polite"></p>
         <div class="btnrow">
           <button type="submit" class="btn btn-hero">Send enquiry</button>
         </div>
@@ -695,5 +701,6 @@
 })();
 </script>
 
+<script src="assets/enquiry.js?v=1" defer></script>
 </body>
 </html>
