@@ -35,7 +35,7 @@
     },
     {
       "source": "/charters",
-      "destination": "/#charters",
+      "destination": "/#safaris",
       "permanent": true
     },
     {
@@ -45,12 +45,12 @@
     },
     {
       "source": "/online-courses",
-      "destination": "/#courses",
+      "destination": "/barra-brain",
       "permanent": true
     },
     {
       "source": "/courses",
-      "destination": "/#courses",
+      "destination": "/barra-brain",
       "permanent": true
     },
     {
