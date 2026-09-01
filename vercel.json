@@ -73,5 +73,27 @@
       "destination": "/media",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?barefootoutdoors\\.com\\.au"
+        }
+      ],
+      "destination": "/outdoors"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?barefootconsulting\\.com\\.au"
+        }
+      ],
+      "destination": "/consulting"
+    }
   ]
 }
