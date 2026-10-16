@@ -356,6 +356,7 @@ section.navy .eyebrow{color:var(--copper)}
 .faq details[open] summary::after{content:"\2013"}
 .faq details p{margin:.7rem 0 0;color:var(--slate)}
 
+.pricetable th .pp{display:block;font-family:'Open Sans',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.02em;opacity:.8;margin-top:.1rem}
 .pricetable .pop{float:right;background:var(--copper);color:#fff;border-radius:99px;padding:.18em .75em;font-size:.7rem;font-family:'Montserrat';font-weight:700;letter-spacing:.05em;text-transform:uppercase}
 .pricetable.grouped tbody tr.hl{background:#FBF3E6}
 
