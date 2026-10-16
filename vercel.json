@@ -83,7 +83,7 @@
     {
       "source": "/merch",
       "destination": "/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/products-list",
