@@ -8,6 +8,48 @@
  * mailto behaviour rather than dropping the enquiry — worst case the visitor
  * gets what they used to get, never nothing.
  */
+
+/* Availability tiles — tap a window and it goes into the "Your dates" box.
+ * The tiles and date lists are generated from assets/availability.json by
+ * tools/build_availability.py. Anything whose end date has passed hides
+ * itself, so a stale page never offers a trip that's already been.
+ */
+(function () {
+  var today = new Date().toISOString().slice(0, 10);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-end]'), function (el) {
+    if (el.getAttribute('data-end') < today) el.hidden = true;
+  });
+
+  var when = document.getElementById('enq-when');
+  var tiles = document.querySelectorAll('[data-avpick] .avtile');
+  if (!when || !tiles.length) return;
+
+  var picked = [];
+  var lastSet = '';
+
+  Array.prototype.forEach.call(tiles, function (t) {
+    t.addEventListener('click', function () {
+      var label = t.getAttribute('data-label');
+      var i = picked.indexOf(label);
+      if (i === -1) picked.push(label); else picked.splice(i, 1);
+      t.setAttribute('aria-pressed', i === -1 ? 'true' : 'false');
+
+      // Keep anything the visitor typed themselves; only replace what the
+      // tiles put there last time.
+      var own = when.value.trim();
+      if (lastSet && own.indexOf(lastSet) === 0) own = own.slice(lastSet.length).replace(/^[;\s]+/, '');
+      lastSet = picked.join('; ');
+      when.value = [lastSet, own].filter(Boolean).join('; ');
+    });
+  });
+
+  var form = document.getElementById('enqform');
+  if (form) form.addEventListener('reset', function () {
+    picked = []; lastSet = '';
+    Array.prototype.forEach.call(tiles, function (t) { t.setAttribute('aria-pressed', 'false'); });
+  });
+})();
+
 (function () {
   var f = document.getElementById('enqform');
   if (!f) return;
@@ -82,7 +124,9 @@
     }).then(function (res) {
       if (res && res.ok) {
         f.reset();
-        say("Got it — that's landed with Watty. He'll come back to you, usually within a day or two. He's out on the water most days.", 'ok');
+        say(res.autoreply
+          ? "Got it — that's landed with Watty. Check your inbox: the full list of open dates is on its way now. He'll come back to you properly within a day or two — he's out on the water most days."
+          : "Got it — that's landed with Watty. He'll come back to you, usually within a day or two. He's out on the water most days.", 'ok');
       } else if (res && res.fallback) {
         mailtoFallback(d);
       } else {

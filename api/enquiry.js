@@ -14,6 +14,11 @@
 //
 // The From address only matters for deliverability — Reply-To is always set to
 // the person enquiring, so hitting reply in Gmail answers the customer.
+//
+// Each enquirer also gets an automatic reply listing the open dates. Resend
+// only delivers that to outside addresses once ENQUIRY_FROM is on a domain
+// verified in Resend — on the default onboarding@resend.dev it is rejected,
+// quietly, and the visitor just sees the normal "landed with Watty" message.
 
 const TO = process.env.ENQUIRY_TO || "glenn@barefootfishingsafaris.com.au";
 const FROM = process.env.ENQUIRY_FROM || "Barefoot website <onboarding@resend.dev>";
@@ -28,6 +33,58 @@ const LABELS = {
   days: "Days fishing",
   message: "Notes",
 };
+
+const SITE = "https://barefootfishingsafaris.com.au";
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+  "August", "September", "October", "November", "December"];
+
+function range(w) {
+  const [, am, ad] = w.start.split("-").map(Number);
+  const [, bm, bd] = w.end.split("-").map(Number);
+  return am === bm ? `${ad}–${bd} ${MONTHS[bm - 1]}` : `${ad} ${MONTHS[am - 1]} – ${bd} ${MONTHS[bm - 1]}`;
+}
+
+// The open dates come from the same file the pages are built from, fetched
+// live, so the auto-reply can never disagree with the website.
+async function openDatesText(host) {
+  const r = await fetch(`https://${host}/assets/availability.json`);
+  if (!r.ok) throw new Error(`availability.json ${r.status}`);
+  const av = await r.json();
+  const today = new Date().toISOString().slice(0, 10);
+  const live = av.windows.filter((w) => w.end >= today);
+  const booked = live.filter((w) => w.status === "booked").length;
+  const pct = live.length ? Math.round((100 * booked) / live.length) : 0;
+  const blocks = Object.entries(av.trips).map(([key, t]) => {
+    const open = live.filter((w) => w.trip === key && w.status === "open");
+    const rows = open.length ? open.map((w) => `  • ${range(w)} ${w.start.slice(0, 4)}`).join("\n") : "  • All booked — ask about the waitlist";
+    return `${t.name} · ${t.place}\n${rows}\n  ${SITE}/${t.page}`;
+  });
+  return { text: blocks.join("\n\n"), pct, year: av.year };
+}
+
+function autoReplyText(data, dates) {
+  const first = data.name.split(/\s+/)[0];
+  return [
+    `G'day ${first},`,
+    "",
+    "Thanks for getting in touch — your enquiry has landed with me. I'm out on the water most days, so give me a day or two to come back to you properly.",
+    data.when ? `\nYou asked about: ${data.when}` : "",
+    "",
+    "So you're not left waiting on me for the basics, here's exactly what's still open right now:",
+    "",
+    dates.text,
+    "",
+    `${dates.year} is already ${dates.pct}% booked, and the best tide windows often book out up to two years ahead. Dates are held first in, best dressed, and a 30% deposit locks yours in.`,
+    "",
+    "If one of those suits, just hit reply and tell me which one and how many in your crew.",
+    /waitlist/i.test(data.when) ? "\nYou picked a booked date, so I've got you down for the waitlist — I'll be in touch if it comes free." : "",
+    "",
+    "Cheers,",
+    "Watty",
+    "Barefoot Fishing Safaris · 0417 272 871",
+    SITE,
+  ].filter((l, i, a) => !(l === "" && a[i - 1] === "")).join("\n");
+}
 
 function clean(value, max = 2000) {
   return String(value == null ? "" : value).trim().slice(0, max);
@@ -108,7 +165,30 @@ export default async function handler(req, res) {
       return res.status(502).json({ ok: false, fallback: true, error: "Could not send just now." });
     }
 
-    return res.status(200).json({ ok: true });
+    // Second email: the enquirer gets the open dates straight back. This is a
+    // bonus — if it fails for any reason, Watty's copy has already gone, so
+    // the enquiry still counts as sent.
+    let autoreply = false;
+    try {
+      const dates = await openDatesText(req.headers["x-forwarded-host"] || req.headers.host);
+      const a = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from: FROM,
+          to: [data.email],
+          reply_to: TO,
+          subject: "Got your enquiry — here's what's still open",
+          text: autoReplyText(data, dates),
+        }),
+      });
+      autoreply = a.ok;
+      if (!a.ok) console.error("Auto-reply rejected:", a.status, await a.text());
+    } catch (err) {
+      console.error("Auto-reply failed:", err);
+    }
+
+    return res.status(200).json({ ok: true, autoreply });
   } catch (err) {
     console.error("Enquiry send threw:", err);
     console.error("ENQUIRY (send failed, preserved here):\n" + text);

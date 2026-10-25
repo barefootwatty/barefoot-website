@@ -7,6 +7,7 @@
 <meta name="description" content="Guided dry-season and build-up fishing safaris at Dundee Beach &amp; Bynoe Harbour with Watty — shallow-water sight-casting for barramundi plus the Top End's big bluewater species. Private 3–8 day trips, early June to end December.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
 <link rel="stylesheet" href="styles.css?v=25">
+<link rel="stylesheet" href="assets/availability.css?v=1">
 <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/dundee-bynoe-hero-640.avif 640w, assets/img/dundee-bynoe-hero-1000.avif 1000w, assets/img/dundee-bynoe-hero-1600.avif 1600w" imagesizes="100vw">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dundee &amp; Bynoe Harbour Fishing Safaris — Top End NT">
@@ -278,24 +279,25 @@
       <div class="stat"><div class="num">2 yrs</div><div class="cap">how far ahead dates book out</div></div>
       <div class="stat"><div class="num">4</div><div class="cap">anglers max per boat — always private</div></div>
     </div>
-    <!-- Hand-maintained availability. Update rows as dates sell; keep the
-         pattern: li.open + "Available", li.gone + "Booked". -->
+    <!-- AVAIL:LIST — generated from assets/availability.json by tools/build_availability.py. Don't edit here. -->
     <div class="dates">
       <p class="soldout">2026 &mdash; fully booked</p>
       <p class="yr">2027 dates &middot; Bynoe &amp; Dundee</p>
       <ul>
-        <li class="open"><span class="d">30 May &ndash; 1 June</span><span class="st">Available</span></li>
-        <li class="gone"><span class="d">2 &ndash; 6 June</span><span class="st">Booked</span></li>
-        <li class="open"><span class="d">28 June &ndash; 1 July</span><span class="st">Available</span></li>
-        <li class="gone"><span class="d">2 &ndash; 5 July</span><span class="st">Booked</span></li>
-        <li class="open"><span class="d">27 July &ndash; 3 August</span><span class="st">Available</span></li>
-        <li class="open"><span class="d">26 August &ndash; 2 September</span><span class="st">Available</span></li>
-        <li class="gone"><span class="d">10 &ndash; 17 September</span><span class="st">Booked</span></li>
-        <li class="gone"><span class="d">24 &ndash; 27 October</span><span class="st">Booked</span></li>
-        <li class="gone"><span class="d">28 &ndash; 31 October</span><span class="st">Booked</span></li>
-        <li class="open"><span class="d">22 &ndash; 29 November</span><span class="st">Available</span></li>
+        <li class="gone" data-end="2027-06-01"><span class="d">30 May &ndash; 1 June</span><span class="st">Booked</span></li>
+        <li class="gone" data-end="2027-06-06"><span class="d">2 &ndash; 6 June</span><span class="st">Booked</span></li>
+        <li class="open" data-end="2027-07-01"><span class="d">28 June &ndash; 1 July</span><span class="st">Available</span></li>
+        <li class="gone" data-end="2027-07-05"><span class="d">2 &ndash; 5 July</span><span class="st">Booked</span></li>
+        <li class="open" data-end="2027-08-03"><span class="d">27 July &ndash; 3 August</span><span class="st">Available</span></li>
+        <li class="open" data-end="2027-09-02"><span class="d">26 August &ndash; 2 September</span><span class="st">Available</span></li>
+        <li class="gone" data-end="2027-09-17"><span class="d">10 &ndash; 17 September</span><span class="st">Booked</span></li>
+        <li class="gone" data-end="2027-10-27"><span class="d">24 &ndash; 27 October</span><span class="st">Booked</span></li>
+        <li class="gone" data-end="2027-10-31"><span class="d">28 &ndash; 31 October</span><span class="st">Booked</span></li>
+        <li class="open" data-end="2027-11-29"><span class="d">22 &ndash; 29 November</span><span class="st">Available</span></li>
       </ul>
+      <div class="avbar dark" data-av-bar><div class="avbar-track"><span style="width:60%"></span></div><p><strong>2027 barra & bluewater is 60% booked</strong> &middot; 4 of 10 windows still open. The best tides often book out up to two years ahead.</p></div>
     </div>
+    <!-- /AVAIL:LIST -->
     <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.9rem">
       <a href="#enquire" class="btn btn-hero">Check availability</a>
     </div>
@@ -465,7 +467,31 @@
             <select id="enq-size"><option>2 anglers</option><option>3 anglers</option><option selected>4 anglers</option><option>More / two boats</option><option>Just me</option></select>
           </div>
         </div>
-        <div><label for="enq-when">When are you thinking?</label><input id="enq-when" type="text" placeholder="e.g. September 2027, or 'first window free'"></div>
+        <!-- AVAIL:PICKER — generated from assets/availability.json by tools/build_availability.py. Don't edit here. -->
+        <fieldset class="avpick" data-avpick>
+          <legend>Tap the dates you want</legend>
+          <p class="avkey"><span class="k open"></span>Open <span class="k few"></span>Last ones <span class="k gone"></span>Booked &mdash; tap to join the waitlist</p>
+          <div class="avbar" data-av-bar><div class="avbar-track"><span style="width:60%"></span></div><p><strong>2027 barra & bluewater is 60% booked</strong> &middot; 4 of 10 windows still open. The best tides often book out up to two years ahead.</p></div>
+          <p class="avgroup">Barra &amp; bluewater &middot; Bynoe &amp; Dundee</p>
+          <div class="avtiles">
+            <button type="button" class="avtile gone" data-end="2027-06-01" data-label="Waitlist: 30 May – 1 June 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">30 May&ndash;1 Jun</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile gone" data-end="2027-06-06" data-label="Waitlist: 2 – 6 June 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">2&ndash;6 Jun</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile open" data-end="2027-07-01" data-label="28 June – 1 July 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">28 Jun&ndash;1 Jul</span><span class="s">Open</span></button>
+            <button type="button" class="avtile gone" data-end="2027-07-05" data-label="Waitlist: 2 – 5 July 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">2&ndash;5 Jul</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile open" data-end="2027-08-03" data-label="27 July – 3 August 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">27 Jul&ndash;3 Aug</span><span class="s">Open</span></button>
+            <button type="button" class="avtile open" data-end="2027-09-02" data-label="26 August – 2 September 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">26 Aug&ndash;2 Sep</span><span class="s">Open</span></button>
+            <button type="button" class="avtile gone" data-end="2027-09-17" data-label="Waitlist: 10 – 17 September 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">10&ndash;17 Sep</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile gone" data-end="2027-10-27" data-label="Waitlist: 24 – 27 October 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">24&ndash;27 Oct</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile gone" data-end="2027-10-31" data-label="Waitlist: 28 – 31 October 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">28&ndash;31 Oct</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile open" data-end="2027-11-29" data-label="22 – 29 November 2027 · Barra &amp; bluewater, Bynoe &amp; Dundee" aria-pressed="false"><span class="d">22&ndash;29 Nov</span><span class="s">Open</span></button>
+          </div>
+          <p class="avgroup">Planning further out?</p>
+          <div class="avtiles">
+            <button type="button" class="avtile next" data-label="2028 — keen to get in early" aria-pressed="false"><span class="d">2028</span><span class="s">Get in early</span></button>
+          </div>
+        </fieldset>
+        <!-- /AVAIL:PICKER -->
+        <div><label for="enq-when">Your dates &mdash; or tell me what suits</label><input id="enq-when" type="text" placeholder="Tap a date above, or type e.g. 'any week in April'"></div>
         <div><label for="enq-msg">Anything else?</label><textarea id="enq-msg" rows="3" placeholder="Full package or boat only, barra or bluewater focus, first trip or fiftieth..."></textarea></div>
         <div class="hp" aria-hidden="true"><label for="enq-website">Website</label><input id="enq-website" type="text" tabindex="-1" autocomplete="off"></div>
         <p id="enq-status" class="enq-status" hidden role="status" aria-live="polite"></p>
@@ -637,6 +663,6 @@
 })();
 </script>
 
-<script src="assets/enquiry.js?v=1" defer></script>
+<script src="assets/enquiry.js?v=2" defer></script>
 </body>
 </html>

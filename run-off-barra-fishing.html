@@ -7,6 +7,7 @@
 <meta name="description" content="Guided run-off barramundi fishing safaris in the Top End with Watty — late Feb to early June, the peak barra season. Private lodge-based 3–8 day safaris for you and your crew. Free Run-Off Black Book guide.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
 <link rel="stylesheet" href="styles.css?v=25">
+<link rel="stylesheet" href="assets/availability.css?v=1">
 <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/run-off-barra-hero-640.avif 640w, assets/img/run-off-barra-hero-1000.avif 1000w, assets/img/run-off-barra-hero-1600.avif 1600w" imagesizes="100vw">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Run-Off Barra Fishing Safaris — Top End NT">
@@ -387,19 +388,20 @@
       <div class="stat"><div class="num">2 yrs</div><div class="cap">how far ahead dates book out</div></div>
       <div class="stat"><div class="num">4</div><div class="cap">anglers max per boat — always private</div></div>
     </div>
-    <!-- Hand-maintained availability. Update rows as dates sell; keep the
-         pattern: li.open + "Available", li.gone + "Booked". -->
+    <!-- AVAIL:LIST — generated from assets/availability.json by tools/build_availability.py. Don't edit here. -->
     <div class="dates">
       <p class="soldout">2026 &mdash; fully booked</p>
       <p class="yr">2027 run-off dates &middot; Kakadu</p>
       <ul>
-        <li class="open"><span class="d">18 &ndash; 20 March</span><span class="st">Available</span></li>
-        <li class="gone"><span class="d">21 &ndash; 26 March</span><span class="st">Booked</span></li>
-        <li class="gone"><span class="d">3 &ndash; 6 April</span><span class="st">Booked</span></li>
-        <li class="open"><span class="d">7 &ndash; 11 April</span><span class="st">Available</span></li>
-        <li class="open"><span class="d">2 &ndash; 9 May</span><span class="st">Available</span></li>
+        <li class="open" data-end="2027-03-20"><span class="d">18 &ndash; 20 March</span><span class="st">Available</span></li>
+        <li class="gone" data-end="2027-03-26"><span class="d">21 &ndash; 26 March</span><span class="st">Booked</span></li>
+        <li class="gone" data-end="2027-04-06"><span class="d">3 &ndash; 6 April</span><span class="st">Booked</span></li>
+        <li class="open" data-end="2027-04-11"><span class="d">7 &ndash; 11 April</span><span class="st">Available</span></li>
+        <li class="open" data-end="2027-05-09"><span class="d">2 &ndash; 9 May</span><span class="st">Available</span></li>
       </ul>
+      <div class="avbar dark" data-av-bar><div class="avbar-track"><span style="width:40%"></span></div><p><strong>2027 run-off barra is 40% booked</strong> &middot; 3 of 5 windows still open. The best tides often book out up to two years ahead.</p></div>
     </div>
+    <!-- /AVAIL:LIST -->
     <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.9rem">
       <a href="#enquire" class="btn btn-hero">Check availability</a>
     </div>
@@ -617,7 +619,26 @@
             <select id="enq-size"><option>2 anglers</option><option>3 anglers</option><option selected>4 anglers</option><option>More / two boats</option><option>Just me</option></select>
           </div>
         </div>
-        <div><label for="enq-when">When are you thinking?</label><input id="enq-when" type="text" placeholder="e.g. April 2027, or 'first window free'"></div>
+        <!-- AVAIL:PICKER — generated from assets/availability.json by tools/build_availability.py. Don't edit here. -->
+        <fieldset class="avpick" data-avpick>
+          <legend>Tap the dates you want</legend>
+          <p class="avkey"><span class="k open"></span>Open <span class="k few"></span>Last ones <span class="k gone"></span>Booked &mdash; tap to join the waitlist</p>
+          <div class="avbar" data-av-bar><div class="avbar-track"><span style="width:40%"></span></div><p><strong>2027 run-off barra is 40% booked</strong> &middot; 3 of 5 windows still open. The best tides often book out up to two years ahead.</p></div>
+          <p class="avgroup">Run-off barra &middot; Kakadu</p>
+          <div class="avtiles">
+            <button type="button" class="avtile open" data-end="2027-03-20" data-label="18 – 20 March 2027 · Run-off barra, Kakadu" aria-pressed="false"><span class="d">18&ndash;20 Mar</span><span class="s">Open</span></button>
+            <button type="button" class="avtile gone" data-end="2027-03-26" data-label="Waitlist: 21 – 26 March 2027 · Run-off barra, Kakadu" aria-pressed="false"><span class="d">21&ndash;26 Mar</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile gone" data-end="2027-04-06" data-label="Waitlist: 3 – 6 April 2027 · Run-off barra, Kakadu" aria-pressed="false"><span class="d">3&ndash;6 Apr</span><span class="s">Waitlist</span></button>
+            <button type="button" class="avtile open" data-end="2027-04-11" data-label="7 – 11 April 2027 · Run-off barra, Kakadu" aria-pressed="false"><span class="d">7&ndash;11 Apr</span><span class="s">Open</span></button>
+            <button type="button" class="avtile open" data-end="2027-05-09" data-label="2 – 9 May 2027 · Run-off barra, Kakadu" aria-pressed="false"><span class="d">2&ndash;9 May</span><span class="s">Open</span></button>
+          </div>
+          <p class="avgroup">Planning further out?</p>
+          <div class="avtiles">
+            <button type="button" class="avtile next" data-label="2028 — keen to get in early" aria-pressed="false"><span class="d">2028</span><span class="s">Get in early</span></button>
+          </div>
+        </fieldset>
+        <!-- /AVAIL:PICKER -->
+        <div><label for="enq-when">Your dates &mdash; or tell me what suits</label><input id="enq-when" type="text" placeholder="Tap a date above, or type e.g. 'any week in April'"></div>
         <div><label for="enq-msg">Anything else?</label><textarea id="enq-msg" rows="3" placeholder="Full package or boat only, fly or lures, first trip or fiftieth..."></textarea></div>
         <div class="hp" aria-hidden="true"><label for="enq-website">Website</label><input id="enq-website" type="text" tabindex="-1" autocomplete="off"></div>
         <p id="enq-status" class="enq-status" hidden role="status" aria-live="polite"></p>
@@ -793,6 +814,6 @@
 })();
 </script>
 
-<script src="assets/enquiry.js?v=1" defer></script>
+<script src="assets/enquiry.js?v=2" defer></script>
 </body>
 </html>

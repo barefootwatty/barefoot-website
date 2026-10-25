@@ -1,0 +1,47 @@
+/* ---- Tap-a-date availability (Oct 2026) ---------------------------------
+   Tiles on the enquiry form and a "how booked is the season" bar. Markup is
+   generated from assets/availability.json by tools/build_availability.py;
+   clicks are handled in assets/enquiry.js. Kept out of styles.css so adding
+   it didn't mean bumping the stylesheet version on all 300 pages. */
+
+.avpick{border:0;margin:0;padding:0;min-width:0}
+.avpick legend{font-family:'Montserrat';font-weight:700;font-size:.85rem;color:var(--navy);padding:0;margin-bottom:.3rem}
+.avpick .avkey{font-size:.78rem;color:var(--slate);margin:0 0 .7rem;line-height:1.6}
+.avkey .k{display:inline-block;width:.7rem;height:.7rem;border-radius:3px;vertical-align:-1px;margin:0 .25rem 0 .5rem}
+.avkey .k:first-child{margin-left:0}
+.avkey .k.open{background:var(--sage)}
+.avkey .k.few{background:var(--orange)}
+.avkey .k.gone{background:#cfc6b8}
+
+.avpick .avgroup{font-family:'Montserrat';font-weight:700;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--copper);margin:.85rem 0 .4rem}
+.avtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:.45rem}
+.avtile{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;padding:.5rem .6rem;border-radius:9px;
+  border:1.5px solid transparent;font:inherit;text-align:left;cursor:pointer;transition:transform .08s,box-shadow .15s}
+.avtile .d{font-weight:600;font-size:.88rem;line-height:1.2;color:var(--charcoal)}
+.avtile .s{font-family:'Montserrat';font-weight:700;font-size:.58rem;letter-spacing:.09em;text-transform:uppercase}
+.avtile.open{background:rgba(110,129,105,.14);border-color:rgba(110,129,105,.45)}
+.avtile.open .s{color:#3f5a3b}
+.avtile.few{background:rgba(218,90,30,.10);border-color:rgba(218,90,30,.5)}
+.avtile.few .s{color:#a33f10}
+.avtile.gone{background:#f1ece3;border-color:#ddd3c4}
+.avtile.gone .d{color:#8a8f92;text-decoration:line-through}
+.avtile.gone .s{color:#8a8f92}
+.avtile.next{background:var(--cream);border:1.5px dashed var(--copper)}
+.avtile.next .s{color:var(--copper)}
+.avtile:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(22,49,78,.12)}
+.avtile:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.avtile[aria-pressed="true"]{background:var(--navy);border-color:var(--navy)}
+.avtile[aria-pressed="true"] .d,.avtile[aria-pressed="true"] .s{color:#fff;text-decoration:none}
+.avtile[aria-pressed="true"] .s::before{content:"\2713  "}
+
+/* Season bar — light version on the form card, dark version in the navy band */
+.avbar{margin:.2rem 0 .3rem}
+.avbar-track{height:8px;border-radius:99px;background:#e9e1d4;overflow:hidden}
+.avbar-track span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--copper),var(--orange))}
+.avpick .avbar p{font-size:.8rem;color:var(--slate);margin:.4rem 0 0;line-height:1.45}
+.avpick .avbar p strong{color:var(--navy)}
+.avbar.dark{margin-top:1.4rem}
+.avbar.dark .avbar-track{background:rgba(255,255,255,.16)}
+.avbar.dark p{color:#dfe6ec;font-size:.88rem}
+.avbar.dark p strong{color:#fff}

@@ -1,0 +1,27 @@
+{
+  "_readme": "THE ONE PLACE TRIP DATES LIVE. Change a status here, then run: python3 tools/build_availability.py site — it rewrites the date lists and enquiry-form tiles on the run-off, Bynoe/Dundee, fly and home pages. The enquiry auto-reply email reads this file live, so it is right as soon as the site deploys. status is 'open' or 'booked'. Windows whose end date has passed hide themselves.",
+  "updated": "2026-10-25",
+  "year": 2027,
+  "previous_year": "2026 — fully booked",
+  "trips": {
+    "runoff": { "name": "Run-off barra", "place": "Kakadu", "loc": "Kakadu", "page": "run-off-barra-fishing" },
+    "bynoe": { "name": "Barra & bluewater", "place": "Bynoe & Dundee", "loc": "Bynoe", "page": "dundee-bynoe-barra-bluewater" }
+  },
+  "windows": [
+    { "trip": "runoff", "start": "2027-03-18", "end": "2027-03-20", "status": "open" },
+    { "trip": "runoff", "start": "2027-03-21", "end": "2027-03-26", "status": "booked" },
+    { "trip": "runoff", "start": "2027-04-03", "end": "2027-04-06", "status": "booked" },
+    { "trip": "runoff", "start": "2027-04-07", "end": "2027-04-11", "status": "open" },
+    { "trip": "runoff", "start": "2027-05-02", "end": "2027-05-09", "status": "open" },
+    { "trip": "bynoe", "start": "2027-05-30", "end": "2027-06-01", "status": "booked" },
+    { "trip": "bynoe", "start": "2027-06-02", "end": "2027-06-06", "status": "booked" },
+    { "trip": "bynoe", "start": "2027-06-28", "end": "2027-07-01", "status": "open" },
+    { "trip": "bynoe", "start": "2027-07-02", "end": "2027-07-05", "status": "booked" },
+    { "trip": "bynoe", "start": "2027-07-27", "end": "2027-08-03", "status": "open" },
+    { "trip": "bynoe", "start": "2027-08-26", "end": "2027-09-02", "status": "open" },
+    { "trip": "bynoe", "start": "2027-09-10", "end": "2027-09-17", "status": "booked" },
+    { "trip": "bynoe", "start": "2027-10-24", "end": "2027-10-27", "status": "booked" },
+    { "trip": "bynoe", "start": "2027-10-28", "end": "2027-10-31", "status": "booked" },
+    { "trip": "bynoe", "start": "2027-11-22", "end": "2027-11-29", "status": "open" }
+  ]
+}
