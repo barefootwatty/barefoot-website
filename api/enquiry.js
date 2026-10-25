@@ -10,18 +10,18 @@
 //   RESEND_API_KEY   an API key from resend.com
 // Optional overrides:
 //   ENQUIRY_TO       where enquiries go       (default glenn@barefootfishingsafaris.com.au)
-//   ENQUIRY_FROM     the From address         (default onboarding@resend.dev)
+//   ENQUIRY_FROM     the From address         (default glenn@barefootfishingsafaris.com.au)
 //
 // The From address only matters for deliverability — Reply-To is always set to
 // the person enquiring, so hitting reply in Gmail answers the customer.
 //
-// Each enquirer also gets an automatic reply listing the open dates. Resend
-// only delivers that to outside addresses once ENQUIRY_FROM is on a domain
-// verified in Resend — on the default onboarding@resend.dev it is rejected,
-// quietly, and the visitor just sees the normal "landed with Watty" message.
+// Each enquirer also gets an automatic reply listing the open dates. That
+// needs the From address on a domain verified in Resend — the Barefoot domain
+// was verified 25 Oct 2026 (records resend._domainkey, send, rsend in GoDaddy).
+// If those records are ever removed, every send here fails, Watty's included.
 
 const TO = process.env.ENQUIRY_TO || "glenn@barefootfishingsafaris.com.au";
-const FROM = process.env.ENQUIRY_FROM || "Barefoot website <onboarding@resend.dev>";
+const FROM = process.env.ENQUIRY_FROM || "Watty at Barefoot <glenn@barefootfishingsafaris.com.au>";
 
 const FIELDS = ["name", "email", "phone", "size", "when", "days", "message"];
 const LABELS = {
