@@ -284,6 +284,31 @@
       "source": "/checkout/:path*",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/shady-camp-early-run-off/:path*",
+      "destination": "/run-off-barra-fishing",
+      "permanent": true
+    },
+    {
+      "source": "/(abt-berkley-bream-series|bragmat)",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/abt-berkley-bream-series/:path*",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/(general/coming-soon|sk_isotopegallery/tours)",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
