@@ -1,0 +1,62 @@
+title: Deep holes: where barra wait out the tide
+module: Finding barra
+description: A deep hole is any stretch of water noticeably deeper than what surrounds it — a scoured creek bend, a depression on a flat, a hole at a junction. How to find them on a chart, read the tide on them, and fish them slow — from a Darwin fishing charters guide of 15+ years.
+ogdesc: How to find a deep hole on a chart, read the tide on it, and fish it slow.
+schemadesc: How to find a deep hole on a chart, read the tide on it, and fish it slow.
+lead: A deep hole doesn't have to be deep. It just has to be deeper than what's around it — and once you can spot one on a chart, you've got a spot worth checking on every tide, in every season.
+related: choke-points, snags, weed-beds
+ask: Ask below and Watty will answer. If you've got a deep hole that fires every trip — or one that never does — that's worth hearing too.
+---
+A deep hole is any stretch of water that sits noticeably deeper than what's around it. Sometimes that's genuinely deep. More often it's just a depression — a scoured-out bend in a creek, a dip at a junction, a bit of open water that happens to hold more depth than the flat beside it. The label covers a fair range of country, but the fish treat all of it the same way.
+
+## Why barra use them
+
+A deep hole halfway up a draining creek arm or a major river is often where all the bait from upstream and downstream ends up as the tide falls. On the way in, pressure waves ball bait up the same way. Barra — and threadfin, and blue salmon — will stage in a hole like that and wait for the tide to push them up to the next stretch of good hunting ground.
+
+Threadfin are the classic example. They'll sit in a hole on the bottom of the tide and, the moment the push starts, move on to the next hole, then the next, working their way up the system as the water rises. Blue salmon tend to hang back a bit longer before doing the same thing.
+
+Deep holes also hold their temperature better than the shallows around them. On the first cold snap of the year — a couple of cold overnight lows in a row — barra will often stack into the deeper water while the shallows are still catching up. The same thing works in reverse coming out of winter: the shallows warm faster, but the deep water holds its cooler temperature for longer.
+
+## The best time of year
+
+Deep holes fish on both the top and bottom of the tide, year-round. But the stand-out period is the build-up, September through December, when big numbers of pre-spawn barra stack into them.
+
+Numbers on the sounder don't mean an easy bite, though. Some schools bite right on the top of the tide, some on the bottom, some on the big tides, some on the small ones — and some only in the last few minutes before you have to leave the spot. Don't read too much into a session or two without a touch. The pattern usually shows itself over time.
+
+## Finding them on a chart
+
+Sharp bends are the giveaway. A tight bend scours out the bank on the outside of the turn, and that's where the hole sits. On the chart, look for the tree line pressing in close to the water — that usually means rock underneath, and rock is a good sign a hole isn't far away. Where the country opens back out into mud flat on either side, that's your marker for where the hole starts and finishes.
+
+Once you know the shape to look for, it's quick work zooming around a system, dropping a waypoint on anything that looks right, and building a list of holes to check on the way past.
+
+## Reading the tide on a hole
+
+Barra tend to sit on the leading edge — whichever side of the hole is facing into the direction the tide is pushing, so they get first crack at anything moving through. On the run-out they'll sit on the downstream edge; on the push they'll shift to the other side. Blue salmon often sit in the middle, and threadfin move through right on the turn.
+
+Position the boat down-tide of the fish rather than up-current of them. Casting up and across onto the shallow lip, then working the lure back down the drop-off in stages — a short lift, a long pause to let it sink another metre, another lift — covers the depth properly. Casting from up-current and working back against the flow puts the lure in front of the fish moving the wrong way, which isn't how the bait they're used to seeing behaves.
+
+## What to fish it with
+
+For fish stacked up in a hole, casting beats trolling. A troll only puts the lure past them for a few seconds before you have to come back around and reset — casting lets you work the school properly, and quietly. Noise matters more than usual here: a hatch slammed shut, a hard step on the floor, is often enough to put the whole school down. If fish vanish between passes and it isn't something you did, the tide has probably turned — they sense the change a good half hour before it shows on the surface.
+
+Vibes and soft plastics, worked slow, are the standout lures:
+
+- A long sideways sweep dragging a vibe along the bottom, rather than an aggressive rip, is often what gets the nudges
+- Soft plastics with a big paddle tail, wound dead slow, move at the pace that seems to draw the strikes
+- Prawn-style soft plastics, let sink to the bottom and crawled along the mud, work well for schooled-up build-up fish — a smear of scent gel doesn't hurt
+
+Structure-scan sonar earns its keep here too. Being able to tell a barra from a bull shark or a school of catfish before you make a cast saves a lot of time fishing water that was never going to produce.
+
+@faq
+
+Q: What is a deep hole in barra fishing?
+A: Any stretch of water noticeably deeper than what surrounds it — often a scoured-out bend in a creek with rock on one side, though some sit in open water. It doesn't have to be genuinely deep, just deeper than the country around it.
+
+Q: When do deep holes fish best?
+A: They work on both the top and bottom of the tide year-round, with fish working their way up a system hole by hole as the tide pushes in. The stand-out period is the build-up, September through December, when big numbers of pre-spawn barra stack into them — though a crowded sounder doesn't guarantee an easy bite.
+
+Q: How do you find a deep hole on a chart?
+A: Look for sharp bends, where the tree line presses in close to the water — a sign of rock, and rock usually means a hole close by. The hole typically sits between stretches of mud flat.
+
+Q: What's the best way to fish a deep hole?
+A: Cast rather than troll, work slow, and stay quiet — a banged hatch or a heavy step is often enough to spook a whole school. Vibes worked with a long sideways sweep, and soft plastics wound dead slow, are the standout lures.

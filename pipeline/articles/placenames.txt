@@ -1,0 +1,118 @@
+# Verified Top End place names.
+#
+# WHY THIS FILE EXISTS: the lesson transcripts come off an automatic
+# transcriber, which mangles proper nouns badly — "Shaw Bay" for Shoal Bay,
+# "Kokatoo" for Kakadu, "Mganella" for Murgenella. GW's rule, and he is right:
+# a wrong place name is a reputation killer on a guiding site. Locals spot it
+# instantly and it undoes the authority the whole article library is for.
+#
+# THE DISCIPLINE: if a place name is not on this list and you cannot verify
+# it, LEAVE IT OUT of the article. Write "one of the bigger rivers" instead of
+# guessing at a name. Never invent, never approximate. Add a name here only
+# once it is confirmed — from GW, from a map, or from an unambiguous source.
+#
+# tools/check_places.py reads this file and flags anything unrecognised in the
+# article sources before they ship.
+
+# --- Harbours, bays and coast -------------------------------------------
+Shoal Bay
+Darwin Harbour
+Bynoe Harbour
+Fog Bay
+Dundee Beach
+Anson Bay
+Port Keats
+
+# --- Around Darwin ------------------------------------------------------
+Nightcliff
+East Point
+Mandorah
+Cullen Bay
+Mindil Beach
+Lee Point
+Buffalo Creek
+Channel Island
+Middle Arm
+West Arm
+East Arm
+Woods Inlet
+Charles Point
+Channel Point
+Coolalinga
+Berry Springs
+Palmerston
+Noonamah
+Humpty Doo
+Casuarina
+
+# --- Islands ------------------------------------------------------------
+Indian Island
+Crab Claw Island
+Bathurst Island
+Melville Island
+Field Island
+
+# --- Rivers and systems -------------------------------------------------
+Daly River
+Adelaide River
+Mary River
+Finniss River
+Moyle River
+Wildman River
+Elizabeth River
+Blackmore River
+South Alligator
+East Alligator
+West Alligator
+Katherine
+
+# --- Kakadu and the parks ----------------------------------------------
+Kakadu
+Shady Camp
+Corroboree Billabong
+Point Stuart
+Yellow Water
+
+# --- Arnhem Land --------------------------------------------------------
+Arnhem Land
+Murgenella
+Maningrida
+
+# --- Regions ------------------------------------------------------------
+Top End
+Northern Territory
+Territory
+Australia
+
+# --- KNOWN TRANSCRIBER MANGLINGS ---------------------------------------
+# Left of the arrow is what the transcriber produces; right is correct.
+# These also feed the radio-transcript glossary in tools/clean_transcript.py.
+@fix
+Shaw Bay -> Shoal Bay
+Shady Bay -> Shoal Bay
+Shore Bay -> Shoal Bay
+Kokatoo -> Kakadu
+Kokadu -> Kakadu
+Mganella -> Murgenella
+Bino Harbour -> Bynoe Harbour
+Bino -> Bynoe
+By No Harbour -> Bynoe Harbour
+Easter Alligator -> East Alligator
+Menle Beach -> Mindil Beach
+Colum Bay -> Cullen Bay
+Buff Creek -> Buffalo Creek
+Arnamland -> Arnhem Land
+Tipperary Station -> Tipperary
+Nunamar -> Noonamah
+Nunuma -> Noonamah
+Nooney -> Noonamah
+Humpty Dee -> Humpty Doo
+Kakadoo -> Kakadu
+Corroborate -> Corroboree
+Crabcall -> Crab Claw
+Crabclaw -> Crab Claw
+Callum Bay -> Cullen Bay
+Mental Beach -> Mindil Beach
+Casarena -> Casuarina
+Port Keaks -> Port Keats
+Port Keeks -> Port Keats

@@ -1,0 +1,76 @@
+title: Mud flats: sight casting the highway between structure
+module: Finding barra
+description: Mud flats are the highway barramundi use between drains, snags and rocky points. How to read a flat on the chart, why the falling spring tide is the one to fish, and how to work down through the tide from tree line to drain to rocky point — from a Darwin fishing charters guide of 15+ years.
+ogdesc: Reading mud flats on the chart, and working them down through a falling tide.
+schemadesc: How to read barra mud flats on a chart and fish them through the falling tide, from tree line to drain to rocky point.
+lead: The plain old mud flat is one of our favourite places to hunt barra. Get the tide right, find a flat out of the wind, and it is some of the best sight casting in the Top End.
+related: choke-points, snags, deep-holes
+ask: Ask below and Watty will answer. If you have a flat that fishes on the neaps when everything else is dead — or one that never seems to switch on — we would like to hear about it.
+---
+Mud flats are the highway between deeper water, drains, snags and rocky points. Going into the low tide they hold big mobs of bait — mullet, bream and everything else that has been sheltering up in the mangroves — and as the water drops, that bait gets forced out of the trees and into the open. The barra cruise the flat looking for an easy feed.
+
+Fish a flat on a gently falling tide and, if you are in the right spot, you will see them coming.
+
+## There are more fish than you think
+
+We have fished some flats a hundred times, and it was not until we put a drone up over one that we realised how many fish move across them. From the boat you see a few. From above you see school after school of mullet and bream with barra mixed through them, and plenty that nobody on the deck had spotted.
+
+The drone footage showed something else worth knowing. When fish are moving across a flat, they duck into the tiny snaking drains that wind through it — and they sit **in the bends** of those drains far more than in the straight sections. When you are prospecting a flat rather than sight casting, that is where to put your casts.
+
+## Reading a flat on the chart
+
+To find a flat, look at your charts for the areas shaded green. Some are big, some are small, some are shallow and wide, and some drop away quickly. Each one fishes best at a different stage of the tide, and part of the job is working out which is which in your own area.
+
+The numbers on the shaded areas are drying heights — how far above zero tide that part of the flat sits. You do not need to get too technical about it. What matters is what the number means for your boat. A flat marked to dry at 1.7 metres, with a long run back to the channel, is telling you two things: it will empty out fast once the water drops below the tree line, and you need an exit plan before you get stuck on it.
+
+That is not necessarily a bad thing. The bigger fish leave a flat earliest. On a fast-drying flat they come off first, drop into the channel and head for deeper water over the low — so that flat is where you start, not where you finish.
+
+## Working down through the tide
+
+On a spring tide run-out, we think of it as a sequence, moving to the next spot as each one gets too shallow:
+
+- **Top of the tide** — rocks, beaches, and stands of dead mangroves if your system has them. For whatever reason barra like hanging around individual dead trees on a big high. Put a cast beside each tree as the water starts to drop.
+- **The first hour of the fall** — the fast-drying flats. Sight cast along the edge until it gets too shallow and you have to get off.
+- **The middle of the tide** — the next flat down: a medium-sized one that dries later and holds water a bit longer.
+- **Lower again** — the flats between the drains, the points between the creeks, and the drains themselves, especially where a few good drains sit close together. Look for colour changes pushing out off the points.
+- **The bottom of the tide** — rocky points. Drains tend to go quiet over the low, but a rocky point will have active bait right through it.
+
+When you are working along a flat edge, travel against the current rather than with it. The fish are usually moving with the run-out, so heading the other way lets you intercept them instead of drifting along parallel and never quite catching up.
+
+Some creeks off a flat hold good water even on the lowest tides, with a decent lip at the entrance and deeper water inside. Those are often at their best when the flat has emptied right out, and the junctions inside them are worth checking for deep holes.
+
+## The incoming is harder
+
+The incoming is the same sequence in reverse, but the window is smaller. The fish rush back up quickly, and given the choice they will follow the bait up the drains rather than across the open flat — especially if those drains already have bait and colour in them. Barra on a flat during the push are a lot more elusive.
+
+On the incoming, our better results come from finding a spot the fish will move through on their own — a creek mouth pulling out a good colour change, or a rocky edge they travel along on their way back up. Sit on one of those for an hour and keep putting casts into the colour. You will intercept fish heading back to their high-tide spots, as well as the few that sat there over the low. By about three metres of tide they have mostly gone back up into the drains and the back of the flats, and that is usually when we start thinking about pelagics, or the boat ramp.
+
+## Springs, neaps and wind
+
+The best flats fishing comes when there is some **urgency in the tide**. On a neap the fish are in no hurry. The bait gets pushed out in slow stages and the barra sit just out of reach for hours at a time; you can lose most of a tide waiting for them. That is why we do most of our flats fishing on the springs, and on a falling tide in the morning.
+
+Wind is the other half of it. On the springs, the run-out falls in the morning, before the afternoon wind change gets up — so the flats that fish best on a spring tide are the ones with no wind and clean water early. As the tides back off towards the neaps, the high-tide change slides later into the day and the wind gets onto it. It is worth having one set of flats you fish on the springs and another you fish on the neaps, chosen for which way they face, how fast the water comes off them, and how the fish behave there.
+
+## The neap incoming exception
+
+Flats are hard work on a neap incoming, and on guided days that is when we usually go chasing trevally, queenfish or tuna instead. But there is one pattern worth knowing.
+
+Flats with **big, individual mangroves** — rather than dense walls of aerial roots — can fish on a neap incoming. The barra push up and sit in the shade of those individual trees rather than leaving straight away, and you can fish in amongst them until the water has come up quite a way. The flats out the front of West Arm in Darwin Harbour are a good example. Zoom right in on satellite imagery and you can pick that sort of tree line out before you go.
+
+## What to take from it
+
+Every system is different, and the job is to find these features in your own area and learn how they fish through different tides. Start with the shaded green on the chart, work out which flats dry early and which dry late, and fish them in order as the water drops. Spring tides, morning run-outs, out of the wind. And when you are prospecting, cast into the bends.
+
+@faq
+
+Q: What is the best tide to fish mud flats for barramundi?
+A: A falling tide, ideally a spring tide running out in the morning before the wind gets up. The bait gets forced out of the mangroves and onto the open flat, and the urgency of a bigger tide moves the fish out where you can get at them. On neap tides they tend to sit just out of reach for hours.
+
+Q: Where do barra sit on a mud flat?
+A: They cruise the flat with the bait, but when they stop they duck into the small snaking drains that wind through it — and more often into the bends of those drains than the straight sections. When you are prospecting rather than sight casting, cast into the bends.
+
+Q: Can you fish mud flats on the incoming tide?
+A: You can, but the window is smaller. The fish move back up quickly and prefer to follow the bait up the drains rather than cross the open flat. You will usually do better sitting on a creek mouth or a colour change that fish move through on their own. The exception is a flat with big individual mangroves, which can fish on a neap incoming as barra sit in the shade of each tree.
+
+Q: How do you read a mud flat on a chart?
+A: Look for the areas shaded green. The number on them is the drying height — how far above zero tide that part sits. A flat that dries high with a long run back to the channel will empty fast, so fish it first in the tide and have an exit plan before you get stuck.

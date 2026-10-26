@@ -1,0 +1,56 @@
+{
+  "_note": "The 36 Top End Barra Secrets lesson transcripts in Drive, which become the article library. 'about' is GW's taxonomy — the 6 module folders are the article sections. choke-points is the approved sample GW signed off on 17 Aug 2026.",
+  "_drive_root": "1Q2en_T1n5CzPeB8KtXLdLaZXykaDLaVh",
+  "modules": {
+    "Finding barra": "1xgn_1Ngz_99HAlBjHai39BfjUml6BSWI",
+    "Techniques and tactics": "1DQ9rw77TizmMRP5r9Dbj3dkIm2giR4y5",
+    "Lures and tackle": "10JQdYTmj4Ix9iKXLVONjjjGgIA874o_S",
+    "Before and after the catch": "1Mx3fKZKXKxoKC_s2Rx0EML_093OnhVei",
+    "About barra": "1TE_zVK1F5qUIYPWE4MeQexGqCckm8f7W",
+    "Bonus lessons": "1cYhEGW4Nbx9LYUhD841vy28Gqjbho60i"
+  },
+  "lessons": [
+    {"slug": "choke-points", "module": "Finding barra", "fileId": "1P_v40fCmcvjGABT50pKL-cv14a45xn3V", "source": "choke_points_video.pdf", "done": true},
+
+    {"slug": "points", "module": "Finding barra", "fileId": "1BeoOOIarB0GrQDFRIzg14l8qtu758Qnb", "source": "points_video.pdf"},
+    {"slug": "snags", "module": "Finding barra", "fileId": "159yXgknuSLqdYvKnsJ5IE5ypKepF2N3l", "source": "snags_video.pdf"},
+    {"slug": "rocks", "module": "Finding barra", "fileId": "1IA2Ul-qQ9NLq8xzZgvSSvRCKCAghJn_7", "source": "rocks_video.pdf"},
+    {"slug": "deep-holes", "module": "Finding barra", "fileId": "1MF4Q4fIlNv3k0q9SZSY4j2KmHJcPcBAs", "source": "deep_holes_video.pdf"},
+    {"slug": "weed-beds", "module": "Finding barra", "fileId": "1637QWBqeZiM_Kb16mFcqp05uFsUY7ftb", "source": "weed_beds_video.pdf"},
+    {"slug": "mud-flats", "module": "Finding barra", "fileId": "1NPsEdxVmbHS-rsi9N1KdZWcAFasGCCKE", "source": "mud_flats_video.pdf"},
+    {"slug": "collapsed-banks", "module": "Finding barra", "fileId": "1EErKest2bt1gc2-MWnbH17GD1taXNv2_", "source": "collapsed_banks_video.pdf"},
+    {"slug": "edges-and-eddies", "module": "Finding barra", "fileId": "12G-QR0Kb-nWRP8Df-VCWAlTpm7xWUBi_", "source": "edges_and_eddys_video.pdf"},
+    {"slug": "transition-areas", "module": "Finding barra", "fileId": "1f2p_icjUYxPX6gXqC86L_OlNUKIKd1f2", "source": "transition_areas_video.pdf"},
+    {"slug": "river-and-creek-mouths", "module": "Finding barra", "fileId": "1LwX4PJIVsSHE2eGDZZQSmXsCoZN8VprJ", "source": "river_and_creek_mouths_video.pdf"},
+    {"slug": "open-water", "module": "Finding barra", "fileId": "1QmBXrpaV4dEbY00-QagSD8gaMfTI_LbF", "source": "open_water_video.pdf"},
+    {"slug": "tides", "module": "Finding barra", "fileId": "1txnZReI7SoZCV-xkxChumBlqGeivgkOn", "source": "tides_video.pdf"},
+    {"slug": "warmer-water", "module": "Finding barra", "fileId": "1AzG7VAGgFSN-948hU2f7EiOPoXdmYJth", "source": "warmer_water_video.pdf"},
+    {"slug": "fresh-or-salt", "module": "Finding barra", "fileId": "1EYzHM6qCf34AiCp_hPvoLc8dmPBHpMg4", "source": "fidning_barra_in_the_fresh_or_salt_video.pdf"},
+
+    {"slug": "casting-lures", "module": "Techniques and tactics", "fileId": "1jjN68MXF-mBna7xwD_bImcchLQSDzjXl", "source": "casting_lures_video.pdf"},
+    {"slug": "casting-flies", "module": "Techniques and tactics", "fileId": "1T2ZqQE7Se-nfn5ZCVftbwVWZxAK4HB06", "source": "casting_flies_video.pdf"},
+    {"slug": "the-barra-twitch", "module": "Techniques and tactics", "fileId": "1DA_C7c3i_a_W4Uc9mbjYiH1m_rwQzOk0", "source": "barra_twitch_video.pdf"},
+    {"slug": "trolling", "module": "Techniques and tactics", "fileId": "15xhmIiGovu8aoBPDAzAQ7K_RnGOzy4ky", "source": "trolling_video.pdf"},
+    {"slug": "fighting-and-landing", "module": "Techniques and tactics", "fileId": "1bCGD2GCUU0alh-q_tTpQ3hXAy5IV5XsC", "source": "fighting_and_landing_barra_video.pdf"},
+    {"slug": "knots", "module": "Techniques and tactics", "fileId": "1QgFUkCVn8Zw3kGE09CYx5blXAQcLm8oF", "source": "knots_video.pdf"},
+
+    {"slug": "lures", "module": "Lures and tackle", "fileId": "16586HopbOh6x7-MDeDWIpqkCCXN95ifv", "source": "lures_video.pdf"},
+    {"slug": "line-and-leader", "module": "Lures and tackle", "fileId": "10x18mOfxTnw6LI1Qyu07uAJRAh11ced7", "source": "line_and_leader_video.pdf"},
+    {"slug": "flies", "module": "Lures and tackle", "fileId": "16dyYPwMjzqb58_WlMf6njxJz9MWZ5vEB", "source": "flies_video.pdf"},
+    {"slug": "bait", "module": "Lures and tackle", "fileId": "1O8OkMjRLafNiUdub0zxq2Qf0siejT7Rp", "source": "bait_video.pdf"},
+    {"slug": "weedless-rigging", "module": "Lures and tackle", "fileId": "165Sdbe7CqTcLYVomp0g9OQ89zblP4l60", "source": "Weedless_rigging_Gulp_jerk_shads.pdf"},
+
+    {"slug": "preparation", "module": "Before and after the catch", "fileId": "1k7Pg698XYgjGdq7egDT2nXY4jslLvIjV", "source": "preparation_video.pdf"},
+    {"slug": "photographing-your-catch", "module": "Before and after the catch", "fileId": "1pg26w0kVTg41WX41MeI43hsnOtNAvxLV", "source": "getting_good_photos_video.pdf"},
+    {"slug": "killing-and-filleting", "module": "Before and after the catch", "fileId": "1-dUyqPaFsp-Pz9xF7VEywo8o73mxTCls", "source": "kill_it_and_fillet_video.pdf"},
+
+    {"slug": "why-barra", "module": "About barra", "fileId": "1qhPl7DRTHykVKDoFT1ak8u9NlJebAuxo", "source": "why_barra_video.pdf"},
+    {"slug": "barra-anatomy", "module": "About barra", "fileId": "1RI8JgO1EGyW31xCECG9bEET9rnQvrMnP", "source": "anatomy_video.pdf"},
+    {"slug": "breeding", "module": "About barra", "fileId": "1LgLZ9_beDPDHhK5e3PeCvzZMIUod-KvA", "source": "breeding_video.pdf"},
+
+    {"slug": "beaches", "module": "Bonus lessons", "fileId": "1vSgRukpdzXz6tfhXen-qw9vQ1cynopt5", "source": "beaches_video.pdf"},
+    {"slug": "foam", "module": "Bonus lessons", "fileId": "1vzkxNkhnbCffrX0Y2z3ADik6m2olJz3j", "source": "foam_video.pdf"},
+    {"slug": "stance-and-grip", "module": "Bonus lessons", "fileId": "1sDaHCdfSQ005jsS_9aDs7BSMK-OBnZQk", "source": "stance_grip_and_body_position_video.pdf"},
+    {"slug": "advanced-lure-tweaks", "module": "Bonus lessons", "fileId": "1-bbHCP-PzRDnF-iZCaJNQx4mP2pKqd5h", "source": "advanced_lure_tweaks_video.pdf"}
+  ]
+}
