@@ -94,6 +94,196 @@
       "source": "/radio-archive",
       "destination": "/media",
       "permanent": true
+    },
+    {
+      "source": "/(2018-run-off-availability-update|barra-run-off|blackbooks|free-black-book-library|winrunoffbarra|runoffbarrafishing|shady-camp-early-run-off|fishing-safari/live-aboard-run-off-barra-fishing|fishing-safari/run-off-barra-fishing-darwin|tour/run-off-barra-extended-and-day-tours|tag/barra-run-off|tag/run-off|category/run-off)",
+      "destination": "/run-off-barra-fishing",
+      "permanent": true
+    },
+    {
+      "source": "/(flyfishing|fishing-safari/northern-territory-fly-fishing|homepage/full-day-saltwater-big-trev-on-fly|homepage/full-day-freshwater-barra-popper-fly)",
+      "destination": "/fly-fishing-darwin",
+      "permanent": true
+    },
+    {
+      "source": "/(bynoe_harbour|tag/blue-water|category/blue-water)",
+      "destination": "/dundee-bynoe-barra-bluewater",
+      "permanent": true
+    },
+    {
+      "source": "/(build-up-barra|build-up-barra-2|membership|membership-pre-launch|product/membership|product/yearly-membership|product-category/membership|barefoot-member|tebs-accelerated-2023-registration-page-1|barra-fishing-tips-tricks)",
+      "destination": "/barra-brain",
+      "permanent": true
+    },
+    {
+      "source": "/offers/:id/checkout",
+      "destination": "/barra-brain",
+      "permanent": true
+    },
+    {
+      "source": "/(booking-conditions)",
+      "destination": "/booking-terms",
+      "permanent": true
+    },
+    {
+      "source": "/(about-barefoot-fishing-safaris|about-us|About_Barefoot|who_we_are|the-boat-and-gear|therig|glenns-journey-to-becoming-a-fishing-guide|wattfish-elite-custom-rods|outcast-fishing-club)",
+      "destination": "/about-barefoot",
+      "permanent": true
+    },
+    {
+      "source": "/about-barefoot-fishing-safaris/:path*",
+      "destination": "/about-barefoot",
+      "permanent": true
+    },
+    {
+      "source": "/glenns-journey-to-becoming-a-fishing-guide/:path*",
+      "destination": "/about-barefoot",
+      "permanent": true
+    },
+    {
+      "source": "/site/:path*",
+      "destination": "/about-barefoot",
+      "permanent": true
+    },
+    {
+      "source": "/(monday-tip|one-minute-monday-tip|how-to-keep-your-plugs-good-as-new|how-to-save-your-braid|blog|blogpage|latest-barefoot-news|videos|catch-a-million-dollar-barra|win-5-day-fishing-safari-in-kakadu|your-in-the-draw|friends|starlo-watty-wet-season-creek-walk|starlos-jungle-toga|trout-fishing-tassie|fishing-with-starlo|fishing-with-matthew-hayden)",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/one-minute-monday-tip-:slug",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/video/:slug",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/catch-a-million-dollar-barra/:path*",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/fishing-with-starlo/:path*",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/fishing-with-matthew-hayden/:path*",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/changes-for-the-nt-recreational-fishery/:path*",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/changes-for-the-nt-recreational-fishery",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/category/:slug",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/tour/tassie-vic-trout",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/(fishing-charters|fishing-safari|darwin-fishing-locations|darwin-fishing-tour-reviews|darwin-harbour-longtail-tuna|kakadu|kakaduhalfday|tour-booking|current-availability|conditions|anglingadventures|remote-boat-ramp-specialists|tour)",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/fishing-charters/:path*",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/fishing-safari/:path*",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/tour/:path*",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/tour-tag/:slug",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/type/:slug",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/homepage/:path*",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/darwin-harbour-longtail-tuna/:path*",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/tag/barramundi",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:slug",
+      "destination": "/#safaris",
+      "permanent": true
+    },
+    {
+      "source": "/(store|shop-2|shop-2-2|cart|checkout|Visit-our-store|payments|my-account|login|charter-enquiry-thank-you|thank-you|thanks|thanks-for-signing-up|product-details)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/my-account/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/password/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/product-details/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cart/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/checkout/:path*",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
