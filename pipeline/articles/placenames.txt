@@ -116,3 +116,8 @@ Mental Beach -> Mindil Beach
 Casarena -> Casuarina
 Port Keaks -> Port Keats
 Port Keeks -> Port Keats
+Buino Harbour -> Bynoe Harbour
+Buino Harvest -> Bynoe Harbour
+Buino -> Bynoe
+Crabcore -> Crab Claw
+Nuneham -> Noonamah
