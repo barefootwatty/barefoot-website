@@ -309,6 +309,61 @@
       "source": "/(general/coming-soon|sk_isotopegallery/tours)",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/(top-end-tides-cheat-sheet-and-fishing-journal-sales|top-end-tides-cheat-sheet-and-fishing-journal-sales-page-2)",
+      "destination": "/tides-cheat-sheet",
+      "permanent": true
+    },
+    {
+      "source": "/(Top-End-Barra-Essentials|registration-page|registration-page-1|webinar-room-1)",
+      "destination": "/barra-brain",
+      "permanent": true
+    },
+    {
+      "source": "/offers/:id",
+      "destination": "/barra-brain",
+      "permanent": true
+    },
+    {
+      "source": "/resource_redirect/offers/:id",
+      "destination": "/barra-brain",
+      "permanent": true
+    },
+    {
+      "source": "/(flyfish)",
+      "destination": "/fly-fishing-darwin",
+      "permanent": true
+    },
+    {
+      "source": "/(win-5-)",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/(fish|blank-page|opt-in-1|confirmation-page-1|thank-you-1)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/opt-in-:slug",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you-:slug",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/confirmation-page-:slug",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/resource_redirect/:path*",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
