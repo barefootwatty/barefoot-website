@@ -857,3 +857,6 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
   border-left-color:var(--orange);
   color:#7a2f0f;
 }
+
+/* Article hero: the headline block is a plain .wrap, which painted under the absolutely-positioned hero photo and its ::after gradient (headlines invisible on every Know-How article). Lift it like .hero-content. 8 Nov 2026. */
+.photohero .wrap{position:relative;z-index:2}
