@@ -15,7 +15,8 @@
 // The From address only matters for deliverability — Reply-To is always set to
 // the person enquiring, so hitting reply in Gmail answers the customer.
 //
-// Each enquirer also gets an automatic reply listing the open dates. That
+// Each enquirer also gets an automatic reply listing the open dates (plus one
+// line per trip for any dates held on an unpaid deposit). That
 // needs the From address on a domain verified in Resend — the Barefoot domain
 // was verified 25 Oct 2026 (records resend._domainkey, send, rsend in GoDaddy).
 // If those records are ever removed, every send here fails, Watty's included.
@@ -56,8 +57,15 @@ async function openDatesText(host) {
   const pct = live.length ? Math.round((100 * booked) / live.length) : 0;
   const blocks = Object.entries(av.trips).map(([key, t]) => {
     const open = live.filter((w) => w.trip === key && w.status === "open");
-    const rows = open.length ? open.map((w) => `  • ${range(w)} ${w.start.slice(0, 4)}`).join("\n") : "  • All booked — ask about the waitlist";
-    return `${t.name} · ${t.place}\n${rows}\n  ${SITE}/${t.page}`;
+    // Held = invoice sent, deposit not yet paid. Never listed as open; one
+    // line under the open dates so nobody is surprised if it comes free.
+    const held = live.filter((w) => w.trip === key && w.status === "held");
+    const none = held.length ? "  • Nothing open right now — ask about the waitlist" : "  • All booked — ask about the waitlist";
+    const rows = open.length ? open.map((w) => `  • ${range(w)} ${w.start.slice(0, 4)}`).join("\n") : none;
+    const heldRow = held.length
+      ? `\n  • Held, deposit pending: ${held.map((w) => `${range(w)} ${w.start.slice(0, 4)}`).join(", ")} — ask to go on the waitlist`
+      : "";
+    return `${t.name} · ${t.place}\n${rows}${heldRow}\n  ${SITE}/${t.page}`;
   });
   return { text: blocks.join("\n\n"), pct, year: av.year };
 }
@@ -77,7 +85,7 @@ function autoReplyText(data, dates) {
     `${dates.year} is already ${dates.pct}% booked, and the best tide windows often book out up to two years ahead. Dates are held first in, best dressed, and a 30% deposit locks yours in.`,
     "",
     "If one of those suits, just hit reply and tell me which one and how many in your crew.",
-    /waitlist/i.test(data.when) ? "\nYou picked a booked date, so I've got you down for the waitlist — I'll be in touch if it comes free." : "",
+    /waitlist/i.test(data.when) ? "\nYou picked a date that's booked or on hold, so I've got you down for the waitlist — I'll be in touch if it comes free." : "",
     "",
     "Cheers,",
     "Watty",

@@ -1,5 +1,5 @@
 {
-  "_readme": "THE ONE PLACE TRIP DATES LIVE. Change a status here, then run: python3 tools/build_availability.py site — it rewrites the date lists and enquiry-form tiles on the run-off, Bynoe/Dundee, fly and home pages. The enquiry auto-reply email reads this file live, so it is right as soon as the site deploys. status is 'open' or 'booked'. Windows whose end date has passed hide themselves.",
+  "_readme": "THE ONE PLACE TRIP DATES LIVE. Change a status here, then run: python3 tools/build_availability.py site (from a repo checkout: python3 pipeline/tools/build_availability.py .) — it rewrites the date lists and enquiry-form tiles on the run-off, Bynoe/Dundee, fly and home pages. The enquiry auto-reply email reads this file live, so it is right as soon as the site deploys. status is 'open', 'held' or 'booked'. 'held' means an invoice has been sent and the deposit has not landed yet: add \"held_until\": \"YYYY-MM-DD\" (invoice date + 14 days) as a private note, it is never shown on the site. Deposit paid: set 'booked'. Hold lapsed: set 'open'. Either way remove held_until. NO CLIENT NAMES in this file, it is public. Windows whose end date has passed hide themselves.",
   "updated": "2026-10-25",
   "year": 2027,
   "previous_year": "2026 — fully booked",

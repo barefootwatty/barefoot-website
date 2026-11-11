@@ -11,6 +11,7 @@
 .avkey .k:first-child{margin-left:0}
 .avkey .k.open{background:var(--sage)}
 .avkey .k.few{background:var(--orange)}
+.avkey .k.held{background:var(--cream);border:1.5px dashed var(--copper)}
 .avkey .k.gone{background:#cfc6b8}
 
 .avpick .avgroup{font-family:'Montserrat';font-weight:700;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
@@ -24,6 +25,11 @@
 .avtile.open .s{color:#3f5a3b}
 .avtile.few{background:rgba(218,90,30,.10);border-color:rgba(218,90,30,.5)}
 .avtile.few .s{color:#a33f10}
+/* Held = invoice sent, deposit pending. Same dashed-copper family as .next,
+   no strike-through: the date isn't gone yet, so tapping it joins the waitlist. */
+.avtile.held{background:var(--cream);border:1.5px dashed var(--copper)}
+.avtile.held .d{color:var(--slate)}
+.avtile.held .s{color:#a33f10}
 .avtile.gone{background:#f1ece3;border-color:#ddd3c4}
 .avtile.gone .d{color:#8a8f92;text-decoration:line-through}
 .avtile.gone .s{color:#8a8f92}
@@ -45,3 +51,9 @@
 .avbar.dark .avbar-track{background:rgba(255,255,255,.16)}
 .avbar.dark p{color:#dfe6ec;font-size:.88rem}
 .avbar.dark p strong{color:#fff}
+
+/* Held row in the date list (navy band). The base .dates styles live in
+   styles.css; this one sits here so a new status didn't mean bumping the
+   stylesheet version on every page. */
+.dates .held .d{opacity:.78}
+.dates .held .st{border:1.5px dashed var(--copper);color:var(--cream)}
