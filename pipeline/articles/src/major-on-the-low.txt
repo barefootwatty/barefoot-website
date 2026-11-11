@@ -1,0 +1,50 @@
+title: Why the major lands on the low in Darwin
+module: Finding barra
+description: In Darwin the moon's major lands on the low tide and the minor on the high, on all but a handful of days in the year. Why it works that way, the clock it gives you through the month, and the days the major drifts off the turn.
+ogdesc: In Darwin the moon's major lands on the low tide and the minor on the high, nearly every day of the year. Why, and what the clock looks like through the month.
+schemadesc: Why the moon's major period (moon overhead or underfoot) coincides with low tide at Darwin, counted from the 2026 tide table, and how the timing drifts through the month.
+lead: On the course I teach the major as the couple of hours around the moon being straight overhead or straight underfoot. In Darwin that's the bottom of the tide, and the minor at moonrise and moonset is the top. There's a reason for it, and once you know it you can work the month out from the moon.
+related: tides, daytime-lows-are-back, choke-points
+ask: Ask below and Watty will answer. If you've got a spot where the major lands somewhere other than the low, tell us where it is.
+---
+Quarter to one in the afternoon on a new moon in Darwin and it's dead low, the moon straight overhead, and from September that midday low is the low low, so the drains empty right out and the bait is moving. Twelve and a half hours earlier the moon was underfoot and the tide was on the bottom then too. Same deal as the low low, I've been saying it on the course for years, and this year the 2026 table got counted for it as well.
+
+## Majors and minors
+
+The major is the bigger of the two moon bite times, an hour either side of the moon being straight up or straight under your feet. The minor is the hour or so around moonrise and moonset. Two of each most days, and they come about 50 minutes later every day because the moon's 50 minutes later every day.
+
+## Why it's the low
+
+The high water doesn't come when the moon is overhead. Every place has its own lag between the moon going over and the high arriving, and in Darwin it's five hours and eleven minutes on the 2026 chart. That puts the low before it inside the hour before the moon is straight up on most days, on the start of the major, and tighter than that around the new and full moon. Moon underfoot is the same again twelve hours and twenty-five minutes later.
+
+Moonrise and moonset sit about six hours either side of the moon overhead, and six hours off the low is the high, so the minor lands on the top of the tide.
+
+In 2026 the nearest tide to the moon overhead was a low on all but a couple of days, and to the moon underfoot on all but about a week's worth. I go through the tide chart every year and that's as tight as anything in it.
+
+## The clock through the month
+
+On the new moon the majors are at quarter to one, night and day, a few minutes later on the full, and the lows at twenty-five to one. Highs at half past six morning and evening, so a high in the morning, the run-out through the middle of the day and the low at lunch.
+
+A week later, on the quarter moons, the majors have come round to half past six morning and evening, dawn and dusk. The lows are at twenty to five, the highs at half past ten, and you're coming onto the neaps, the small tides.
+
+Fifteen days after the new moon, the full, you're back to around quarter to one, and by day 22 it's half past six again, so once you've got the new moon date you can run the whole month in your head at fifty minutes a day before you open the chart.
+
+## The exception: it drifts off the turn
+
+The major lands on the low, but not always dead on it, and the difference is where you are in the month. The biggest tide of each set of springs is a day or two after the new or full moon, not on it, 22 of the 25 sets in 2026.
+
+On the building tides, from a couple of days after the smallest tide through to a couple of days past the biggest, the major comes 18 minutes after the low on the 2026 chart, and four days in five it's inside the hour. That's the major straddling the turn, the last of the run-out and into the first push. The back of the moon sits in that band, so on the days that get booked out first every year the major is within twenty minutes of the low low in the middle of the day.
+
+From about three days after the biggest tide down to the next neap, the major lags. Most days it comes over an hour and a half after the low, so the turn comes before the major starts and the middle of it is well into the first push. The neaps are loose as well, about an hour and twenty minutes after the low, and on a neap there's not much water moving at the bottom anyway.
+
+The catch with the midday major on the new and full moon is that it has you on the bottom of the tide as the afternoon breeze gets up, so have the sheltered side worked out before lunch.
+
+## Tide first
+
+No fish in any of this. It's where the water sits against the moon, and in Darwin it sits on the low. Tide first, then wind and water clarity, and the moon bite times third, and up here, fish the low and you're on the major anyway.
+
+At Bynoe the moon's overhead at near enough the same time and the tide's half an hour earlier, and up some of the rivers the low is hours behind the moon and the major lands somewhere else in the tide altogether. That's one for another day.
+
+Go and check it on your own chart, with the moon times from your fishing app alongside it. Pick a new moon, find the low and see where the moon is. If you've got a spot where the major lands somewhere other than the bottom of the tide, tell me where. I'm a bit of a tide chart nerd, that's the one I want to hear about.
+
+The tides cheat sheet is a free download if you want the whole year on one page.
