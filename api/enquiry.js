@@ -28,7 +28,7 @@ const FIELDS = ["name", "email", "phone", "size", "when", "days", "message"];
 const LABELS = {
   name: "Name",
   email: "Email",
-  phone: "Phone",
+  phone: "Mobile",
   size: "Group size",
   when: "Time of year",
   days: "Days fishing",
@@ -53,8 +53,12 @@ async function openDatesText(host) {
   const av = await r.json();
   const today = new Date().toISOString().slice(0, 10);
   const live = av.windows.filter((w) => w.end >= today);
-  const booked = live.filter((w) => w.status === "booked").length;
-  const pct = live.length ? Math.round((100 * booked) / live.length) : 0;
+  // Counted in days, not windows, the same way the pages do it
+  // (pipeline/tools/build_availability.py), so the email and the site agree.
+  const days = (w) => Math.round((Date.parse(w.end) - Date.parse(w.start)) / 86400000) + 1;
+  const sum = (list) => list.reduce((n, w) => n + days(w), 0);
+  const total = sum(live);
+  const pct = total ? Math.round((100 * sum(live.filter((w) => w.status === "booked"))) / total) : 0;
   const blocks = Object.entries(av.trips).map(([key, t]) => {
     const open = live.filter((w) => w.trip === key && w.status === "open");
     // Held = invoice sent, deposit not yet paid. Never listed as open; one
@@ -132,6 +136,13 @@ export default async function handler(req, res) {
   }
   if (!validEmail(data.email)) {
     return res.status(400).json({ ok: false, error: "Please check your email address — that's how Watty gets back to you." });
+  }
+
+  // A mobile number is required: Watty is on the water most days and a call or
+  // text is how a booking actually gets sorted. Eight digits is the shortest
+  // real number, with or without a country code.
+  if (data.phone.replace(/\D/g, "").length < 8) {
+    return res.status(400).json({ ok: false, error: "Please add your mobile number so Watty can call or text you." });
   }
 
   const lines = FIELDS

@@ -108,6 +108,10 @@
       say("Please check your email address — that's how Watty gets back to you.", 'warn');
       return;
     }
+    if (d.phone.replace(/\D/g, '').length < 8) {
+      say('Please add your mobile number so Watty can call or text you.', 'warn');
+      return;
+    }
 
     if (button) { button.disabled = true; button.textContent = 'Sending…'; }
     say('Sending…', '');

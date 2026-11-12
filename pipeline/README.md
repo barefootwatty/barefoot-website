@@ -46,10 +46,21 @@ pending** on the website and in the auto-reply until the deposit lands or the
 - `held_until` is a private note. It is never written into a page or an email.
   Nothing releases a hold automatically: the build script prints `HOLD LAPSED`
   for any hold past its date, and a person decides.
-- A held window is not "open" and not "booked": the summary bar's "% booked"
-  counts booked only, and "N of M windows still open" counts open only.
+- The summary bar is counted in days, not windows: "% booked" is booked days out
+  of all days listed, "N of M days still open" is open days. A held window is
+  neither. The auto-reply does the same sum, so the email and the site agree.
 - Tapping a held tile on the enquiry form joins the waitlist, same as a booked one.
-- **No client names** in `availability.json`, the pages or the auto-reply. The
-  JSON is a public file. Dates and status only. The script refuses to build if a
+- **No client names** in `availability.json`, the pages, the auto-reply or a
+  commit message. The JSON and this GitHub repo are public. Dates and status
+  only. Client names and trip details live in the Barefoot calendar and nowhere
+  else. The script refuses to build if a
   window carries any field other than trip, start, end, status, held_until.
 - Set `"updated"` to the day of the change.
+- Most visitors are on a phone: look at any change to the date list, the tiles
+  or the enquiry form at phone width before it goes live.
+
+## Enquiry form
+
+The form is on the home, run-off, fly and Bynoe/Dundee pages. Name, email and
+mobile number are all required (the mobile since Nov 2026): the page checks
+them, and `api/enquiry.js` refuses an enquiry without them.

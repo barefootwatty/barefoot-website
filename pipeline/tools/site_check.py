@@ -9,6 +9,8 @@ Weekly health check for barefootfishingsafaris.com.au, run by GitHub Actions
   * the security certificate has under 10 days left (it should renew itself
     around 30 days out, so this means the renewal failed)
   * the www address, or the two holding domains, stop answering
+  * the trip dates on the live site are not the ones in this repo (a deploy
+    that never went through)
 
 Silent when everything is fine.
 """
@@ -105,8 +107,41 @@ for url in ("https://www.barefootfishingsafaris.com.au/", "https://barefootoutdo
     if s != 200:
         problems.append(f"{url} -> {s}")
 
+# 6. the live site is serving this repo's trip dates. The auto-reply email reads
+# the live file, so a deploy that silently failed would leave both the pages
+# and the emails quoting old availability. A push takes a minute or so to go
+# live, so give it a few goes before calling it a problem.
+import json
+SITE_DIR = os.path.join(HERE, "..", "..")
+want = json.load(open(os.path.join(SITE_DIR, "assets", "availability.json"), encoding="utf-8"))
+block = re.compile(r"<!-- AVAIL:LIST.*?<!-- /AVAIL:LIST -->", re.S)
+want_list = block.search(open(os.path.join(SITE_DIR, "run-off-barra-fishing.html"), encoding="utf-8").read())
+
+
+def body(url):
+    req = urllib.request.Request(f"{url}?check={int(time.time())}", headers=UA)
+    return OPENER.open(req, timeout=25).read().decode()
+
+
+dates_live = False
+for attempt in range(8):
+    try:
+        got_list = block.search(body(BASE + "/run-off-barra-fishing"))
+        if json.loads(body(BASE + "/assets/availability.json")) == want and \
+                want_list and got_list and got_list.group(0) == want_list.group(0):
+            dates_live = True
+            break
+    except Exception:
+        pass
+    time.sleep(20)
+if not dates_live:
+    problems.append("the trip dates on the live site do not match assets/availability.json in the repo "
+                    "(the last deploy may not have gone through)")
+
 if problems:
     print("PROBLEMS FOUND:")
     print("\n".join(" - " + p for p in problems))
     sys.exit(1)
-print(f"all good: {len(locs)} pages, old links, form, certificate ({days} days left)")
+held = sum(1 for w in want["windows"] if w["status"] == "held")
+print(f"all good: {len(locs)} pages, old links, form, certificate ({days} days left), "
+      f"live trip dates match the repo (updated {want['updated']}, {held} held)")

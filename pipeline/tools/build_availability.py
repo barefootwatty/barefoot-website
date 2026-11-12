@@ -20,8 +20,9 @@ A held window may carry "held_until": "YYYY-MM-DD" (invoice date + 14 days).
 That field is a note for us only: it is never written into a page. Running
 this script prints any hold that has lapsed so it can be released or chased.
 
-The summary bar counts "booked" only for the percentage and "open" only for
-"N of M windows still open", so a held window is neither.
+The summary bar is counted in days, not windows: "% booked" is booked days
+out of all days listed, and "N of M days still open" is open days. A held
+window is neither booked nor open.
 
 NEVER put a client's name in availability.json: it is a public file.
 """
@@ -84,14 +85,22 @@ def short_range(w):
     return f"{ad} {MONTHS[am - 1][:3]}&ndash;{bd} {MONTHS[bm - 1][:3]}"
 
 
+def days(w):
+    """Days in a window, first and last day both counted."""
+    return (date.fromisoformat(w["end"]) - date.fromisoformat(w["start"])).days + 1
+
+
 def bar(av, wins, trips, dark):
-    booked = sum(1 for w in wins if w["status"] == "booked")
-    still_open = sum(1 for w in wins if w["status"] == "open")
-    pct = int(100 * booked / len(wins) + 0.5) if wins else 0
+    # Counted in DAYS, not windows: splitting a block in two must not move the
+    # number, and a 3-day trip should not weigh the same as an 8-day one.
+    total = sum(days(w) for w in wins)
+    booked = sum(days(w) for w in wins if w["status"] == "booked")
+    still_open = sum(days(w) for w in wins if w["status"] == "open")
+    pct = int(100 * booked / total + 0.5) if total else 0
     what = f" {av['trips'][trips[0]]['name'].lower()}" if trips and len(trips) == 1 else ""
     return (f'<div class="avbar{" dark" if dark else ""}" data-av-bar><div class="avbar-track">'
             f'<span style="width:{pct}%"></span></div><p><strong>{av["year"]}{what} is {pct}% booked</strong>'
-            f' &middot; {still_open} of {len(wins)} windows still open.'
+            f' &middot; {still_open} of {total} days still open.'
             f' The best tides often book out up to two years ahead.</p></div>')
 
 
