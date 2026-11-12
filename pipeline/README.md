@@ -1,5 +1,12 @@
 # Pipeline (not part of the website)
 
+Every script that builds a page lives in `tools/`. Which script builds which
+page is mapped in `CLAUDE.md` at the repo root. Since 12 Nov 2026 that includes
+the radio/topic builders (`build_media.py`, `build_topics.py`,
+`clean_transcript.py`), the weekly `publish_bagabarra.py` with its Mac
+transcriber `transcribe.swift`, and `add_social_meta.py`. Before that they lived
+only on GW's Mac.
+
 Everything the weekly article job needs to run without Glenn's Mac: the build
 scripts, the lesson list (articles/manifest.json), the verified place-name list and
 the article sources. `.vercelignore` keeps this folder off the live site.

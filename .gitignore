@@ -6,3 +6,4 @@ assets/raw/
 # published, so they stay tracked. (Nothing to ignore here; note kept for
 # whoever wonders why site/media/ is committed rather than built on deploy:
 # Vercel serves this repo as-is, there is no build step.)
+__pycache__/
