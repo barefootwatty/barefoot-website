@@ -21,9 +21,9 @@ Then copy any new `articles/src/*.txt` and `articles/placenames.txt` back into
 
     python3 pipeline/tools/build_availability.py .
 
-(On the Mac project layout that is `python3 tools/build_availability.py site`.
-Keep the Mac copy of the script identical to the one in this folder. This one is
-the master.) It rewrites the `AVAIL:LIST` and `AVAIL:PICKER` blocks on the home,
+Run it inside the website folder (on the Mac that is the `site` folder). This is
+the only copy of the script: an older `tools/build_availability.py` outside the
+repo does not know about `held` and must not be used. It rewrites the `AVAIL:LIST` and `AVAIL:PICKER` blocks on the home,
 run-off, fly and Bynoe/Dundee pages. Never edit those blocks by hand. Then commit
 and push to `main`. Vercel serves the repo as-is, so a push to `main` is live. The
 enquiry auto-reply (`api/enquiry.js`) reads the JSON live, so it follows the site.

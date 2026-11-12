@@ -1,6 +1,6 @@
 /* ---- Tap-a-date availability (Oct 2026) ---------------------------------
    Tiles on the enquiry form and a "how booked is the season" bar. Markup is
-   generated from assets/availability.json by tools/build_availability.py;
+   generated from assets/availability.json by pipeline/tools/build_availability.py;
    clicks are handled in assets/enquiry.js. Kept out of styles.css so adding
    it didn't mean bumping the stylesheet version on all 300 pages. */
 

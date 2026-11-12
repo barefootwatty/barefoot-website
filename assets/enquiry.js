@@ -11,7 +11,7 @@
 
 /* Availability tiles — tap a window and it goes into the "Your dates" box.
  * The tiles and date lists are generated from assets/availability.json by
- * tools/build_availability.py. Anything whose end date has passed hides
+ * pipeline/tools/build_availability.py. Anything whose end date has passed hides
  * itself, so a stale page never offers a trip that's already been.
  */
 (function () {

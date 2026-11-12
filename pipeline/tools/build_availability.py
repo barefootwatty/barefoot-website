@@ -2,10 +2,11 @@
 """
 Rewrite the availability blocks on the website from assets/availability.json.
 
-    python3 tools/build_availability.py site            (Mac project layout)
-    python3 pipeline/tools/build_availability.py .      (from a repo checkout)
+    python3 pipeline/tools/build_availability.py .      (run inside the website folder)
 
-The one argument is the folder that holds index.html. Only the text between
+This is the only copy of the script: it lives in the repo so it works the same
+on the Mac and in a cloud session. The one argument is the folder that holds
+index.html. Only the text between
 the <!-- AVAIL:LIST --> / <!-- AVAIL:PICKER --> markers is touched, so running
 it twice changes nothing the second time.
 
@@ -55,7 +56,7 @@ PAGES = {
 
 BLOCK = re.compile(r"^([ \t]*)<!-- AVAIL:(LIST|PICKER) —[^\n]*-->\n.*?^[ \t]*<!-- /AVAIL:\2 -->",
                    re.S | re.M)
-NOTE = "generated from assets/availability.json by tools/build_availability.py. Don't edit here."
+NOTE = "generated from assets/availability.json by pipeline/tools/build_availability.py. Don't edit here."
 
 
 def esc(text):
