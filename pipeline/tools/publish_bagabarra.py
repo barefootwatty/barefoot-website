@@ -5,7 +5,7 @@ Weekly Bag a Barra publisher.
 Watty's segment airs Friday on Oz Off Road Radio (3AW / Nine Radio). This finds
 any segment in the feed we haven't published yet, transcribes it on-device
 (free — never a paid API), builds its page, links it into the Media Centre
-archive and the sitemap, and pushes both branches.
+archive and the sitemap, commits, and pushes main (Vercel serves main).
 
     python3 tools/publish_bagabarra.py              # do the lot
     python3 tools/publish_bagabarra.py --dry-run    # say what it would do

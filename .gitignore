@@ -7,3 +7,7 @@ assets/raw/
 # whoever wonders why site/media/ is committed rather than built on deploy:
 # Vercel serves this repo as-is, there is no build step.)
 __pycache__/
+
+# The Mac compiles pipeline/tools/transcribe.swift into this binary on first
+# run. It must never be committed (publish_bagabarra.py does `git add -A`).
+pipeline/tools/transcribe
