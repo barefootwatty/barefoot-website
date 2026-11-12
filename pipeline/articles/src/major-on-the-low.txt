@@ -1,4 +1,4 @@
-title: Why the major lands on the low in Darwin
+title: Darwin barra bite times: why the major lands on the low tide
 module: Finding barra
 description: In Darwin the moon's major lands on the low tide and the minor on the high, on all but a handful of days in the year. Why it works that way, the clock it gives you through the month, and the days the major drifts off the turn.
 ogdesc: In Darwin the moon's major lands on the low tide and the minor on the high, nearly every day of the year. Why, and what the clock looks like through the month.
