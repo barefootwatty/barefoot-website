@@ -1,8 +1,17 @@
 # CLAUDE.md — Barefoot Fishing Safaris website
 
 Read this first in every session on this repo. The owner is GW (Watty), a
-fishing guide, not a programmer: explain plainly, give him numbered steps and
-clickable links when he has to do something.
+fishing guide, not a programmer: explain plainly.
+
+**Whenever GW has to do anything, hand him ONE path, never a menu of options.**
+Pick the best route yourself and give:
+- every step, numbered, naming exactly what to click or open;
+- a clickable link for every web page, and the exact folder path for every
+  Mac folder (or a Terminal command that opens it);
+- everything he has to copy and paste, each in its own code block, complete,
+  with nothing left for him to fill in or edit.
+If a step might fail, say what he'll see and what to do then, inside that step.
+He should never have to ask for links or steps.
 
 **This repo is PUBLIC.** Nothing private goes in it: no client names, no trip
 details, no credentials, no internal pricing notes or commentary on other
