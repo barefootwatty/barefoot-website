@@ -113,8 +113,11 @@ GLOSSARY = [
     # file pre-dated them; recovered on 12 Nov 2026 from the word changes in
     # those commits and proven by rebuilding four Bag a Barra pages byte-for-
     # byte identical to the live ones. Must sit AFTER the "bag a barrow" rules.
-    (r"\bbuino harvest\b", "Bynoe Harbour"), (r"\bbuino\b", "Bynoe"),
-    (r"\bcrabcore\b", "Crab Claw"),
+    (r"\bbuino harvest\b", "Bynoe Harbour"),
+    (r"\bbuino harbour\b", "Bynoe Harbour"),   # from the Mac copy, 13 Nov 2026
+    (r"\bbuino\b", "Bynoe"),
+    (r"\bcrab ?core\b", "Crab Claw"),          # "crab core" too (Mac copy)
+    (r"\bmangraves\b", "mangroves"),           # plural (Mac copy)
     (r"\bmangrave\b", "mangrove"),
     (r"\bWadi\b", "Watty"),
     (r"\bbarrows\b", "barra"), (r"\bbarrow\b", "barra"),
