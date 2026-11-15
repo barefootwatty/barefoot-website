@@ -1,0 +1,94 @@
+title: Knots: the FG, a locked-down Albright and a loop knot that holds
+module: Techniques and tactics
+description: The knots that land barramundi: how we tie the FG knot so it never pulls out, a locked-down version of the Albright, a loop knot for lures and flies, and how to test your own — from a Darwin fishing charters guide of 15+ years.
+ogdesc: The FG, a locked-down Albright and a reliable loop knot — tied the way that holds.
+schemadesc: How to tie the FG knot, a locked-down Albright and a loop knot for barramundi, and how to test them.
+lead: It does not matter what boat you have or how much you paid for your rod. The one thing that will keep you from a good barra, and keep doing it until you fix it, is your knots.
+related: fighting-and-landing, casting-lures, trolling
+ask: Ask below and Watty will answer. If you have a knot that has never let you down, or one that keeps failing, tell us about it.
+---
+Most lost barra are not lost to bad luck. They are lost to a knot that was nearly right. You hook the fish, it jumps, and you wind in a little curly bit of braid while the fish swims off wearing your lure.
+
+There are plenty of ways to tie every knot here. These are the ones we tie on the boat, in the way we tie them, and they have held up to years of guiding. That is the real test.
+
+## The FG knot
+
+The FG is the best braid-to-leader knot there is for barra. It is thin, it is strong, and it slides through your guides cleanly. There is a catch, though. If you tie it well, it is a pleasure to fish with. If you tie it slightly wrong, it will fail every time.
+
+We have been tying it for leaders since about 2018, and it is the only leader knot we use now. This is how we do it:
+
+- Put tension on the braid. Lean the rod in a chair or a rod holder so the line stays tight, and hold the tag end of the braid in your mouth
+- Wrap the braid around the leader in a figure-eight motion. We do 17 wraps
+- Lock it with a single half hitch
+- Now pull the braid as hard as you can. It will cut into your hands and you will think it is going to bust. Keep pulling until the braid goes **opaque right down to the very first wrap**
+- Tie half hitches around the leader, alternating under and over, six or eight of them, and pull each one up firmly
+- Trim the leader tag as close as you can
+- Tie another half dozen firm half hitches over the braid only
+- Finish with a triple hitch: three turns around the braid, pulled up tight so it locks. Snip it, leaving a small tag
+
+## Why fewer wraps are better
+
+The pulling step is the whole knot, and it is why fewer wraps beat more. If you have too many wraps, or you do not pull hard enough, the first couple of wraps stay half loose. Then every time the knot goes through the guides — tap, tap, tap — it loosens a little more, until it pulls straight out.
+
+Alternating your half hitches matters too. If you tie them all the same way, they curl back around and leave loose line in the knot.
+
+## Test your knots before a fish does
+
+Learning a knot from a video at the kitchen table is a good start, but it is only a start. Most of the FG knots people bring on board and tie themselves can be picked apart with a fingernail in a couple of seconds.
+
+So field test it. Tie it in the backyard, bash it around, and try to pull it to pieces. When it comes apart, work out why and fix that step. We went through the same process. The FG kept coming undone in our trials until we settled on the method above, and since then it has never let us down.
+
+## A locked-down Albright
+
+The Albright is a good entry-level knot. The standard version tends to slip, though, especially with the heavier leader we use up here. With big heavy mono and something like 30 lb braid, the leader does not kink down tight enough, the final tuck works loose, and eventually the whole thing comes undone.
+
+Before the FG came along, this was our leader knot, refined over years of guiding:
+
+- Double the leader over. Biting it helps put a sharp kink in the bend
+- Pass the braid down through the loop, leaving plenty of tag
+- Make two wraps down the leader, then wrap back up seven times
+- On the seventh wrap, pass the braid through the small triangle that forms between the leader and the braid at the start of the second wrap. That turn is now sandwiched between braid on both sides, which locks it
+- Finish as you would a normal Albright by going back out through the loop, but go through **twice** instead of once
+
+Even if the knot slips out of the last two tucks, the sandwiched wrap still holds it, because it is pulled in on itself.
+
+## Loop knots for lures and flies
+
+To tie your lure or fly to the leader, use any loop knot you are comfortable tying. A loop lets the lure swing and work freely. The one we use is a version of the Rapala knot, and it has never let us down:
+
+- Tie a loose overhand knot in the leader, leaving plenty of tag. Give yourself room with every knot, or you cramp yourself and stuff it up
+- Pass the tag through the eye or split ring of the lure, then back through the overhand knot on the same side it came out
+- Slide it up until the loop sits where you want it, about 3 to 5 mm off the eye
+- Wrap the tag around the main leader three times
+- Go back through the gap left in the overhand knot
+- Wet it and pull hard from both directions, holding the tag and cinching down firmly
+
+Keep the loop about the size of a five-cent piece. On big lures over five or six inches the size hardly matters. On small, subtle lures, though, a big loop can change the action, and the front hook can catch in it during the cast or the twitch and pause. Make it as small as is practical while still swinging freely. If you could fit your head through it, it is not a loop knot any more, it is a noose.
+
+We are not fans of the clips and quick-release knots that let you swap lures without retying. A proper loop knot is one less thing to go wrong.
+
+## The rest of the box
+
+- **Uni knot** for a rigid connection. It is the one for fizzers and for live bait hooks
+- **Dropper loop and surgeon's loop** if you are fishing sinkers in a drop shot style rig
+- **Bimini twist** for a double in mono. It gives the line a bit of spring and works well for live baiting and long doubles on billfish rigs
+
+We used to tie Bimini twists in braid, but braid does not like it. It seems to get hot and weak, and all you really do is move the weakest point further up the line. If you need a double in braid, a plait is the best way to make one by far. It is not really a knot, it works more like a finger trap, and it holds under tension.
+
+## What to take from it
+
+Pick one knot for each job, learn it properly, and test it until you cannot break it by hand. Tying three knots well beats tying ten of them roughly. The FG for your leader, a loop knot for your lure, and a uni for anything rigid will cover most barra fishing in the Top End.
+
+@faq
+
+Q: What is the best leader knot for barramundi?
+A: The FG knot. It is thin, strong and slides through the guides cleanly. The catch is that it has to be tied properly. Use fewer wraps rather than more, and pull the braid hard enough that it goes opaque right down to the first wrap, or it will work loose and pull out.
+
+Q: Why does my FG knot keep pulling out?
+A: Usually it has too many wraps or was not pulled tight enough, so the first few wraps stay loose. Each trip through the guides loosens them further until the braid slips out. Half hitches that are not alternated can also curl back and leave loose line.
+
+Q: What knot should I use to tie a lure on for barra?
+A: Any loop knot you are confident tying. We use a version of the Rapala knot with the loop about the size of a five-cent piece, so the lure swings freely without a big loop catching the front hook or upsetting the action of small lures.
+
+Q: Should I tie a Bimini twist in braid?
+A: We would not. Braid does not handle a Bimini well, and it just moves the weak point further up the line. Use a Bimini for mono doubles, and plait the braid if you need a double in braid.
