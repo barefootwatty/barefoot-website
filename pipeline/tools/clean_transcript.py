@@ -55,6 +55,9 @@ GLOSSARY = [
     (r"\barnamland\b", "Arnhem Land"), (r"\barnam land\b", "Arnhem Land"),
     (r"\bshaw bay\b", "Shoal Bay"), (r"\bshore bay\b", "Shoal Bay"),
     (r"\bmganella\b", "Murgenella"),
+    # Added 20 Nov 2026: "Corroboree" -> "corrobory" in 21 episodes; "Dinah Beach"
+    # (the Darwin boat ramp) -> "Diner Beach" in 4.
+    (r"\bcorrobory\b", "Corroboree"), (r"\bdiner beach\b", "Dinah Beach"),
     # "Daly" comes out as "daily". Scoped so "on a daily basis" survives.
     # "Daily Rivers" is the transcriber hearing "Daly River's" — the trailing "s"
     # defeated the \b in the singular rule, so four pages kept a wrong place name
