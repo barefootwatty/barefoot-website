@@ -59,8 +59,28 @@ def get(url, method="GET", data=None, tries=3):
 
 
 def many(urls):
-    with cf.ThreadPoolExecutor(8) as ex:
-        return list(zip(urls, ex.map(lambda u: get(u), urls)))
+    """Check a batch of addresses. The host's attack protection sometimes drops
+    connections from GitHub's servers partway through a run, which used to look
+    like dead pages. So anything that fails on a network error (not a real
+    404/500 answer) gets a second go, one at a time, after a breather."""
+    with cf.ThreadPoolExecutor(4) as ex:
+        results = dict(zip(urls, ex.map(lambda u: get(u), urls)))
+    shaky = [u for u in urls if not isinstance(results[u][0], int)]
+    if shaky:
+        time.sleep(60)
+        for u in shaky:
+            results[u] = get(u)
+            time.sleep(1)
+    return [(u, results[u]) for u in urls]
+
+
+def get_patient(url, **kw):
+    """One address, with the same second go after a breather."""
+    r = get(url, **kw)
+    if not isinstance(r[0], int):
+        time.sleep(60)
+        r = get(url, **kw)
+    return r
 
 
 # 1. every sitemap page is live
@@ -87,23 +107,40 @@ if os.path.exists(LEGACY):
         problems.append(f"...and {len(dead) - 25} more old links dead")
 
 # 3. enquiry form endpoint: an empty POST must be refused politely (4xx), not crash (5xx)
-s, _ = get(BASE + "/api/enquiry", method="POST", data=b"{}")
+s, _ = get_patient(BASE + "/api/enquiry", method="POST", data=b"{}")
 if not (isinstance(s, int) and 400 <= s < 500):
     problems.append(f"enquiry form endpoint answered {s} (expected a 4xx refusal)")
 
 # 4. certificate
-ctx = ssl.create_default_context()
-with socket.create_connection(("barefootfishingsafaris.com.au", 443), timeout=15) as sock:
-    with ctx.wrap_socket(sock, server_hostname="barefootfishingsafaris.com.au") as ss:
-        exp = datetime.strptime(ss.getpeercert()["notAfter"], "%b %d %H:%M:%S %Y %Z").replace(tzinfo=timezone.utc)
-days = (exp - datetime.now(timezone.utc)).days
-if days < 10:
+def cert_days_left():
+    ctx = ssl.create_default_context()
+    with socket.create_connection(("barefootfishingsafaris.com.au", 443), timeout=15) as sock:
+        with ctx.wrap_socket(sock, server_hostname="barefootfishingsafaris.com.au") as ss:
+            exp = datetime.strptime(ss.getpeercert()["notAfter"], "%b %d %H:%M:%S %Y %Z").replace(tzinfo=timezone.utc)
+    return (exp - datetime.now(timezone.utc)).days
+
+
+days = None
+cert_error = None
+for attempt in range(4):
+    try:
+        days = cert_days_left()
+        break
+    except ssl.SSLCertVerificationError as e:  # a genuinely bad certificate: no point retrying
+        cert_error = f"security certificate is not valid: {e.verify_message}"
+        break
+    except Exception as e:  # dropped connection: wait and try again
+        cert_error = f"could not read the security certificate after 4 goes ({type(e).__name__})"
+        time.sleep(30)
+if days is None:
+    problems.append(cert_error)
+elif days < 10:
     problems.append(f"security certificate expires in {days} days and has not renewed")
 
 # 5. the other addresses
 for url in ("https://www.barefootfishingsafaris.com.au/", "https://barefootoutdoors.com.au/",
             "https://barefootconsulting.com.au/"):
-    s, _ = get(url)
+    s, _ = get_patient(url)
     if s != 200:
         problems.append(f"{url} -> {s}")
 
