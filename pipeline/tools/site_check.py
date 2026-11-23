@@ -65,11 +65,13 @@ def many(urls):
     404/500 answer) gets a second go, one at a time, after a breather."""
     with cf.ThreadPoolExecutor(4) as ex:
         results = dict(zip(urls, ex.map(lambda u: get(u), urls)))
-    shaky = [u for u in urls if not isinstance(results[u][0], int)]
-    if shaky:
-        time.sleep(60)
+    for wait in (60, 120, 180):
+        shaky = [u for u in urls if not isinstance(results[u][0], int)]
+        if not shaky:
+            break
+        time.sleep(wait)
         for u in shaky:
-            results[u] = get(u)
+            results[u] = get(u, tries=1)
             time.sleep(1)
     return [(u, results[u]) for u in urls]
 
@@ -77,8 +79,10 @@ def many(urls):
 def get_patient(url, **kw):
     """One address, with the same second go after a breather."""
     r = get(url, **kw)
-    if not isinstance(r[0], int):
-        time.sleep(60)
+    for wait in (60, 120, 180):
+        if isinstance(r[0], int):
+            break
+        time.sleep(wait)
         r = get(url, **kw)
     return r
 
