@@ -11,9 +11,9 @@
   },
   "kit": { "name": "Walkabout Expedition Kit (the Pair, a Guide Series shirt and footy shorts)", "short": "Expedition Kit", "founding": 65000, "full": 75000, "limit": 30, "shirts": ["shirt-collared", "shirt-hooded"], "shorts": "shorts", "rods": { "spin": 1, "baitcast": 1 } },
   "extras": {
-    "shirt-collared": { "name": "Guide Series collared shirt", "price": 8900, "sizes": { "M": 5, "L": 12, "XL": 10, "2XL": 7, "Kids 10": 5, "Kids 12": 5 } },
-    "shirt-hooded": { "name": "Guide Series hooded shirt", "price": 7900, "sizes": { "M": 5, "L": 12, "XL": 10, "2XL": 7, "Kids 10": 5, "Kids 12": 5 } },
-    "shorts": { "name": "Barefoot footy shorts", "price": 5500, "sizes": { "M": 6, "L": 11, "XL": 10, "2XL": 7, "Kids 10": 5, "Kids 12": 5 } }
+    "shirt-collared": { "name": "Guide Series collared shirt", "price": 8900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 5, "Kids 10": 5, "Kids 12": 5 } },
+    "shirt-hooded": { "name": "Guide Series hooded shirt", "price": 7900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 6, "Kids 10": 5, "Kids 12": 5 } },
+    "shorts": { "name": "Barefoot footy shorts", "price": 5500, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 5, "Kids 10": 5, "Kids 12": 5 } }
   },
   "postage": {
     "AU": { "label": "Australia", "founding_rod": 0, "rod": 2500, "rod_express": 3000, "no_rod": 2070 },
