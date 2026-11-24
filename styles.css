@@ -315,6 +315,8 @@ section.navy .eyebrow{color:var(--copper)}
 .gallery-2 figure{aspect-ratio:3/2}
 @media(max-width:840px){.gallery-4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.gallery-3,.gallery-2{grid-template-columns:1fr}}
+/* A photo row sitting directly above a row of shop cards (Walkabout pages) */
+.gallery+.shopcards{margin-top:1.6rem}
 
 .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
 .timeline.cols4{grid-template-columns:repeat(2,1fr)} /* 4 cards → balanced 2×2 */
