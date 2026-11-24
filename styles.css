@@ -875,6 +875,9 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
 .plainquotes .pqclose{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:1.2rem;margin:2rem 0 0}
 section.navy .checklist li{color:#dfe6ec}
 section.navy .card .checklist li{color:var(--charcoal)}
+.spechead{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:1.02rem;margin:1.6rem 0 .2rem}
+.speclist li{font-size:1.02rem}
+.speclist li b{font-family:'Montserrat';font-weight:800;color:var(--navy)}
 .shopcards{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:1.4rem;align-items:stretch}
 .shopcard{display:flex;flex-direction:column;padding:28px}
 .shopcard.hero-offer{border:3px solid var(--copper)}
