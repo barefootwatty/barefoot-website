@@ -8,7 +8,7 @@
 // SETUP (one environment variable, set in the Vercel dashboard):
 //   STRIPE_SECRET_KEY   a Stripe secret key (test key on Preview, live on Production)
 // Until that is set, or while "open" is false in walkabout-shop.json, the page
-// shows the "opens Friday" message and nobody can be charged.
+// shows the "opens Sunday" message and nobody can be charged.
 //
 // STOCK AND THE FOUNDING 100: there is no database. Every completed order
 // carries a short list of what was bought (in Stripe "metadata"). This adds
@@ -88,6 +88,17 @@ function status(shop, totals) {
     const n = totals[sku] || 0;
     for (const [kind, each] of Object.entries(rod.rods)) rodsSold[kind] += n * each;
   }
+  // Expedition Kits: "kit|shirt-collared|L|XL" = one Pair, that shirt, those shorts.
+  let kitsSold = 0;
+  const kitUse = {};
+  for (const [key, n] of Object.entries(totals)) {
+    if (!key.startsWith("kit|")) continue;
+    const [, shirt, shirtSize, shortsSize] = key.split("|");
+    kitsSold += n;
+    rodsSold.spin += n; rodsSold.baitcast += n;
+    kitUse[`${shirt}|${shirtSize}`] = (kitUse[`${shirt}|${shirtSize}`] || 0) + n;
+    kitUse[`${shop.kit.shorts}|${shortsSize}`] = (kitUse[`${shop.kit.shorts}|${shortsSize}`] || 0) + n;
+  }
   const allRods = rodsSold.spin + rodsSold.baitcast;
   const left = {
     spin: Math.max(0, shop.rods["rod-spin"].stock - rodsSold.spin),
@@ -96,10 +107,11 @@ function status(shop, totals) {
   const extras = {};
   for (const [sku, x] of Object.entries(shop.extras)) {
     for (const [size, n] of Object.entries(x.sizes)) {
-      extras[`${sku}|${size}`] = Math.max(0, n - (totals[`${sku}|${size}`] || 0));
+      extras[`${sku}|${size}`] = Math.max(0, n - (totals[`${sku}|${size}`] || 0) - (kitUse[`${sku}|${size}`] || 0));
     }
   }
-  return { founding: allRods < shop.founding_limit, foundingLeft: Math.max(0, shop.founding_limit - allRods), left, extras };
+  return { founding: allRods < shop.founding_limit, foundingLeft: Math.max(0, shop.founding_limit - allRods), left, extras,
+    kitsLeft: Math.max(0, shop.kit.limit - kitsSold) };
 }
 
 export default async function handler(req, res) {
@@ -143,6 +155,9 @@ export default async function handler(req, res) {
   const meta = [];
   const want = { spin: 0, baitcast: 0 };
   let rodCount = 0;
+  let wantKits = 0;
+  const wantX = {};
+  const xName = {};
 
   for (const it of body.items.slice(0, 30)) {
     const qty = Math.min(20, Math.max(0, parseInt(it.qty, 10) || 0));
@@ -155,16 +170,37 @@ export default async function handler(req, res) {
       meta.push(`${sku}:${qty}`);
       continue;
     }
+    if (sku.startsWith("kit|")) {
+      const [, shirt, shirtSize, shortsSize] = sku.split("|");
+      const sh = shop.extras[shirt], so = shop.extras[shop.kit.shorts];
+      if (!shop.kit.shirts.includes(shirt) || !sh || !(shirtSize in sh.sizes) || !(shortsSize in so.sizes)) {
+        return res.status(400).json({ ok: false, error: "Something in your order is no longer available. Please refresh the page." });
+      }
+      wantKits += qty;
+      want.spin += qty; want.baitcast += qty; rodCount += 2 * qty;
+      for (const k of [`${shirt}|${shirtSize}`, `${shop.kit.shorts}|${shortsSize}`]) wantX[k] = (wantX[k] || 0) + qty;
+      xName[`${shirt}|${shirtSize}`] = `${sh.name} in ${shirtSize}`;
+      xName[`${shop.kit.shorts}|${shortsSize}`] = `${so.name} in ${shortsSize}`;
+      lines.push({ name: `Walkabout Expedition Kit: the Pair, ${sh.name} (${shirtSize}), footy shorts (${shortsSize})` + (st.founding ? " — Founding rods" : ""),
+        amount: st.founding ? shop.kit.founding : shop.kit.full, qty });
+      meta.push(`${sku}:${qty}`);
+      continue;
+    }
     const [base, size] = sku.split("|");
     const x = shop.extras[base];
     if (!x || !(size in x.sizes)) return res.status(400).json({ ok: false, error: "Something in your order is no longer available. Please refresh the page." });
-    if (qty > st.extras[sku]) {
-      return res.status(409).json({ ok: false, error: `Sorry, only ${st.extras[sku]} left of the ${x.name} in ${size}.` });
-    }
+    wantX[sku] = (wantX[sku] || 0) + qty;
+    xName[sku] = `${x.name} in ${size}`;
     lines.push({ name: `${x.name}, ${size}`, amount: x.price, qty });
     meta.push(`${sku}:${qty}`);
   }
   if (!lines.length) return res.status(400).json({ ok: false, error: "Your order is empty." });
+  if (wantKits > st.kitsLeft) {
+    return res.status(409).json({ ok: false, error: st.kitsLeft ? `Sorry, only ${st.kitsLeft} Expedition Kit${st.kitsLeft === 1 ? "" : "s"} left.` : "Sorry, the Expedition Kits have sold." });
+  }
+  for (const [k, n] of Object.entries(wantX)) {
+    if (n > st.extras[k]) return res.status(409).json({ ok: false, error: `Sorry, only ${st.extras[k]} left of the ${xName[k]}.` });
+  }
   for (const kind of ["spin", "baitcast"]) {
     if (want[kind] > st.left[kind]) {
       return res.status(409).json({ ok: false, error: `Sorry, only ${st.left[kind]} ${kind} rod${st.left[kind] === 1 ? "" : "s"} left.` });

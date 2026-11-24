@@ -9,13 +9,22 @@
 
   function founding(){ return !live.open || live.founding !== false; }
   function rodPrice(sku){ var r = shop.rods[sku]; return founding() ? r.founding : r.full; }
+  function kitPrice(){ return founding() ? shop.kit.founding : shop.kit.full; }
   function item(sku){
+    if (sku.indexOf('kit|') === 0){
+      var k = sku.split('|');
+      return {name: 'Expedition Kit: ' + (k[1] === 'shirt-hooded' ? 'hooded' : 'collared') + ' shirt ' + k[2] + ', shorts ' + k[3], price: kitPrice(), rod: true};
+    }
     if (shop.rods[sku]) return {name: shop.rods[sku].short === 'The Pair' ? 'The Pair' : 'Single, ' + shop.rods[sku].short, price: rodPrice(sku), rod: true};
     var p = sku.split('|'), x = shop.extras[p[0]];
     return {name: x.name + ', ' + p[1], price: x.price, rod: false};
   }
   function leftOf(sku){
     if (!live.open) return 99;
+    if (sku.indexOf('kit|') === 0){
+      var k = sku.split('|');
+      return Math.min(live.kitsLeft, live.left.spin, live.left.baitcast, live.extras[k[1] + '|' + k[2]] || 0, live.extras[shop.kit.shorts + '|' + k[3]] || 0);
+    }
     if (sku === 'pair') return Math.min(live.left.spin, live.left.baitcast);
     if (sku === 'rod-spin') return live.left.spin;
     if (sku === 'rod-baitcast') return live.left.baitcast;
@@ -24,7 +33,7 @@
 
   function postage(){
     var region = $('cart-region').value, p = shop.postage[region], hasRod = false, any = false;
-    Object.keys(cart).forEach(function(s){ any = true; if (shop.rods[s]) hasRod = true; });
+    Object.keys(cart).forEach(function(s){ any = true; if (shop.rods[s] || s.indexOf('kit|') === 0) hasRod = true; });
     if (!any) return {cents: 0, text: '–'};
     if (hasRod){
       if (region === 'AU' && founding()) return {cents: 0, text: 'Free (Founding rod)'};
@@ -67,6 +76,24 @@
       if (p) p.textContent = money(rodPrice(sku));
       if (n) n.textContent = founding() ? 'Founding price. Then ' + money(shop.rods[sku].full) + '.' : 'The Founding rods have sold.';
     });
+    var kp = document.querySelector('[data-price="kit"]'), kn = document.querySelector('[data-note="kit"]'), kl = document.querySelector('[data-kitleft]');
+    if (kp) kp.textContent = money(kitPrice());
+    if (kn) kn.textContent = founding() ? 'Founding price. Then ' + money(shop.kit.full) + '.' : 'The Founding rods have sold.';
+    if (kl) kl.textContent = !live.open ? 'First ' + shop.kit.limit + ' only' : (live.kitsLeft > 0 ? live.kitsLeft + ' of ' + shop.kit.limit + ' left' : 'Sold out');
+    var sizeOpts = function(sku){
+      var o = '', x = shop.extras[sku];
+      Object.keys(x.sizes).forEach(function(size){
+        var left = live.open ? leftOf(sku + '|' + size) : x.sizes[size];
+        o += '<option value="' + size + '"' + (left < 1 ? ' disabled' : '') + '>' + size + (left < 1 ? ' (sold out)' : '') + '</option>';
+      });
+      return o;
+    };
+    var ks = $('kit-shirt'), kss = $('kit-shirt-size'), kso = $('kit-shorts-size');
+    if (ks && kss && kso){
+      var keep = [kss.value, kso.value];
+      kss.innerHTML = sizeOpts(ks.value); kso.innerHTML = sizeOpts(shop.kit.shorts);
+      if (keep[0]) kss.value = keep[0]; if (keep[1]) kso.value = keep[1];
+    }
     var box = $('shop-extras'), html = '';
     Object.keys(shop.extras).forEach(function(sku){
       var x = shop.extras[sku], opts = '';
@@ -85,7 +112,8 @@
   document.addEventListener('click', function(e){
     var t = e.target.closest('[data-add],[data-addx],[data-inc],[data-dec]');
     if (!t || !shop) return;
-    if (t.dataset.add) { add(t.dataset.add); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
+    if (t.dataset.add === 'kit') { add('kit|' + $('kit-shirt').value + '|' + $('kit-shirt-size').value + '|' + $('kit-shorts-size').value); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
+    else if (t.dataset.add) { add(t.dataset.add); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
     else if (t.dataset.addx) add(t.dataset.addx + '|' + $('size-' + t.dataset.addx).value);
     else if (t.dataset.inc) add(t.dataset.inc);
     else if (t.dataset.dec) { cart[t.dataset.dec]--; if (cart[t.dataset.dec] < 1) delete cart[t.dataset.dec]; render(); }
@@ -93,6 +121,7 @@
 
   function start(){
     $('cart-region').addEventListener('change', render);
+    if ($('kit-shirt')) $('kit-shirt').addEventListener('change', build);
     $('cart-go').addEventListener('click', function(){
       var go = this; go.disabled = true; go.textContent = 'Opening checkout…';
       fetch('/api/walkabout-checkout', {method:'POST', headers:{'Content-Type':'application/json'},

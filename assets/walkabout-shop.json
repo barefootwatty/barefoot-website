@@ -9,6 +9,7 @@
     "rod-baitcast": { "name": "Walkabout Baitcast (Single)", "short": "Baitcast", "founding": 29500, "full": 35000, "stock": 100, "rods": { "baitcast": 1 } },
     "pair": { "name": "Walkabout Pair (one spin, one baitcast)", "short": "The Pair", "founding": 55000, "full": 65000, "rods": { "spin": 1, "baitcast": 1 } }
   },
+  "kit": { "name": "Walkabout Expedition Kit (the Pair, a Guide Series shirt and footy shorts)", "short": "Expedition Kit", "founding": 65000, "full": 75000, "limit": 30, "shirts": ["shirt-collared", "shirt-hooded"], "shorts": "shorts", "rods": { "spin": 1, "baitcast": 1 } },
   "extras": {
     "shirt-collared": { "name": "Guide Series collared shirt", "price": 8900, "sizes": { "M": 5, "L": 12, "XL": 10, "2XL": 7, "Kids 10": 5, "Kids 12": 5 } },
     "shirt-hooded": { "name": "Guide Series hooded shirt", "price": 7900, "sizes": { "M": 5, "L": 12, "XL": 10, "2XL": 7, "Kids 10": 5, "Kids 12": 5 } },
