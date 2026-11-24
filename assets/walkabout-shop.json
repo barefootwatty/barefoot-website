@@ -1,7 +1,7 @@
 {
   "_readme": "Walkabout shop settings. Prices are AUD cents, GST included. The page and the checkout both read this file, so a change here changes both. 'stock' is how many we started with: the checkout takes off what Stripe says has sold.",
   "open": false,
-  "closed_message": "Founding rods open on Black Friday, 27 November.",
+  "closed_message": "Founding rods open on Sunday 29 November.",
   "launch_ts": 1795400000,
   "founding_limit": 100,
   "rods": {
