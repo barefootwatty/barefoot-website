@@ -226,7 +226,7 @@ export default async function handler(req, res) {
   const params = {
     mode: "payment",
     success_url: `${origin}/walkabout-thanks`,
-    cancel_url: `${origin}/walkabout#offer`,
+    cancel_url: `${origin}${body.from === "/walkabout-early" ? "/walkabout-early" : "/walkabout"}#offer`,
     phone_number_collection: { enabled: true },
     shipping_address_collection: { allowed_countries: Object.assign({}, REGIONS[region]) },
     shipping_options: Object.assign({}, options),

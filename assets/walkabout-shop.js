@@ -125,7 +125,7 @@
     $('cart-go').addEventListener('click', function(){
       var go = this; go.disabled = true; go.textContent = 'Opening checkout…';
       fetch('/api/walkabout-checkout', {method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({region: $('cart-region').value, waitlist: $('cart-waitlist').checked,
+        body: JSON.stringify({from: location.pathname.replace(/\.html$/, ''), region: $('cart-region').value, waitlist: $('cart-waitlist').checked,
           items: Object.keys(cart).map(function(s){ return {sku:s, qty:cart[s]}; })})})
         .then(function(r){ return r.json(); })
         .then(function(j){
