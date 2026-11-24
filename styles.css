@@ -860,3 +860,54 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
 
 /* Article hero: the headline block is a plain .wrap, which painted under the absolutely-positioned hero photo and its ::after gradient (headlines invisible on every Know-How article). Lift it like .hero-content. 8 Nov 2026. */
 .photohero .wrap{position:relative;z-index:2}
+
+/* ---- Walkabout shop (24 Nov 2026). Offer cards, the order panel and the
+   photo slots on walkabout.html. Reusable for any later product page. ---- */
+.photoslot{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
+  background:var(--dune);color:var(--charcoal);border:2px dashed var(--slate);border-radius:var(--radius);
+  font-family:'Montserrat';font-weight:700;font-size:.9rem;width:100%}
+.photoslot.dark{background:#22364f;color:#e9e1d3;border-color:rgba(255,255,255,.35)}
+.plainquotes{max-width:760px}
+.plainquotes .who{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:.9rem;margin-bottom:1.2rem}
+.plainquotes .pq{border-top:1px solid var(--dune);padding-top:1.3rem;margin-top:1.3rem}
+.plainquotes .pq p:first-child{margin-bottom:.35rem}
+.plainquotes .pq .who{margin-bottom:0}
+.plainquotes .pqclose{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:1.2rem;margin:2rem 0 0}
+section.navy .checklist li{color:#dfe6ec}
+section.navy .card .checklist li{color:var(--charcoal)}
+.shopcards{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:1.4rem;align-items:stretch}
+.shopcard{display:flex;flex-direction:column;padding:28px}
+.shopcard.hero-offer{border:3px solid var(--copper)}
+.shopcard .checklist{flex-grow:1;align-content:start;justify-content:flex-start}
+.shopprice{font-family:'Montserrat';font-weight:800;color:var(--navy);font-size:2.6rem;line-height:1;margin:.2rem 0 .2rem}
+.shopcard.hero-offer .shopprice{font-size:3.2rem}
+section.navy .card p.shopprice{color:var(--navy);font-size:2.6rem}
+section.navy .card.hero-offer p.shopprice{font-size:3.2rem}
+section.navy .card .small{color:var(--slate);font-size:.85rem}
+.shopnote{font-size:.92rem;margin-bottom:.6rem}
+.shopbtns{display:flex;flex-wrap:wrap;gap:.6rem}
+.kitpick{display:grid;grid-template-columns:auto 1fr;gap:.5rem .8rem;align-items:center;margin-bottom:1rem}
+@media(min-width:901px) and (max-width:1180px){.shopcards{grid-template-columns:1fr 1fr}.shopcard.hero-offer{order:-1;grid-column:1/-1}}
+.shopcard .btn,.shopcart .btn{border:none;cursor:pointer;min-height:48px}
+.shopcard .btn[disabled],.shopcart .btn[disabled]{opacity:.5;cursor:not-allowed}
+.shopextras{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.shopextra{padding:22px;display:flex;flex-direction:column;gap:.6rem}
+.shopextra h4{margin:0;color:var(--navy);font-size:1.02rem}
+.shopextra .xprice{font-family:'Montserrat';font-weight:800;color:var(--navy);font-size:1.3rem}
+.shopextra select,.shopcart select,.kitpick select{font:inherit;padding:.7em .9em;border-radius:10px;border:1px solid var(--slate);
+  background:#fff;color:var(--charcoal);min-height:48px;width:100%}
+.shopcart{margin-top:1.6rem;padding:28px;max-width:640px}
+.shopcart .cartline,.shopcart .cartrow{display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:.65rem 0;border-bottom:1px solid var(--dune);color:var(--charcoal)}
+.shopcart .cartrow label{flex:0 0 auto}
+.shopcart .cartrow select{max-width:240px}
+.shopcart .cartrow.total{font-family:'Montserrat';font-weight:800;color:var(--navy);font-size:1.2rem;border-bottom:none}
+.shopcart .qty{display:inline-flex;align-items:center;gap:.5rem}
+.shopcart .qty button{width:44px;height:44px;border-radius:50%;border:1px solid var(--slate);background:#fff;
+  font-size:1.2rem;font-weight:700;color:var(--navy);cursor:pointer}
+.shopcart .cartcheck{display:flex;gap:.6rem;align-items:flex-start;margin:1rem 0;color:var(--charcoal);font-size:.95rem}
+.shopcart .cartcheck input{width:22px;height:22px;flex:0 0 auto;margin-top:.15rem}
+section.navy .shopcart p.small,section.navy .shopcart .cartempty{color:var(--slate);font-size:.85rem;margin:.8rem 0 0}
+section.navy .shopcart #cart-status{color:#9a3412;font-weight:600}
+@media(max-width:900px){.shopcards,.shopextras{grid-template-columns:1fr}}
+@media(max-width:520px){.shopcart .cartrow:not(.total){flex-wrap:wrap}.shopcart .cartrow select{max-width:none}}
