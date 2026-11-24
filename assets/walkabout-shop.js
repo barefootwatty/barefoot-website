@@ -15,7 +15,7 @@
       var k = sku.split('|');
       return {name: 'Expedition Kit: ' + (k[1] === 'shirt-hooded' ? 'hooded' : 'collared') + ' shirt ' + k[2] + ', shorts ' + k[3], price: kitPrice(), rod: true};
     }
-    if (shop.rods[sku]) return {name: shop.rods[sku].short === 'The Pair' ? 'The Pair' : 'Single, ' + shop.rods[sku].short, price: rodPrice(sku), rod: true};
+    if (shop.rods[sku]) return {name: shop.rods[sku].short === 'The Pair' ? 'The Pair, each with a spare tip' : 'Single, ' + shop.rods[sku].short + ', with a spare tip', price: rodPrice(sku), rod: true};
     var p = sku.split('|'), x = shop.extras[p[0]];
     return {name: x.name + ', ' + p[1], price: x.price, rod: false};
   }

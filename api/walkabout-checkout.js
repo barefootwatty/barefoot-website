@@ -181,7 +181,7 @@ export default async function handler(req, res) {
       for (const k of [`${shirt}|${shirtSize}`, `${shop.kit.shorts}|${shortsSize}`]) wantX[k] = (wantX[k] || 0) + qty;
       xName[`${shirt}|${shirtSize}`] = `${sh.name} in ${shirtSize}`;
       xName[`${shop.kit.shorts}|${shortsSize}`] = `${so.name} in ${shortsSize}`;
-      lines.push({ name: `Walkabout Expedition Kit: the Pair, ${sh.name} (${shirtSize}), footy shorts (${shortsSize})` + (st.founding ? " — Founding rods" : ""),
+      lines.push({ name: `Walkabout Expedition Kit: the Pair (each rod with a spare tip), ${sh.name} (${shirtSize}), footy shorts (${shortsSize})` + (st.founding ? " — Founding rods" : ""),
         amount: st.founding ? shop.kit.founding : shop.kit.full, qty });
       meta.push(`${sku}:${qty}`);
       continue;
