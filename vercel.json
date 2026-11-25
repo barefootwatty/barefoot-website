@@ -31,6 +31,11 @@
       "permanent": true
     },
     {
+      "source": "/join",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
       "source": "/runoff-barra-fishing",
       "destination": "/run-off-barra-fishing",
       "permanent": true
