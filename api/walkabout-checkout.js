@@ -10,6 +10,11 @@
 // Until that is set, or while "open" is false in walkabout-shop.json, the page
 // shows the "opens Sunday" message and nobody can be charged.
 //
+// DEPOSIT WAITLIST: once a rod has sold out, and only while "waitlist.enabled"
+// is true in walkabout-shop.json, a buyer can pay a deposit (a share of the
+// Founding price) to hold a rod from the next batch. Deposits are marked
+// "walkabout-waitlist" so they are never counted as stock sold.
+//
 // STOCK AND THE FOUNDING 100: there is no database. Every completed order
 // carries a short list of what was bought (in Stripe "metadata"). This adds
 // those up to know how many rods and shirts are left.
@@ -114,6 +119,13 @@ function status(shop, totals) {
     kitsLeft: Math.max(0, shop.kit.limit - kitsSold) };
 }
 
+// Which rods can take a deposit right now: sold out, and the waitlist is switched on.
+function waitlistOpen(shop, st) {
+  const w = shop.waitlist || {};
+  const on = w.enabled === true && w.deposit_pct > 0 && w.deposit_pct < 100;
+  return { spin: on && st.left.spin < 1, baitcast: on && st.left.baitcast < 1, pct: on ? w.deposit_pct : 0 };
+}
+
 export default async function handler(req, res) {
   const host = req.headers["x-forwarded-host"] || req.headers.host;
   let shop;
@@ -127,7 +139,7 @@ export default async function handler(req, res) {
     try {
       const st = status(shop, await sold(shop));
       res.setHeader("Cache-Control", "s-maxage=20");
-      return res.status(200).json({ ok: true, open: true, ...st });
+      return res.status(200).json({ ok: true, open: true, ...st, waitlist: waitlistOpen(shop, st) });
     } catch (e) {
       return res.status(200).json({ ok: true, open: false, message: "The checkout is having a moment. Please try again shortly." });
     }
@@ -144,12 +156,62 @@ export default async function handler(req, res) {
   if (!body || !Array.isArray(body.items) || !body.items.length) {
     return res.status(400).json({ ok: false, error: "Your order is empty." });
   }
-  const region = REGIONS[body.region] ? body.region : null;
-  if (!region) return res.status(400).json({ ok: false, error: "Please choose where we are posting it." });
 
   let st;
   try { st = status(shop, await sold(shop)); }
   catch (e) { return res.status(502).json({ ok: false, error: "Could not check stock just now. Please try again." }); }
+
+  const origin = `https://${host}`;
+  const back = `${origin}${body.from === "/walkabout-early" ? "/walkabout-early" : "/walkabout"}#offer`;
+
+  // Deposit to hold a rod from the next batch. No postage yet: that is sorted with the balance.
+  if (body.deposit === true) {
+    const w = waitlistOpen(shop, st);
+    const dLines = [], dMeta = [];
+    let balance = 0;
+    for (const it of body.items.slice(0, 5)) {
+      const qty = Math.min(4, Math.max(0, parseInt(it.qty, 10) || 0));
+      const sku = String(it.sku || "");
+      const rod = shop.rods[sku];
+      if (!qty || !rod) continue;
+      if (!Object.keys(rod.rods).some((kind) => w[kind])) {
+        return res.status(409).json({ ok: false, error: "The waitlist is not open for that rod. If it is still in stock you can buy it now." });
+      }
+      const deposit = Math.round(rod.founding * w.pct / 100);
+      balance += (rod.founding - deposit) * qty;
+      dLines.push({ name: `${rod.name}: ${w.pct}% deposit, next batch at the Founding price`, amount: deposit, qty });
+      dMeta.push(`${sku}:${qty}`);
+    }
+    if (!dLines.length) return res.status(400).json({ ok: false, error: "Please choose a rod to hold." });
+    const dParams = {
+      mode: "payment",
+      success_url: `${origin}/walkabout-thanks?deposit=1`,
+      cancel_url: back,
+      phone_number_collection: { enabled: true },
+      line_items: Object.assign({}, dLines.map((l) => ({
+        quantity: l.qty,
+        price_data: { currency: "aud", unit_amount: l.amount, product_data: { name: l.name } },
+      }))),
+      custom_text: { submit: { message: shop.waitlist.checkout_note || `This is a ${w.pct}% deposit to hold a rod from the next batch at the Founding price. The deposit is not refundable. The balance is due when the next batch lands in Darwin.` } },
+      metadata: {
+        shop: "walkabout-waitlist",
+        items: dMeta.join(",").slice(0, 480),
+        deposit_pct: String(w.pct),
+        balance_cents: String(balance),
+        barra_brain_waitlist: body.waitlist ? "yes" : "no",
+      },
+      payment_intent_data: { description: "Barefoot Walkabout deposit, next batch" },
+    };
+    try {
+      const session = await stripe("POST", "/checkout/sessions", dParams);
+      return res.status(200).json({ ok: true, url: session.url });
+    } catch (e) {
+      return res.status(502).json({ ok: false, error: "The checkout did not open. Please try again, or call Watty on 0417 272 871." });
+    }
+  }
+
+  const region = REGIONS[body.region] ? body.region : null;
+  if (!region) return res.status(400).json({ ok: false, error: "Please choose where we are posting it." });
 
   const lines = [];
   const meta = [];
@@ -222,11 +284,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, error: "For clothing posted overseas without a rod, email glenn@barefootfishingsafaris.com.au and Watty will sort the postage." });
   }
 
-  const origin = `https://${host}`;
   const params = {
     mode: "payment",
     success_url: `${origin}/walkabout-thanks`,
-    cancel_url: `${origin}${body.from === "/walkabout-early" ? "/walkabout-early" : "/walkabout"}#offer`,
+    cancel_url: back,
     phone_number_collection: { enabled: true },
     shipping_address_collection: { allowed_countries: Object.assign({}, REGIONS[region]) },
     shipping_options: Object.assign({}, options),

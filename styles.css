@@ -293,6 +293,9 @@ section.navy .eyebrow{color:var(--copper)}
 .splitband{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,3.5rem);align-items:center}
 .splitband .media figure.shot{margin:0}
 .splitband.flip .media{order:-1}
+/* A split band whose photo is not there yet: the copy runs on its own at reading width */
+.splitband.solo{grid-template-columns:1fr}
+.splitband.solo>.copy{max-width:760px}
 @media(max-width:900px){
   .splitband{grid-template-columns:1fr;gap:1.8rem}
   .splitband.flip .media{order:0}
@@ -514,6 +517,9 @@ section.navy.charcoalband.bandphoto::before{
 /* Demoted hero sub-line: tiny tracked uppercase under the serif title */
 .photohero .hero-sub.quiet{font-size:.74rem;text-transform:uppercase;letter-spacing:.18em;
   margin:.9rem 0 .4rem}
+
+/* The same tracked sub-line on a plain navy header, when a second line follows it */
+.subhero .hero-sub.tracked{font-family:'Montserrat';font-weight:600;color:#e9e1d3;font-size:.74rem;text-transform:uppercase;letter-spacing:.18em;margin:.9rem 0 .9rem}
 
 /* Sticky section-nav bar — desktop + mobile (replaces stickycall).
    Highlights · Itinerary · Pricing · FAQs + one Enquire button. */
@@ -914,5 +920,13 @@ section.navy .card .small{color:var(--slate);font-size:.85rem}
 .shopcart .cartcheck input{width:22px;height:22px;flex:0 0 auto;margin-top:.15rem}
 section.navy .shopcart p.small,section.navy .shopcart .cartempty{color:var(--slate);font-size:.85rem;margin:.8rem 0 0}
 section.navy .shopcart #cart-status{color:#9a3412;font-weight:600}
+/* Deposit waitlist card: only shown once a rod has sold out */
+.shopwait{margin-top:1.6rem;padding:28px;max-width:640px}
+.shopwait[hidden],.checklist[hidden]{display:none}
+.shopwait .waitrow{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0;border-top:1px solid var(--dune);color:var(--charcoal)}
+.shopwait .btn{border:none;cursor:pointer;min-height:48px;flex:0 0 auto}
+.shopwait .btn[disabled]{opacity:.5;cursor:not-allowed}
+section.navy .shopwait #waitlist-status{color:#9a3412;font-weight:600;margin:.8rem 0 0}
+@media(max-width:520px){.shopwait .waitrow{flex-direction:column;align-items:flex-start}}
 @media(max-width:900px){.shopcards,.shopextras{grid-template-columns:1fr}}
 @media(max-width:520px){.shopcart .cartrow:not(.total){flex-wrap:wrap}.shopcart .cartrow select{max-width:none}}

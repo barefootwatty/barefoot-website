@@ -7,7 +7,7 @@
 <meta name="description" content="The Walkabout: a 7'2&quot; 4-piece spin and baitcast rod designed by Top End guide Watty. Tips swap between both rods, every rod comes with a spare tip, and every section can be replaced.">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=29">
+<link rel="stylesheet" href="styles.css?v=30">
 <link rel="canonical" href="https://barefootfishingsafaris.com.au/walkabout-early">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Walkabout fishing rod">
@@ -178,6 +178,19 @@
       <p class="small">Prices in AUD, including GST. Posted from Darwin. Secure checkout by Stripe.</p>
     </div>
 
+    <!-- Deposit waitlist. Stays hidden until a rod has sold out AND "waitlist.enabled" is true in assets/walkabout-shop.json. -->
+    <div class="card shopwait" id="shop-waitlist" hidden>
+      <h3>Missed out? Get on the next batch.</h3>
+      <ul class="checklist">
+        <li>Put down a 30% deposit and your rod&rsquo;s locked in at the Founding price.</li>
+        <li>Any improvements we make to the next batch, you get.</li>
+        <li>You pay the rest when the next batch lands in Darwin.</li>
+        <li>The deposit isn&rsquo;t refundable.</li>
+      </ul>
+      <div id="waitlist-rows"></div>
+      <p class="small" id="waitlist-status"></p>
+    </div>
+
     <h3 style="margin-top:2.6rem">Every Founding rod also comes with</h3>
     <ul class="checklist">
       <li>Free postage in Australia.</li>
@@ -279,6 +292,6 @@
   });
 })();
 </script>
-<script src="assets/walkabout-shop.js?v=3" defer></script>
+<script src="assets/walkabout-shop.js?v=4" defer></script>
 </body>
 </html>

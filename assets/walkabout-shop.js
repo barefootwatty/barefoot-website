@@ -64,6 +64,33 @@
     else st.textContent = '';
   }
 
+  // Deposit waitlist: shows only for a rod that has sold out, and only when the shop file switches it on.
+  function waitlist(){
+    var box = $('shop-waitlist'), rows = $('waitlist-rows');
+    if (!box || !rows) return;
+    var w = live.open && live.waitlist && live.waitlist.pct ? live.waitlist : null, html = '';
+    if (w) Object.keys(shop.rods).forEach(function(sku){
+      var r = shop.rods[sku];
+      if (!Object.keys(r.rods).some(function(kind){ return w[kind]; })) return;
+      var dep = Math.round(r.founding * w.pct / 100), bal = r.founding - dep;
+      var what = r.short === 'The Pair' ? 'The Pair, each with a spare tip' : '1 ' + r.short + ', with a spare tip';
+      html += '<div class="waitrow"><span><strong>' + what + '</strong><br>' + money(dep) + ' deposit today. ' + money(bal) + ' when the next batch lands.</span>' +
+        '<button type="button" class="btn btn-primary" data-deposit="' + sku + '">Pay the ' + money(dep) + ' deposit</button></div>';
+    });
+    rows.innerHTML = html;
+    box.hidden = !html;
+  }
+  function deposit(sku, btn){
+    var st = $('waitlist-status'), label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Opening checkout…';
+    var fail = function(msg){ if (st) st.textContent = msg; btn.disabled = false; btn.textContent = label; };
+    fetch('/api/walkabout-checkout', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({deposit: true, from: location.pathname.replace(/\.html$/, ''), waitlist: $('cart-waitlist').checked, items: [{sku: sku, qty: 1}]})})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if (j.ok && j.url) { location.href = j.url; return; } fail(j.error || 'The checkout did not open. Please try again.'); })
+      .catch(function(){ fail('The checkout did not open. Please try again, or call Watty on 0417 272 871.'); });
+  }
+
   function add(sku){
     var have = cart[sku] || 0;
     if (have + 1 > leftOf(sku)) { $('cart-status').textContent = 'Sorry, that is all we have left of that one.'; return; }
@@ -106,12 +133,14 @@
         '<button type="button" class="btn btn-primary" data-addx="' + sku + '">Add to order</button></div>';
     });
     box.innerHTML = html;
+    waitlist();
     render();
   }
 
   document.addEventListener('click', function(e){
-    var t = e.target.closest('[data-add],[data-addx],[data-inc],[data-dec]');
+    var t = e.target.closest('[data-add],[data-addx],[data-inc],[data-dec],[data-deposit]');
     if (!t || !shop) return;
+    if (t.dataset.deposit) { deposit(t.dataset.deposit, t); return; }
     if (t.dataset.add === 'kit') { add('kit|' + $('kit-shirt').value + '|' + $('kit-shirt-size').value + '|' + $('kit-shorts-size').value); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
     else if (t.dataset.add) { add(t.dataset.add); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
     else if (t.dataset.addx) add(t.dataset.addx + '|' + $('size-' + t.dataset.addx).value);
