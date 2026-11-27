@@ -6,7 +6,7 @@
 <title>The Walkabout fishing rod | Barefoot Fishing Safaris</title>
 <meta name="description" content="The Walkabout: a 7'2&quot; 4-piece spin and baitcast rod designed by Top End guide Watty. Tips swap between both rods, every rod comes with a spare tip, and every section can be replaced.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=34">
+<link rel="stylesheet" href="styles.css?v=35">
 <link rel="canonical" href="https://barefootfishingsafaris.com.au/walkabout">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Walkabout fishing rod">
@@ -21,16 +21,7 @@
 
 <header class="site">
   <nav class="nav">
-    <a href="index.html"><img src="assets/logo-white.png" alt="Barefoot Fishing Safaris"></a>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var u=document.getElementById('navmenu');u.classList.toggle('open');this.setAttribute('aria-expanded',u.classList.contains('open'))">&#9776;</button>
-    <ul id="navmenu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#safaris">Safaris</a></li>
-      <li><a href="media.html">Media</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="about-barefoot.html">About</a></li>
-      <li><a href="index.html#contact" class="btn btn-primary">Book a Trip</a></li>
-    </ul>
+    <span><img src="assets/logo-white.png" alt="Barefoot Fishing Safaris"></span>
   </nav>
 </header>
 
@@ -214,12 +205,23 @@
 <section class="navy eucalypt" id="offer">
   <div class="wrap">
     <div class="section-head" style="max-width:760px">
+      <div data-founding-only>
       <h2>The first hundred are Founding rods.</h2>
       <ul class="checklist">
         <li>They&rsquo;re the lowest price these will ever be.</li>
         <li>You get a numbered card that I sign.</li>
         <li>If you break a section in the first year, I&rsquo;ll replace it.</li>
       </ul>
+      </div>
+      <!-- Shown by walkabout-shop.js once Founding prices have ended (the heading is set there too). -->
+      <div data-after-founding hidden>
+      <h2 data-after-heading>The Founding price has ended.</h2>
+      <ul class="checklist">
+        <li>The Walkabout is still on sale.</li>
+        <li>Every rod comes with a spare tip.</li>
+        <li>Every section can be replaced, so you buy it once and you&rsquo;ve got it for life.</li>
+      </ul>
+      </div>
       <p class="foundclock" id="founding-clock" hidden></p>
     </div>
 
@@ -255,7 +257,7 @@
         </div>
       </div>
       <div class="card shopcard hero-offer">
-        <div class="season">Saves $40 on 2 Singles</div>
+        <div class="season">This is the one I&rsquo;d buy</div>
         <h3>The Pair</h3>
         <p class="shopprice"><span data-price="pair">$550</span></p>
         <p class="shopnote" data-note="pair">Founding price. Then $650.</p>
@@ -291,9 +293,6 @@
       </div>
     </div>
 
-    <h3 style="margin-top:2.6rem">Add to your order</h3>
-    <div class="shopextras" id="shop-extras"></div>
-
     <div class="card shopcart" id="shop-cart" aria-live="polite">
       <h3>Your order</h3>
       <div id="cart-lines"><p class="cartempty">Nothing in your order yet.</p></div>
@@ -310,7 +309,7 @@
       <div class="cartrow total"><span>Total</span><span id="cart-total">$0</span></div>
       <label class="cartcheck"><input type="checkbox" id="cart-waitlist" aria-describedby="cart-waitlist-about"> Put me on the Barra Brain waitlist. It&rsquo;s coming, and there&rsquo;s nothing to pay.</label>
       <div class="cartabout" id="cart-waitlist-about">
-        <p>Barra Brain is fifteen years of guiding the Top End, in your pocket.</p>
+        <p>Barra Brain is everything Watty has worked out guiding the Top End since 2011, in your pocket.</p>
         <ul>
           <li>Ask it a barra question and get a straight answer, the way Watty would give it on the boat: where to be, which tide, what to throw.</li>
           <li>Nearly forty lessons, including the whole Top End Barra Secrets program.</li>
@@ -336,6 +335,10 @@
       <p class="small" id="waitlist-status"></p>
     </div>
 
+    <h3 style="margin-top:2.6rem">Add to your order</h3>
+    <div class="shopextras" id="shop-extras"></div>
+
+    <div data-founding-only>
     <h3 style="margin-top:2.6rem">Every Founding rod also comes with</h3>
     <ul class="checklist">
       <li>Free postage in Australia.</li>
@@ -344,6 +347,7 @@
       <li>A Founders&rsquo; Q&amp;A night with Watty.</li>
       <li>First dibs and a vote on the next model.</li>
     </ul>
+    </div>
   </div>
 </section>
 
@@ -351,12 +355,22 @@
 <section class="cream">
   <div class="wrap">
     <div class="section-head" style="max-width:760px;margin-bottom:0">
+      <div data-founding-only>
       <h2>Break a section in year one, we replace it.</h2>
       <ul class="checklist">
         <li>That&rsquo;s for every Founding rod.</li>
         <li>After that, a replacement section is $90, and you keep fishing on the spare tip while it&rsquo;s in the post.</li>
         <li>Replacement sections are for the registered original owner, including someone given the rod as a gift.</li>
       </ul>
+      </div>
+      <div data-after-founding hidden>
+      <h2>Break a section and you don&rsquo;t need a new rod.</h2>
+      <ul class="checklist">
+        <li>A replacement section is $90, and you keep fishing on the spare tip while it&rsquo;s in the post.</li>
+        <li>Spare sections for every part of the rod are kept in Darwin.</li>
+        <li>Replacement sections are for the registered original owner, including someone given the rod as a gift.</li>
+      </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -393,27 +407,9 @@
         <img src="assets/logo-white.png" alt="Barefoot Fishing Safaris">
         <p>Guided barramundi &amp; sportfishing in Australia's Top End since 2011. Part of the Barefoot Outdoors family.</p>
       </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="index.html#safaris">Safaris</a></li>
-          <li><a href="barra-brain.html">Barra Brain</a></li>
-          <li><a href="media.html">Media Centre</a></li>
-          <li><a href="index.html#adventures">Angling Adventures</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Follow along</h4>
-        <ul>
-          <li><a href="https://www.youtube.com/@barefootfishingsafaris" target="_blank" rel="noopener">YouTube</a></li>
-          <li><a href="https://www.instagram.com/barefoot.fishing.safaris/" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/barefootfishingsafaris/" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://www.tiktok.com/@barefoot.fishing" target="_blank" rel="noopener">TikTok</a></li>
-        </ul>
-      </div>
     </div>
     <div class="foot-note">
-      <span>&copy; <span class="copyyear">2026</span><script>document.currentScript.previousSibling.textContent=new Date().getFullYear()</script> Barefoot Fishing Safaris · Coolalinga, Northern Territory · <a href="privacy-policy.html" style="color:inherit">Privacy</a> &middot; <a href="booking-terms.html" style="color:inherit">Booking terms</a></span>
+      <span>&copy; <span class="copyyear">2026</span><script>document.currentScript.previousSibling.textContent=new Date().getFullYear()</script> Barefoot Fishing Safaris · Coolalinga, Northern Territory · <a href="privacy-policy.html" style="color:inherit">Privacy</a></span>
       <span>Fish with Watty · 0417 272 871</span>
     </div>
   </div>
@@ -425,7 +421,7 @@
     <a class="snlink" href="#tips">The tips</a>
     <a class="snlink" href="#tested">Tested</a>
     <a class="snlink" href="#build">The build</a>
-    <a class="btn btn-hero" href="#offer">Founding rods</a>
+    <a class="btn btn-hero" href="#offer" data-buy-label>Founding rods</a>
   </div>
 </nav>
 
@@ -473,6 +469,6 @@
   });
 })();
 </script>
-<script src="assets/walkabout-shop.js?v=7" defer></script>
+<script src="assets/walkabout-shop.js?v=8" defer></script>
 </body>
 </html>

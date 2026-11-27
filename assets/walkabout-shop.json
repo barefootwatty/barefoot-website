@@ -5,9 +5,15 @@
   "launch_ts": 1795400000,
   "founding_limit": 100,
   "founding_ends": "2026-12-01T23:59:59+09:30",
-  "_founding_readme": "Founding prices end when founding_limit rods have sold OR at founding_ends (Darwin time), whichever comes first. The checkout switches to the full prices by itself. The countdown shows the live N of 100 Founding rods left line once fewer than founding_count_below are left. After Founding prices end, the same spot counts down to christmas_order_by (Darwin time), then shows nothing. That second countdown is display only: it never changes a price or stops an order.",
-  "founding_count_below": 50,
+  "_founding_readme": "Founding prices end when founding_limit rods have sold OR at founding_ends (Darwin time), whichever comes first. The checkout switches to the full prices by itself. The countdown shows the live N of 100 Founding rods left line once fewer than founding_count_below are left (101 means it always shows). After Founding prices end, the same spot counts down to christmas_order_by (Darwin time), then shows nothing. That second countdown is display only: it never changes a price or stops an order.",
+  "founding_count_below": 101,
   "christmas_order_by": "2026-12-07T23:59:59+09:30",
+  "checkout_notes": { "_readme": "The line buyers see beside the Pay button on the Stripe page, for orders with a rod in them. The first step whose 'until' time (Darwin) has not passed is used; 'after' is used once they all have. Plain words only, no links.",
+    "steps": [
+      { "until": "2026-12-01T23:59:59+09:30", "text": "Posted from Darwin by Thursday 3 December. Every rod comes with a spare tip." },
+      { "until": "2026-12-07T23:59:59+09:30", "text": "Posts from Darwin between 8 and 10 December. Every rod comes with a spare tip." }
+    ],
+    "after": "Posted from Darwin. Every rod comes with a spare tip." },
   "waitlist": { "_readme": "Deposit waitlist for the next batch. It only ever shows for a rod that has sold out, and only while enabled is true. prices are the next-batch prices a deposit locks in (AUD cents, GST included). deposit_pct is the share of that price paid up front. The same prices are written in words on the waitlist card on both Walkabout pages: change them there too.", "enabled": false, "deposit_pct": 30, "prices": { "rod-spin": 32500, "rod-baitcast": 32500, "pair": 60000 } },
   "rods": {
     "rod-spin": { "name": "Walkabout Spin (Single, with a spare tip)", "short": "Spin", "founding": 29500, "full": 35000, "stock": 99, "rods": { "spin": 1 } },

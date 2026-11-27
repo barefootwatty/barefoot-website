@@ -54,17 +54,25 @@
       <ul class="checklist" id="next-order">
         <li>Stripe has emailed your receipt.</li>
         <li>Every rod is checked in Darwin before it&rsquo;s posted, and goes out with its spare tip.</li>
+        <li>Orders in by midnight Tuesday 1 December post by Thursday 3 December. After that, orders post between 8 and 10 December.</li>
         <li>You&rsquo;ll get an email when it&rsquo;s on its way.</li>
         <li>If you bought a rod, your 2027 Darwin Barra Bite-Time Calendar comes by email.</li>
         <li>If you ticked the Barra Brain box, you&rsquo;re on the waitlist. <a href="barra-brain.html">What Barra Brain actually is</a>.</li>
       </ul>
       <p>Any questions, call or text Watty on <a href="tel:+61417272871">0417 272 871</a> or email <a href="mailto:glenn@barefootfishingsafaris.com.au">glenn@barefootfishingsafaris.com.au</a>.</p>
-      <p><a class="btn btn-primary" href="index.html">Back to Barefoot</a></p>
+      <div id="after-order">
+        <p><strong>When your rod arrives</strong></p>
+        <p><a class="btn btn-primary" href="walkabout-warranty.html">Register your rod</a></p>
+        <p><a class="btn btn-primary" href="walkabout-setup.html">How to put it together</a></p>
+        <p>Know a mate who&rsquo;d want one? Send him barefootfishingsafaris.com.au/walkabout</p>
+      </div>
+      <p><a href="index.html">Back to Barefoot</a></p>
       <script>
         /* A deposit for the next batch lands here with ?deposit=1: show the deposit steps instead of the order steps. */
         if (/[?&]deposit=1/.test(location.search)) {
           document.getElementById('next-deposit').hidden = false;
           document.getElementById('next-order').hidden = true;
+          var after = document.getElementById('after-order'); if (after) after.hidden = true;
           var h = document.querySelector('.subhero h1'), e = document.querySelector('.subhero .eyebrow');
           if (h) h.textContent = 'Thanks. Your rod is held.';
           if (e) e.textContent = 'Deposit received';

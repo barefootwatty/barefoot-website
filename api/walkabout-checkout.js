@@ -136,6 +136,17 @@ function waitlistPrice(shop, sku) {
 }
 const dollars = (c) => "$" + (c % 100 ? (c / 100).toFixed(2) : c / 100);
 
+// The line beside the Pay button on the Stripe page ("checkout_notes" in walkabout-shop.json). Plain words, no links.
+function checkoutNote(shop) {
+  const n = shop.checkout_notes;
+  if (!n) return "";
+  for (const step of Array.isArray(n.steps) ? n.steps : []) {
+    const until = Date.parse((step && step.until) || "");
+    if (step && step.text && !Number.isNaN(until) && Date.now() < until) return String(step.text).slice(0, 1000);
+  }
+  return n.after ? String(n.after).slice(0, 1000) : "";
+}
+
 export default async function handler(req, res) {
   const host = req.headers["x-forwarded-host"] || req.headers.host;
   let shop;
@@ -314,6 +325,8 @@ export default async function handler(req, res) {
     },
     payment_intent_data: { description: "Barefoot Walkabout order" },
   };
+  const note = rodCount > 0 ? checkoutNote(shop) : "";
+  if (note) params.custom_text = { submit: { message: note } };
 
   try {
     const session = await stripe("POST", "/checkout/sessions", params);
