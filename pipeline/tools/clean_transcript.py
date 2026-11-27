@@ -126,6 +126,10 @@ GLOSSARY = [
     (r"\bbarrows\b", "barra"), (r"\bbarrow\b", "barra"),
     (r"\btrevellis\b", "trevally"), (r"\btrevelli\b", "trevally"),
     (r"\bnuneham\b", "Noonamah"),
+    # Added 27 Nov 2026: "Corroboree" -> "Corbery" (7 pages; once with a stray
+    # comma, "Corbery, Billabong"); "barramundi" -> "Baramundi" (3 episodes).
+    (r"\bcorbery,(?=\s+billabong)", "Corroboree"), (r"\bcorbery\b", "Corroboree"),
+    (r"\bbaramundi\b", "barramundi"),
 ]
 
 # The segment's own top-of-show sting. When present it's the most reliable
