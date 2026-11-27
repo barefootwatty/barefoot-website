@@ -255,12 +255,43 @@ def git(*args, check=True):
                           capture_output=True, text=True)
 
 
+# The only things a radio run is ever allowed to commit.
+PUBLISH_PATHS = ["media", "media.html", "sitemap.xml"]
+
+
+def stop(why):
+    raise SystemExit(f"STOPPED, nothing published: {why}")
+
+
+def preflight():
+    """Refuse to build on a working copy that isn't clean and up to date.
+
+    In Nov 2026 a Mac clean-up left hundreds of site files missing from this
+    folder. Committing "everything" would have taken them off the live site.
+    """
+    if git("rev-parse", "--abbrev-ref", "HEAD").stdout.strip() != "main":
+        stop("site/ is not on the main branch.")
+    dirty = git("status", "--porcelain", "--untracked-files=no").stdout.splitlines()
+    new = git("ls-files", "--others", "--exclude-standard", "--",
+              *PUBLISH_PATHS).stdout.splitlines()
+    if dirty or new:
+        sample = ", ".join([l[3:] for l in dirty][:5] + new[:5])
+        stop(f"site/ has {len(dirty) + len(new)} unexpected change(s): {sample}")
+    git("pull", "--ff-only", "origin", "main")
+    if git("rev-list", "--count", "origin/main..HEAD").stdout.strip() != "0":
+        stop("site/ holds commits that are not on GitHub.")
+
+
 def publish(message, push=True):
-    if not git("status", "--porcelain").stdout.strip():
+    gone = [l for l in git("status", "--porcelain").stdout.splitlines()
+            if "D" in l[:2]]
+    if gone:
+        stop(f"{len(gone)} file(s) would be deleted from the website.")
+    if not git("status", "--porcelain", "--", *PUBLISH_PATHS).stdout.strip():
         log("nothing to commit")
         return
-    git("add", "-A")
-    git("commit", "-m", message)
+    git("add", "--", *PUBLISH_PATHS)
+    git("commit", "-m", message, "--", *PUBLISH_PATHS)
     log(f"committed: {message}")
     if not push:
         log("--no-push: left it local")
@@ -316,6 +347,7 @@ def main():
         log("--dry-run: stopping here")
         return 0
 
+    preflight()
     done = []
     with tempfile.TemporaryDirectory() as work:
         for ep in missing:
