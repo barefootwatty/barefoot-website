@@ -4,6 +4,7 @@
    the server, so nothing here is trusted with money. */
 (function(){
   var shop, live = {open:false}, cart = {};
+  var checked = false; // true once the stock check has answered; until then the box says it is checking
   var $ = function(id){ return document.getElementById(id); };
   var money = function(c){ return '$' + (c % 100 ? (c/100).toFixed(2) : (c/100)); };
 
@@ -105,7 +106,7 @@
     var go = $('cart-go');
     go.disabled = !html || !live.open || !!post.blocked;
     var st = $('cart-status');
-    if (!live.open) st.textContent = live.message || shop.closed_message;
+    if (!live.open) st.textContent = checked ? (live.message || shop.closed_message) : 'Checking stock. If this stays, refresh the page.';
     else if (post.blocked) st.textContent = 'For clothing posted overseas without a rod, email glenn@barefootfishingsafaris.com.au and Watty will sort the postage.';
     else st.textContent = '';
   }
@@ -223,7 +224,7 @@
     });
     fetch('assets/walkabout-shop.json', {cache:'no-store'}).then(function(r){ return r.json(); }).then(function(s){
       shop = s; build();
-      return fetch('/api/walkabout-checkout').then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok) { live = j; build(); } });
+      return fetch('/api/walkabout-checkout').then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok) { checked = true; live = j; build(); } });
     }).catch(function(){ if (shop) render(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
