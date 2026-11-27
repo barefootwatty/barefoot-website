@@ -944,3 +944,10 @@ section.navy .shopwait #waitlist-status{color:#9a3412;font-weight:600;margin:.8r
 @media(max-width:520px){.shopwait .waitrow{flex-direction:column;align-items:flex-start}}
 @media(max-width:900px){.shopcards,.shopextras{grid-template-columns:1fr}}
 @media(max-width:520px){.shopcart .cartrow:not(.total){flex-wrap:wrap}.shopcart .cartrow select{max-width:none}}
+
+/* Group shot behind the headline: keep heads in frame on computer screens. */
+@media(min-width:901px){
+  .photohero.tall.heads{min-height:clamp(480px,calc(100vh - 135px),920px)}
+  .photohero.heads .hero-bg img{object-position:50% 3%}
+  body.has-sectionnav .photohero.tall.heads{min-height:clamp(480px,calc(100vh - 195px),920px)}
+}
