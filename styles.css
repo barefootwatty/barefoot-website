@@ -875,6 +875,8 @@ details.yr{border-top:1px solid rgba(22,49,78,.14)}
   background:var(--dune);color:var(--charcoal);border:2px dashed var(--slate);border-radius:var(--radius);
   font-family:'Montserrat';font-weight:700;font-size:.9rem;width:100%}
 .photoslot.dark{background:#22364f;color:#e9e1d3;border-color:rgba(255,255,255,.35)}
+/* Two photos stacked in one split-band photo column (wide product shots). */
+.splitband .media.stack{display:grid;gap:1rem}
 .plainquotes{max-width:760px}
 .plainquotes .who{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:.9rem;margin-bottom:1.2rem}
 .plainquotes .pq{border-top:1px solid var(--dune);padding-top:1.3rem;margin-top:1.3rem}
