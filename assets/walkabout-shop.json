@@ -6,14 +6,14 @@
   "founding_limit": 100,
   "waitlist": { "_readme": "Deposit waitlist for the next batch. It only ever shows for a rod that has sold out, and only while enabled is true. deposit_pct is the share of the Founding price paid up front.", "enabled": false, "deposit_pct": 30 },
   "rods": {
-    "rod-spin": { "name": "Walkabout Spin (Single, with a spare tip)", "short": "Spin", "founding": 29500, "full": 35000, "stock": 100, "rods": { "spin": 1 } },
-    "rod-baitcast": { "name": "Walkabout Baitcast (Single, with a spare tip)", "short": "Baitcast", "founding": 29500, "full": 35000, "stock": 100, "rods": { "baitcast": 1 } },
+    "rod-spin": { "name": "Walkabout Spin (Single, with a spare tip)", "short": "Spin", "founding": 29500, "full": 35000, "stock": 99, "rods": { "spin": 1 } },
+    "rod-baitcast": { "name": "Walkabout Baitcast (Single, with a spare tip)", "short": "Baitcast", "founding": 29500, "full": 35000, "stock": 99, "rods": { "baitcast": 1 } },
     "pair": { "name": "Walkabout Pair (1 spin, 1 baitcast, each with a spare tip)", "short": "The Pair", "founding": 55000, "full": 65000, "rods": { "spin": 1, "baitcast": 1 } }
   },
   "kit": { "name": "Walkabout Expedition Kit (the Pair with spare tips, a Guide Series shirt and footy shorts)", "short": "Expedition Kit", "founding": 65000, "full": 75000, "limit": 30, "shirts": ["shirt-collared", "shirt-hooded"], "shorts": "shorts", "rods": { "spin": 1, "baitcast": 1 } },
   "extras": {
-    "shirt-collared": { "name": "Guide Series collared shirt", "price": 8900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 5, "Kids 10": 5, "Kids 12": 5 } },
-    "shirt-hooded": { "name": "Guide Series hooded shirt", "price": 7900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 6, "Kids 10": 5, "Kids 12": 5 } },
+    "shirt-collared": { "name": "Guide Series collared shirt", "price": 8900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 4, "Kids 10": 5, "Kids 12": 5 } },
+    "shirt-hooded": { "name": "Guide Series hooded shirt", "price": 7900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 5, "Kids 10": 5, "Kids 12": 5 } },
     "shorts": { "name": "Barefoot footy shorts", "price": 5500, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 5, "Kids 10": 5, "Kids 12": 5 } }
   },
   "postage": {
