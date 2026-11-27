@@ -115,7 +115,10 @@ function status(shop, totals) {
       extras[`${sku}|${size}`] = Math.max(0, n - (totals[`${sku}|${size}`] || 0) - (kitUse[`${sku}|${size}`] || 0));
     }
   }
-  return { founding: allRods < shop.founding_limit, foundingLeft: Math.max(0, shop.founding_limit - allRods), left, extras,
+  // Founding prices end when the limit is reached OR at "founding_ends", whichever comes first.
+  const ends = Date.parse(shop.founding_ends || "");
+  const inTime = Number.isNaN(ends) || Date.now() < ends;
+  return { founding: allRods < shop.founding_limit && inTime, foundingLeft: Math.max(0, shop.founding_limit - allRods), foundingEnds: Number.isNaN(ends) ? null : shop.founding_ends, left, extras,
     kitsLeft: Math.max(0, shop.kit.limit - kitsSold) };
 }
 

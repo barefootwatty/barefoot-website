@@ -8,6 +8,24 @@
   var money = function(c){ return '$' + (c % 100 ? (c/100).toFixed(2) : (c/100)); };
 
   function founding(){ return !live.open || live.founding !== false; }
+  function foundingOver(){ return live.foundingLeft > 0 ? 'The Founding price has ended.' : 'The Founding rods have sold.'; }
+
+  // Founding countdown. Shows only while Founding prices are on and the shop file has an end date.
+  // The checkout itself decides the price on the server: this is only the clock people see.
+  var clockOn = false;
+  function clock(){
+    var el = $('founding-clock');
+    if (!el || !shop) return;
+    var ends = shop.founding_ends ? Date.parse(shop.founding_ends) : NaN, ms = ends - Date.now();
+    if (!live.open || live.founding === false || isNaN(ends)) { el.hidden = true; return; }
+    if (ms <= 0) { el.hidden = true; live.founding = false; build(); return; }
+    var s = Math.floor(ms / 1000), two = function(n){ return (n < 10 ? '0' : '') + n; };
+    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+    var count = shop.show_founding_count && live.foundingLeft > 0 ? '<span class="fc-count">' + live.foundingLeft + ' of ' + shop.founding_limit + ' Founding rods left.</span> ' : '';
+    el.innerHTML = count + 'Founding price ends in <span class="fc-time"><b>' + d + '</b> ' + (d === 1 ? 'day' : 'days') + ' <b>' + two(h) + '</b> hrs <b>' + two(m) + '</b> min <b>' + two(s % 60) + '</b> sec</span>, or when the first ' + shop.founding_limit + ' rods are gone.';
+    el.hidden = false;
+    if (!clockOn) { clockOn = true; setInterval(clock, 1000); }
+  }
   function rodPrice(sku){ var r = shop.rods[sku]; return founding() ? r.founding : r.full; }
   function kitPrice(){ return founding() ? shop.kit.founding : shop.kit.full; }
   function item(sku){
@@ -102,11 +120,11 @@
     Object.keys(shop.rods).forEach(function(sku){
       var p = document.querySelector('[data-price="' + sku + '"]'), n = document.querySelector('[data-note="' + sku + '"]');
       if (p) p.textContent = money(rodPrice(sku));
-      if (n) n.textContent = founding() ? 'Founding price. Then ' + money(shop.rods[sku].full) + '.' : 'The Founding rods have sold.';
+      if (n) n.textContent = founding() ? 'Founding price. Then ' + money(shop.rods[sku].full) + '.' : foundingOver();
     });
     var kp = document.querySelector('[data-price="kit"]'), kn = document.querySelector('[data-note="kit"]'), kl = document.querySelector('[data-kitleft]');
     if (kp) kp.textContent = money(kitPrice());
-    if (kn) kn.textContent = founding() ? 'Founding price. Then ' + money(shop.kit.full) + '.' : 'The Founding rods have sold.';
+    if (kn) kn.textContent = founding() ? 'Founding price. Then ' + money(shop.kit.full) + '.' : foundingOver();
     if (kl) kl.textContent = !live.open ? 'First ' + shop.kit.limit + ' only' : (live.kitsLeft > 0 ? live.kitsLeft + ' of ' + shop.kit.limit + ' left' : 'Sold out');
     var sizeOpts = function(sku){
       var o = '', x = shop.extras[sku];
@@ -136,6 +154,7 @@
     box.innerHTML = html;
     waitlist();
     render();
+    clock();
   }
 
   document.addEventListener('click', function(e){

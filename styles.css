@@ -922,6 +922,13 @@ section.navy .card .small{color:var(--slate);font-size:.85rem}
 .shopcart .cartcheck input{width:22px;height:22px;flex:0 0 auto;margin-top:.15rem}
 section.navy .shopcart p.small,section.navy .shopcart .cartempty{color:var(--slate);font-size:.85rem;margin:.8rem 0 0}
 section.navy .shopcart #cart-status{color:#9a3412;font-weight:600}
+/* Founding countdown under the offer heading */
+.foundclock{font-family:'Montserrat';font-weight:600;color:#fff;font-size:1rem;line-height:1.5;margin:1.2rem 0 0;padding:.9rem 1.1rem;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius);max-width:640px}
+.foundclock[hidden]{display:none}
+.foundclock .fc-time{white-space:nowrap}
+.foundclock .fc-time b{font-weight:800;font-size:1.35rem;color:#fff;font-variant-numeric:tabular-nums}
+.foundclock .fc-count{display:block;font-weight:800}
+@media(max-width:520px){.foundclock .fc-time{white-space:normal}}
 /* Deposit waitlist card: only shown once a rod has sold out */
 .shopwait{margin-top:1.6rem;padding:28px;max-width:640px}
 .shopwait[hidden],.checklist[hidden]{display:none}
