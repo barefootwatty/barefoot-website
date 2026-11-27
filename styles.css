@@ -920,6 +920,11 @@ section.navy .card .small{color:var(--slate);font-size:.85rem}
   font-size:1.2rem;font-weight:700;color:var(--navy);cursor:pointer}
 .shopcart .cartcheck{display:flex;gap:.6rem;align-items:flex-start;margin:1rem 0;color:var(--charcoal);font-size:.95rem}
 .shopcart .cartcheck input{width:22px;height:22px;flex:0 0 auto;margin-top:.15rem}
+/* Short note under a cart tick box saying what it signs you up for; lines up with the tick box's words */
+.shopcart .cartabout{margin:-.45rem 0 1.15rem calc(22px + .6rem);color:var(--charcoal);font-size:.9rem;line-height:1.5}
+section.navy .shopcart .cartabout p{color:var(--navy);font-size:inherit;font-weight:600;margin:0 0 .4rem}
+.shopcart .cartabout ul{margin:0 0 .55rem;padding-left:1.15rem;display:grid;gap:.3rem}
+.shopcart .cartabout a{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 section.navy .shopcart p.small,section.navy .shopcart .cartempty{color:var(--slate);font-size:.85rem;margin:.8rem 0 0}
 section.navy .shopcart #cart-status{color:#9a3412;font-weight:600}
 /* Founding countdown under the offer heading */
