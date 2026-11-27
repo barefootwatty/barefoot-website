@@ -4,9 +4,10 @@
   "closed_message": "Founding rods open on Sunday 29 November.",
   "launch_ts": 1795400000,
   "founding_limit": 100,
-  "founding_ends": "2026-12-06T23:59:59+09:30",
-  "_founding_readme": "Founding prices end when founding_limit rods have sold OR at founding_ends (Darwin time), whichever comes first. The checkout switches to the full prices by itself. show_founding_count adds the live N of 100 Founding rods left line beside the countdown.",
-  "show_founding_count": false,
+  "founding_ends": "2026-12-01T23:59:59+09:30",
+  "_founding_readme": "Founding prices end when founding_limit rods have sold OR at founding_ends (Darwin time), whichever comes first. The checkout switches to the full prices by itself. The countdown shows the live N of 100 Founding rods left line once fewer than founding_count_below are left. After Founding prices end, the same spot counts down to christmas_order_by (Darwin time), then shows nothing. That second countdown is display only: it never changes a price or stops an order.",
+  "founding_count_below": 50,
+  "christmas_order_by": "2026-12-07T23:59:59+09:30",
   "waitlist": { "_readme": "Deposit waitlist for the next batch. It only ever shows for a rod that has sold out, and only while enabled is true. prices are the next-batch prices a deposit locks in (AUD cents, GST included). deposit_pct is the share of that price paid up front. The same prices are written in words on the waitlist card on both Walkabout pages: change them there too.", "enabled": false, "deposit_pct": 30, "prices": { "rod-spin": 32500, "rod-baitcast": 32500, "pair": 60000 } },
   "rods": {
     "rod-spin": { "name": "Walkabout Spin (Single, with a spare tip)", "short": "Spin", "founding": 29500, "full": 35000, "stock": 99, "rods": { "spin": 1 } },

@@ -10,20 +10,35 @@
   function founding(){ return !live.open || live.founding !== false; }
   function foundingOver(){ return live.foundingLeft > 0 ? 'The Founding price has ended.' : 'The Founding rods have sold.'; }
 
-  // Founding countdown. Shows only while Founding prices are on and the shop file has an end date.
+  // Countdown under the offer heading. While Founding prices are on it counts down to "founding_ends",
+  // with the rods-left line above it once fewer than "founding_count_below" are left.
+  // Once Founding prices have ended it counts down to "christmas_order_by", then shows nothing.
   // The checkout itself decides the price on the server: this is only the clock people see.
   var clockOn = false;
   function clock(){
     var el = $('founding-clock');
     if (!el || !shop) return;
-    var ends = shop.founding_ends ? Date.parse(shop.founding_ends) : NaN, ms = ends - Date.now();
-    if (!live.open || live.founding === false || isNaN(ends)) { el.hidden = true; return; }
-    if (ms <= 0) { el.hidden = true; live.founding = false; build(); return; }
-    var s = Math.floor(ms / 1000), two = function(n){ return (n < 10 ? '0' : '') + n; };
-    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
-    var count = shop.show_founding_count && live.foundingLeft > 0 ? '<span class="fc-count">' + live.foundingLeft + ' of ' + shop.founding_limit + ' Founding rods left.</span> ' : '';
-    el.innerHTML = count + 'Founding price ends in <span class="fc-time"><b>' + d + '</b> ' + (d === 1 ? 'day' : 'days') + ' <b>' + two(h) + '</b> hrs <b>' + two(m) + '</b> min <b>' + two(s % 60) + '</b> sec</span>, or when the first ' + shop.founding_limit + ' rods are gone.';
-    el.hidden = false;
+    if (!live.open) { el.hidden = true; return; }
+    var two = function(n){ return (n < 10 ? '0' : '') + n; };
+    var time = function(ms){
+      var s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+      return '<span class="fc-time"><b>' + d + '</b> ' + (d === 1 ? 'day' : 'days') + ' <b>' + two(h) + '</b> hrs <b>' + two(m) + '</b> min <b>' + two(s % 60) + '</b> sec</span>';
+    };
+    var html = '';
+    if (live.founding !== false) {
+      var ends = shop.founding_ends ? Date.parse(shop.founding_ends) : NaN, ms = ends - Date.now();
+      if (ms <= 0) { el.hidden = true; live.founding = false; build(); return; }
+      if (!isNaN(ends)) {
+        var count = live.foundingLeft > 0 && live.foundingLeft < shop.founding_count_below ? '<span class="fc-count">' + live.foundingLeft + ' of ' + shop.founding_limit + ' Founding rods left.</span> ' : '';
+        html = count + 'Founding price ends in ' + time(ms) + ', or when the first ' + shop.founding_limit + ' rods are gone.';
+      }
+    } else {
+      var by = shop.christmas_order_by ? Date.parse(shop.christmas_order_by) : NaN, left = by - Date.now();
+      if (left > 0) html = 'Order in the next ' + time(left) + ' for Parcel Post before Christmas.';
+    }
+    el.hidden = !html;
+    if (!html) return;
+    el.innerHTML = html;
     if (!clockOn) { clockOn = true; setInterval(clock, 1000); }
   }
   function rodPrice(sku){ var r = shop.rods[sku]; return founding() ? r.founding : r.full; }
