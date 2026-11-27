@@ -12,7 +12,7 @@
 //
 // DEPOSIT WAITLIST: once a rod has sold out, and only while "waitlist.enabled"
 // is true in walkabout-shop.json, a buyer can pay a deposit (a share of the
-// Founding price) to hold a rod from the next batch. Deposits are marked
+// next-batch price in "waitlist.prices") to hold a rod from the next batch. Deposits are marked
 // "walkabout-waitlist" so they are never counted as stock sold.
 //
 // STOCK AND THE FOUNDING 100: there is no database. Every completed order
@@ -126,6 +126,13 @@ function waitlistOpen(shop, st) {
   return { spin: on && st.left.spin < 1, baitcast: on && st.left.baitcast < 1, pct: on ? w.deposit_pct : 0 };
 }
 
+// The next-batch price a deposit locks in. Never the Founding price: if one is not set, it is the full price.
+function waitlistPrice(shop, sku) {
+  const p = shop.waitlist && shop.waitlist.prices && shop.waitlist.prices[sku];
+  return Number.isInteger(p) && p > 0 ? p : shop.rods[sku].full;
+}
+const dollars = (c) => "$" + (c % 100 ? (c / 100).toFixed(2) : c / 100);
+
 export default async function handler(req, res) {
   const host = req.headers["x-forwarded-host"] || req.headers.host;
   let shop;
@@ -177,9 +184,10 @@ export default async function handler(req, res) {
       if (!Object.keys(rod.rods).some((kind) => w[kind])) {
         return res.status(409).json({ ok: false, error: "The waitlist is not open for that rod. If it is still in stock you can buy it now." });
       }
-      const deposit = Math.round(rod.founding * w.pct / 100);
-      balance += (rod.founding - deposit) * qty;
-      dLines.push({ name: `${rod.name}: ${w.pct}% deposit, next batch at the Founding price`, amount: deposit, qty });
+      const price = waitlistPrice(shop, sku);
+      const deposit = Math.round(price * w.pct / 100);
+      balance += (price - deposit) * qty;
+      dLines.push({ name: `${rod.name}: ${w.pct}% deposit, next batch, locked in at ${dollars(price)}`, amount: deposit, qty });
       dMeta.push(`${sku}:${qty}`);
     }
     if (!dLines.length) return res.status(400).json({ ok: false, error: "Please choose a rod to hold." });
@@ -192,7 +200,7 @@ export default async function handler(req, res) {
         quantity: l.qty,
         price_data: { currency: "aud", unit_amount: l.amount, product_data: { name: l.name } },
       }))),
-      custom_text: { submit: { message: shop.waitlist.checkout_note || `This is a ${w.pct}% deposit to hold a rod from the next batch at the Founding price. The deposit is not refundable. The balance is due when the next batch lands in Darwin.` } },
+      custom_text: { submit: { message: shop.waitlist.checkout_note || `This is a ${w.pct}% deposit to hold a rod from the next batch at the price shown. The deposit is not refundable if you change your mind. If the next batch does not happen, you get your deposit back. The balance and postage are due when the next batch lands in Darwin.` } },
       metadata: {
         shop: "walkabout-waitlist",
         items: dMeta.join(",").slice(0, 480),

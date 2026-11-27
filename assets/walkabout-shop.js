@@ -72,9 +72,10 @@
     if (w) Object.keys(shop.rods).forEach(function(sku){
       var r = shop.rods[sku];
       if (!Object.keys(r.rods).some(function(kind){ return w[kind]; })) return;
-      var dep = Math.round(r.founding * w.pct / 100), bal = r.founding - dep;
+      var wp = shop.waitlist && shop.waitlist.prices && shop.waitlist.prices[sku] || r.full;
+      var dep = Math.round(wp * w.pct / 100), bal = wp - dep;
       var what = r.short === 'The Pair' ? 'The Pair, each with a spare tip' : '1 ' + r.short + ', with a spare tip';
-      html += '<div class="waitrow"><span><strong>' + what + '</strong><br>' + money(dep) + ' deposit today. ' + money(bal) + ' when the next batch lands.</span>' +
+      html += '<div class="waitrow"><span><strong>' + what + '</strong><br>' + money(dep) + ' deposit today. ' + money(bal) + ' plus postage when the next batch lands.</span>' +
         '<button type="button" class="btn btn-primary" data-deposit="' + sku + '">Pay the ' + money(dep) + ' deposit</button></div>';
     });
     rows.innerHTML = html;
