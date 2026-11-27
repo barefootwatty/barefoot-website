@@ -90,6 +90,47 @@
   </div>
 </section>
 
+<!-- ===== WALKABOUT LAUNCH NOTICE: START =====
+     Temporary. When the launch is over, delete everything from this line down
+     to "WALKABOUT LAUNCH NOTICE: END" in one cut. Nothing else on the page
+     depends on it. Built from the .strip band; the whole strip is one link. -->
+<section style="padding:34px 0 0">
+  <div class="wrap">
+    <a class="strip" href="/walkabout" style="text-decoration:none;flex-wrap:wrap-reverse;padding:clamp(24px,5vw,40px)">
+      <div style="flex:3 1 240px;min-width:0">
+        <h2 style="font-size:clamp(1.5rem,2.6vw,2rem)"><span style="display:inline-block">I couldn&rsquo;t buy this rod.</span> <span style="display:inline-block">So I built it.</span></h2>
+        <p>The Walkabout. 7&rsquo;2&quot;, 10 to 17 lb, extra fast, 4 pieces. Spin and baitcast. Every rod comes with a spare tip.</p>
+        <p style="margin-top:.6rem;text-wrap:balance">The first hundred are Founding rods.</p>
+        <!-- Live count, filled in by the script below. Stays hidden unless the shop is open and the number is above 0. -->
+        <p id="wk-founding-left" style="margin-top:.6rem;color:#fff;font-weight:600" hidden></p>
+        <p style="margin-top:1.1rem;font-family:'Montserrat';font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--cream)">See the Walkabout &rarr;</p>
+      </div>
+      <picture style="flex:1 1 360px;min-width:0">
+        <source type="image/avif" srcset="assets/img/walkabout-frost-640.avif 640w, assets/img/walkabout-frost-1000.avif 1000w" sizes="(max-width:760px) 100vw, 460px">
+        <img class="stripimg" style="width:100%;aspect-ratio:16/9;object-fit:cover" src="assets/img/walkabout-frost-1000.jpg" srcset="assets/img/walkabout-frost-640.jpg 640w, assets/img/walkabout-frost-1000.jpg 1000w" sizes="(max-width:760px) 100vw, 460px" width="1000" height="666" alt="A Walkabout baitcast rod with a reel fitted, lying on frosty ground" loading="lazy" decoding="async">
+      </picture>
+    </a>
+  </div>
+</section>
+<script>
+/* Walkabout launch notice: "N Founding rods left", read live from the shop.
+   Shows nothing if the shop is closed, the number is 0, or the request fails. */
+(function(){
+  var el = document.getElementById('wk-founding-left');
+  if (!el || !window.fetch) return;
+  fetch('/api/walkabout-checkout', { headers: { 'Accept': 'application/json' } })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      var n = d && d.open === true ? d.foundingLeft : 0;
+      if (typeof n !== 'number' || n < 1) return;
+      el.textContent = n + (n === 1 ? ' Founding rod left' : ' Founding rods left');
+      el.hidden = false;
+    })
+    .catch(function(){});
+})();
+</script>
+<!-- ===== WALKABOUT LAUNCH NOTICE: END ===== -->
+
 <!-- AS SEEN ON — rolling band -->
 <section style="padding:34px 0 30px">
   <div class="wrap">
