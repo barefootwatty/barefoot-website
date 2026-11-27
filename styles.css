@@ -901,6 +901,7 @@ section.navy .card .small{color:var(--slate);font-size:.85rem}
 .shopbtns{display:flex;flex-wrap:wrap;gap:.6rem}
 .kitpick{display:grid;grid-template-columns:auto 1fr;gap:.5rem .8rem;align-items:center;margin-bottom:1rem}
 @media(min-width:901px) and (max-width:1180px){.shopcards{grid-template-columns:1fr 1fr}.shopcard.hero-offer{order:-1;grid-column:1/-1}}
+@media(max-width:900px){.shopcard.hero-offer{order:-1}} /* phones: the Pair leads */
 .shopcard .btn,.shopcart .btn{border:none;cursor:pointer;min-height:48px}
 .shopcard .btn[disabled],.shopcart .btn[disabled]{opacity:.5;cursor:not-allowed}
 .shopextras{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}

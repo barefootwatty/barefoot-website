@@ -7,7 +7,7 @@
 <meta name="description" content="The Walkabout: a 7'2&quot; 4-piece spin and baitcast rod designed by Top End guide Watty. Tips swap between both rods, every rod comes with a spare tip, and every section can be replaced.">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=34">
+<link rel="stylesheet" href="styles.css?v=35">
 <link rel="canonical" href="https://barefootfishingsafaris.com.au/walkabout-early">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Walkabout fishing rod">
@@ -18,20 +18,11 @@
 <meta property="og:image" content="https://barefootfishingsafaris.com.au/assets/img/walkabout-share.jpg">
 <meta property="og:locale" content="en_AU">
 </head>
-<body>
+<body class="has-sectionnav">
 
 <header class="site">
   <nav class="nav">
-    <a href="index.html"><img src="assets/logo-white.png" alt="Barefoot Fishing Safaris"></a>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var u=document.getElementById('navmenu');u.classList.toggle('open');this.setAttribute('aria-expanded',u.classList.contains('open'))">&#9776;</button>
-    <ul id="navmenu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#safaris">Safaris</a></li>
-      <li><a href="media.html">Media</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="about-barefoot.html">About</a></li>
-      <li><a href="index.html#contact" class="btn btn-primary">Book a Trip</a></li>
-    </ul>
+    <span><img src="assets/logo-white.png" alt="Barefoot Fishing Safaris"></span>
   </nav>
 </header>
 
@@ -52,7 +43,7 @@
     <div class="section-head" style="max-width:760px;margin-bottom:0">
       <ul class="checklist">
         <li>There&rsquo;s no sales pitch on this page. It&rsquo;s for people who already know they want one.</li>
-        <li>Everyone else gets the link on Sunday 29 November.</li>
+        <li data-until="2026-11-29T06:00:00+09:30">Everyone else gets the link on Sunday 29 November.</li>
         <li>Orders post from Darwin by Thursday 3 December.</li>
       </ul>
       <h3 class="spechead">Every rod comes with a spare tip</h3>
@@ -81,12 +72,23 @@
 <section class="navy eucalypt" id="offer">
   <div class="wrap">
     <div class="section-head" style="max-width:760px">
+      <div data-founding-only>
       <h2>The first hundred are Founding rods.</h2>
       <ul class="checklist">
         <li>They&rsquo;re the lowest price these will ever be.</li>
         <li>You get a numbered card that I sign.</li>
         <li>If you break a section in the first year, I&rsquo;ll replace it.</li>
       </ul>
+      </div>
+      <!-- Shown by walkabout-shop.js once Founding prices have ended (the heading is set there too). -->
+      <div data-after-founding hidden>
+      <h2 data-after-heading>The Founding price has ended.</h2>
+      <ul class="checklist">
+        <li>The Walkabout is still on sale.</li>
+        <li>Every rod comes with a spare tip.</li>
+        <li>Every section can be replaced, so you buy it once and you&rsquo;ve got it for life.</li>
+      </ul>
+      </div>
       <p class="foundclock" id="founding-clock" hidden></p>
     </div>
 
@@ -122,7 +124,7 @@
         </div>
       </div>
       <div class="card shopcard hero-offer">
-        <div class="season">Saves $40 on 2 Singles</div>
+        <div class="season">This is the one I&rsquo;d buy</div>
         <h3>The Pair</h3>
         <p class="shopprice"><span data-price="pair">$550</span></p>
         <p class="shopnote" data-note="pair">Founding price. Then $650.</p>
@@ -158,9 +160,6 @@
       </div>
     </div>
 
-    <h3 style="margin-top:2.6rem">Add to your order</h3>
-    <div class="shopextras" id="shop-extras"></div>
-
     <div class="card shopcart" id="shop-cart" aria-live="polite">
       <h3>Your order</h3>
       <div id="cart-lines"><p class="cartempty">Nothing in your order yet.</p></div>
@@ -177,7 +176,7 @@
       <div class="cartrow total"><span>Total</span><span id="cart-total">$0</span></div>
       <label class="cartcheck"><input type="checkbox" id="cart-waitlist" aria-describedby="cart-waitlist-about"> Put me on the Barra Brain waitlist. It&rsquo;s coming, and there&rsquo;s nothing to pay.</label>
       <div class="cartabout" id="cart-waitlist-about">
-        <p>Barra Brain is fifteen years of guiding the Top End, in your pocket.</p>
+        <p>Barra Brain is everything Watty has worked out guiding the Top End since 2011, in your pocket.</p>
         <ul>
           <li>Ask it a barra question and get a straight answer, the way Watty would give it on the boat: where to be, which tide, what to throw.</li>
           <li>Nearly forty lessons, including the whole Top End Barra Secrets program.</li>
@@ -203,6 +202,10 @@
       <p class="small" id="waitlist-status"></p>
     </div>
 
+    <h3 style="margin-top:2.6rem">Add to your order</h3>
+    <div class="shopextras" id="shop-extras"></div>
+
+    <div data-founding-only>
     <h3 style="margin-top:2.6rem">Every Founding rod also comes with</h3>
     <ul class="checklist">
       <li>Free postage in Australia.</li>
@@ -211,18 +214,62 @@
       <li>A Founders&rsquo; Q&amp;A night with Watty.</li>
       <li>First dibs and a vote on the next model.</li>
     </ul>
+    </div>
   </div>
 </section>
 
 <section class="cream">
   <div class="wrap">
     <div class="section-head" style="max-width:760px;margin-bottom:0">
+      <div data-founding-only>
       <h2>Break a section in year one, we replace it.</h2>
       <ul class="checklist">
         <li>That&rsquo;s for every Founding rod.</li>
         <li>After that, a replacement section is $90, and you keep fishing on the spare tip while it&rsquo;s in the post.</li>
         <li>Replacement sections are for the registered original owner, including someone given the rod as a gift.</li>
       </ul>
+      </div>
+      <div data-after-founding hidden>
+      <h2>Break a section and you don&rsquo;t need a new rod.</h2>
+      <ul class="checklist">
+        <li>A replacement section is $90, and you keep fishing on the spare tip while it&rsquo;s in the post.</li>
+        <li>Spare sections for every part of the rod are kept in Darwin.</li>
+        <li>Replacement sections are for the registered original owner, including someone given the rod as a gift.</li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT ANGLERS SAID -->
+<section id="anglers">
+  <div class="wrap">
+    <div class="plainquotes">
+      <h2>&ldquo;Glenn asked me what I would change. I said nothing.&rdquo;</h2>
+      <p class="who">Lyle S. A week in Mongolia, September 2026. Ordered both rods.</p>
+      <p>&ldquo;I have fished for 35 years with both types of rods, and I just couldn&rsquo;t fault them.&rdquo;</p>
+      <div class="pq"><p>&ldquo;Rods cast exceptionally well, with impressive distance and a good range of lure weights.&rdquo;</p><p class="who">Alex K. Mongolia, September 2026. Ordered the baitcast.</p></div>
+      <div class="pq"><p>&ldquo;Caught barra, queenies, snapper and blue salmon within an hour, straight out of the box! The extra tip is a win.&rdquo;</p><p class="who">James P. Bynoe Harbour, September 2026.</p></div>
+      <div class="pq"><p>&ldquo;Handled quality fish with ease from bluewater to barra.&rdquo;</p><p class="who">Troy. Bynoe Harbour, September 2026.</p></div>
+      <div class="pq"><p>&ldquo;They are a fantastic all rounder and being a 4 piece just makes them that much more versatile.&rdquo;</p><p class="who">Doug W. Bynoe Harbour, October 2026.</p></div>
+      <p class="pqclose">Everyone who&rsquo;s fished with one has told me they want to order one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="cream" id="faq">
+  <div class="wrap">
+    <div class="section-head"><h2>What a mate would ask before buying one</h2></div>
+    <div class="faq" style="margin:0">
+      <details><summary>Does a 4-piece rod fish as well as a 1-piece?</summary><p>My best fly rods are 4-piece and sell for close to $2,000. Piece count isn&rsquo;t the problem. Build quality is.</p></details>
+      <details><summary>What will it fish?</summary><p>Barra, saratoga, jewfish, queenfish, taimen, black bass, peacock bass and more. It&rsquo;s not for marlin or bream.</p></details>
+      <details><summary>Do the tips really swap?</summary><p>Yes. The tips share one guide setup across the spin and the baitcast.</p></details>
+      <details><summary>How heavy is it?</summary><p>About 125 g.</p></details>
+      <details><summary>How long is it packed down?</summary><p>65 cm.</p></details>
+      <details><summary>What&rsquo;s postage?</summary><p>Australia: free for Founding rods. Otherwise $25, or $30 Express.<br>New Zealand: $45.<br>Papua New Guinea: $75.<br>Rest of the world: $80. The buyer pays any import taxes.</p></details>
+      <details><summary>When does it ship?</summary><p>The rods are in Darwin and every one is checked before it ships. Orders in by midnight Tuesday 1 December post by Thursday 3 December. After that, orders post between 8 and 10 December. Order by Monday 7 December for Parcel Post before Christmas.</p></details>
+      <details><summary>How does the warranty work?</summary><p>Register the Purchase ID card from the box on the Barefoot website. Registered owners also get the Fuji guide codes for spare guides.</p></details>
     </div>
   </div>
 </section>
@@ -234,31 +281,22 @@
         <img src="assets/logo-white.png" alt="Barefoot Fishing Safaris">
         <p>Guided barramundi &amp; sportfishing in Australia's Top End since 2011. Part of the Barefoot Outdoors family.</p>
       </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="index.html#safaris">Safaris</a></li>
-          <li><a href="barra-brain.html">Barra Brain</a></li>
-          <li><a href="media.html">Media Centre</a></li>
-          <li><a href="index.html#adventures">Angling Adventures</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Follow along</h4>
-        <ul>
-          <li><a href="https://www.youtube.com/@barefootfishingsafaris" target="_blank" rel="noopener">YouTube</a></li>
-          <li><a href="https://www.instagram.com/barefoot.fishing.safaris/" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/barefootfishingsafaris/" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://www.tiktok.com/@barefoot.fishing" target="_blank" rel="noopener">TikTok</a></li>
-        </ul>
-      </div>
     </div>
     <div class="foot-note">
-      <span>&copy; <span class="copyyear">2026</span><script>document.currentScript.previousSibling.textContent=new Date().getFullYear()</script> Barefoot Fishing Safaris · Coolalinga, Northern Territory · <a href="privacy-policy.html" style="color:inherit">Privacy</a> &middot; <a href="booking-terms.html" style="color:inherit">Booking terms</a></span>
+      <span>&copy; <span class="copyyear">2026</span><script>document.currentScript.previousSibling.textContent=new Date().getFullYear()</script> Barefoot Fishing Safaris · Coolalinga, Northern Territory · <a href="privacy-policy.html" style="color:inherit">Privacy</a></span>
       <span>Fish with Watty · 0417 272 871</span>
     </div>
   </div>
 </footer>
+
+<!-- Sticky section-nav bar (Eleven pattern) -->
+<nav class="sectionnav" aria-label="Page sections">
+  <div class="inner">
+    <a class="snlink" href="#anglers">What they said</a>
+    <a class="snlink" href="#faq">Questions</a>
+    <a class="btn btn-hero" href="#offer" data-buy-label>Founding rods</a>
+  </div>
+</nav>
 
 <script>
 /* Motion system (Eleven pattern) — scroll-reveal + lazy-image fades.
@@ -304,6 +342,6 @@
   });
 })();
 </script>
-<script src="assets/walkabout-shop.js?v=7" defer></script>
+<script src="assets/walkabout-shop.js?v=8" defer></script>
 </body>
 </html>

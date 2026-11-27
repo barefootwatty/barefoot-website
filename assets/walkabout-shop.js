@@ -14,6 +14,16 @@
   // with the rods-left line above it once fewer than "founding_count_below" are left.
   // Once Founding prices have ended it counts down to "christmas_order_by", then shows nothing.
   // The checkout itself decides the price on the server: this is only the clock people see.
+  // Once Founding prices have ended, the Founding-only words step aside for the ones that are still true.
+  function switchWords(){
+    var over = live.open === true && live.founding === false;
+    [].forEach.call(document.querySelectorAll('[data-founding-only]'), function(el){ el.hidden = over; });
+    [].forEach.call(document.querySelectorAll('[data-after-founding]'), function(el){ el.hidden = !over; });
+    var h = document.querySelector('[data-after-heading]');
+    if (h) h.textContent = live.foundingLeft > 0 ? 'The Founding price has ended.' : 'The Founding hundred have sold.';
+    [].forEach.call(document.querySelectorAll('[data-buy-label]'), function(el){ el.textContent = over ? 'Get a Walkabout' : 'Founding rods'; });
+  }
+
   var clockOn = false;
   function clock(){
     var el = $('founding-clock');
@@ -29,7 +39,10 @@
       var ends = shop.founding_ends ? Date.parse(shop.founding_ends) : NaN, ms = ends - Date.now();
       if (ms <= 0) { el.hidden = true; live.founding = false; build(); return; }
       if (!isNaN(ends)) {
-        var count = live.foundingLeft > 0 && live.foundingLeft < shop.founding_count_below ? '<span class="fc-count">' + live.foundingLeft + ' of ' + shop.founding_limit + ' Founding rods left.</span> ' : '';
+        var gone = shop.founding_limit - live.foundingLeft;
+        var leftWords = live.foundingLeft === 1 ? 'is 1 Founding rod' : 'are ' + live.foundingLeft + ' Founding rods';
+        var countWords = gone > 0 ? gone + (gone === 1 ? ' rod has' : ' rods have') + ' gone so far, and there ' + leftWords + ' left.' : live.foundingLeft + ' of ' + shop.founding_limit + ' Founding rods left.';
+        var count = live.foundingLeft > 0 && live.foundingLeft < shop.founding_count_below ? '<span class="fc-count">' + countWords + '</span> ' : '';
         html = count + 'Founding price ends in ' + time(ms) + ', or when the first ' + shop.founding_limit + ' rods are gone.';
       }
     } else {
@@ -169,6 +182,7 @@
     box.innerHTML = html;
     waitlist();
     render();
+    switchWords();
     clock();
   }
 
@@ -178,12 +192,17 @@
     if (t.dataset.deposit) { deposit(t.dataset.deposit, t); return; }
     if (t.dataset.add === 'kit') { add('kit|' + $('kit-shirt').value + '|' + $('kit-shirt-size').value + '|' + $('kit-shorts-size').value); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
     else if (t.dataset.add) { add(t.dataset.add); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
-    else if (t.dataset.addx) add(t.dataset.addx + '|' + $('size-' + t.dataset.addx).value);
+    else if (t.dataset.addx) { add(t.dataset.addx + '|' + $('size-' + t.dataset.addx).value); $('shop-cart').scrollIntoView({behavior:'smooth', block:'center'}); }
     else if (t.dataset.inc) add(t.dataset.inc);
     else if (t.dataset.dec) { cart[t.dataset.dec]--; if (cart[t.dataset.dec] < 1) delete cart[t.dataset.dec]; render(); }
   });
 
   function start(){
+    // Lines marked data-until="<time>" take themselves down once that time has passed.
+    [].forEach.call(document.querySelectorAll('[data-until]'), function(el){
+      var t = Date.parse(el.getAttribute('data-until'));
+      if (!isNaN(t) && Date.now() >= t) el.hidden = true;
+    });
     $('cart-region').addEventListener('change', render);
     if ($('kit-shirt')) $('kit-shirt').addEventListener('change', build);
     $('cart-go').addEventListener('click', function(){
