@@ -951,3 +951,9 @@ section.navy .shopwait #waitlist-status{color:#9a3412;font-weight:600;margin:.8r
   .photohero.heads .hero-bg img{object-position:50% 3%}
   body.has-sectionnav .photohero.tall.heads{min-height:clamp(480px,calc(100vh - 195px),920px)}
 }
+
+/* Article links at the foot of the main pages. */
+.readnext{padding:44px 0}
+.readnext h2{font-size:1.5rem;margin-bottom:1rem}
+.readnext ul{list-style:none;margin:0 0 1rem;padding:0;columns:2 320px;column-gap:2.5rem}
+.readnext li{break-inside:avoid;padding:.55rem 0;border-bottom:1px solid var(--dune)}
