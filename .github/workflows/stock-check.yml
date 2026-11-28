@@ -1,0 +1,22 @@
+name: Walkabout stock check
+# Every 30 minutes, on GitHub's servers: can the live Walkabout shop read shirt and
+# shorts stock from the Google Sheet? Also runs whenever this file or the check changes.
+# If it cannot, this fails and GitHub emails the repo owner, again every 30 minutes
+# until it is fixed. Silent when everything is fine.
+on:
+  schedule:
+    - cron: "11,41 * * * *"   # 11 and 41 minutes past every hour
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/stock-check.yml"
+      - "pipeline/tools/stock_check.py"
+concurrency:
+  group: stock-check
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 pipeline/tools/stock_check.py
