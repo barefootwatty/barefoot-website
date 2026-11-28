@@ -191,9 +191,10 @@
     });
     box.innerHTML = html;
     // Size lists on the "What's in the kit" cards: a size that has sold out is crossed through.
+    // While shirt and shorts stock is being checked, nothing is marked as sold out.
     [].forEach.call(document.querySelectorAll('[data-sizes] [data-size]'), function(li){
       var size = li.getAttribute('data-size'), sku = li.parentNode.getAttribute('data-sizes');
-      var out = live.open && shop.extras[sku] && leftOf(sku + '|' + size) < 1;
+      var out = live.open && !checking() && shop.extras[sku] && leftOf(sku + '|' + size) < 1;
       li.className = out ? 'out' : '';
       li.innerHTML = out ? '<s>' + size + '</s> sold out' : size;
     });
@@ -201,10 +202,6 @@
     render();
     switchWords();
     clock();
-    // While shirt and shorts stock is being checked, no size on the page is marked as sold out.
-    if (checking()) [].forEach.call(document.querySelectorAll('[data-sizes] [data-size]'), function(li){
-      li.className = ''; li.textContent = li.getAttribute('data-size');
-    });
   }
 
   document.addEventListener('click', function(e){
