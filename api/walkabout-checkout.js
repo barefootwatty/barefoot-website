@@ -5,11 +5,15 @@
 // assets/walkabout-shop.json (never from what the browser says), checks
 // nothing is sold out, and opens a Stripe checkout page for the buyer.
 //
-// SETUP (three environment variables, set in the Vercel dashboard, never in this repo):
-//   STRIPE_SECRET_KEY            a Stripe secret key (test key on Preview, live on Production)
-//   GOOGLE_SERVICE_ACCOUNT_KEY   the whole key file (JSON) of a Google service account that
-//                                has been given Viewer access to the Barefoot Merch Manifest Sheet
-//   WALKABOUT_STOCK_SHEET_ID     that Sheet's id (the long code in its web address)
+// SETUP (environment variables, set in the Vercel dashboard, never in this repo):
+//   STRIPE_SECRET_KEY          a Stripe secret key (test key on Preview, live on Production)
+//   WALKABOUT_STOCK_SHEET_ID   the Barefoot Merch Manifest Sheet's id (the long code in its web address)
+//   GOOGLE_STOCK_READER        email of the Google service account that has Viewer access to that Sheet
+//   GOOGLE_WORKLOAD_PROVIDER   the Google "workload identity" provider that trusts this Vercel project:
+//                              projects/<number>/locations/global/workloadIdentityPools/<pool>/providers/<provider>
+// Only the Stripe key is a secret. There is NO Google key or password anywhere: Vercel signs a note
+// saying "this request is from the barefoot-website project", Google trusts that note for this one
+// project, and lets it act as the read-only reader. (Google blocks key files for this account.)
 // Until the Stripe key is set, or while "open" is false in walkabout-shop.json, the page
 // shows the "opens Sunday" message and nobody can be charged.
 //
@@ -128,64 +132,56 @@ let googlePass = null;                 // { token, until }: Google's hour-long p
 let sheetSeen = null;                  // the last good reading of the Sheet
 let sheetFailed = null;                // { at, problem }: the last failed read, if it came after the last good one
 
-function b64url(bytes) {
-  let s = "";
-  for (const b of bytes) s += String.fromCharCode(b);
-  return btoa(s).replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
-}
-
 // Problems are named with short codes (shown under "stock" in the GET answer) so a fault can be
 // found without the server logs. Nothing secret is ever in a code.
 const fault = (code) => Object.assign(new Error(code), { fault: code });
 
-function serviceAccount() {
-  let raw = String(process.env.GOOGLE_SERVICE_ACCOUNT_KEY || "").trim();
-  if (!raw) throw fault("no-google-key");
-  let key;
-  try { key = JSON.parse(raw[0] === "{" ? raw : atob(raw)); } catch (e) { throw fault("bad-google-key"); }
-  if (!key || !key.client_email || !key.private_key) throw fault("bad-google-key");
-  return key;
-}
-
-// Signs in to Google as the service account (read-only access to Sheets) and returns the pass.
-async function googleToken(signal) {
+// Signs in to Google with no key and returns the hour-long pass.
+//   1. Vercel gives every request a signed note saying which Vercel project and environment it is
+//      (the "x-vercel-oidc-token" header).
+//   2. Google's Security Token Service checks that note against the provider named in
+//      GOOGLE_WORKLOAD_PROVIDER and swaps it for a short-lived pass.
+//   3. That pass is used to act as GOOGLE_STOCK_READER, asking for read-only access to Sheets.
+async function googleToken(vercelNote, signal) {
   if (googlePass && Date.now() < googlePass.until) return googlePass.token;
-  const key = serviceAccount();
-  const now = Math.floor(Date.now() / 1000);
-  const enc = new TextEncoder();
-  const part = (o) => b64url(enc.encode(JSON.stringify(o)));
-  const unsigned = part({ alg: "RS256", typ: "JWT" }) + "." + part({
-    iss: key.client_email, scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
-    aud: "https://oauth2.googleapis.com/token", iat: now, exp: now + 3600,
-  });
-  let signature;
-  try {
-    const subtle = (globalThis.crypto && globalThis.crypto.subtle) || (await import("node:crypto")).webcrypto.subtle;
-    const der = Uint8Array.from(atob(String(key.private_key).replace(/-----[^-]+-----/g, "").replace(/\s+/g, "")), (c) => c.charCodeAt(0));
-    const k = await subtle.importKey("pkcs8", der, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
-    signature = new Uint8Array(await subtle.sign("RSASSA-PKCS1-v1_5", k, enc.encode(unsigned)));
-  } catch (e) { throw fault("bad-google-key"); }
-  const r = await fetch("https://oauth2.googleapis.com/token", {
+  const provider = String(process.env.GOOGLE_WORKLOAD_PROVIDER || "").trim().replace(/^\/+/, "");
+  const reader = String(process.env.GOOGLE_STOCK_READER || "").trim();
+  if (!provider || !reader) throw fault("no-google-settings");
+  if (!vercelNote) throw fault("no-vercel-identity");
+  const post = (url, body, bearer) => fetch(url, {
     method: "POST", signal,
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: "grant_type=" + encodeURIComponent("urn:ietf:params:oauth:grant-type:jwt-bearer") + "&assertion=" + unsigned + "." + b64url(signature),
+    headers: Object.assign({ "Content-Type": "application/json" }, bearer ? { Authorization: `Bearer ${bearer}` } : {}),
+    body: JSON.stringify(body),
   });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok || !j.access_token) throw fault(`google-sign-in-${r.status}`);
-  googlePass = { token: j.access_token, until: Date.now() + (Math.min(3600, Number(j.expires_in) || 3600) - 300) * 1000 };
+  let r = await post("https://sts.googleapis.com/v1/token", {
+    grantType: "urn:ietf:params:oauth:grant-type:token-exchange",
+    audience: `//iam.googleapis.com/${provider}`,
+    scope: "https://www.googleapis.com/auth/cloud-platform",
+    requestedTokenType: "urn:ietf:params:oauth:token-type:access_token",
+    subjectTokenType: "urn:ietf:params:oauth:token-type:jwt",
+    subjectToken: String(vercelNote),
+  });
+  let j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.access_token) throw fault(`google-did-not-trust-vercel-${r.status}`);
+  r = await post(`https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${encodeURIComponent(reader)}:generateAccessToken`,
+    { scope: ["https://www.googleapis.com/auth/spreadsheets.readonly"], lifetime: "3600s" }, j.access_token);
+  j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.accessToken) throw fault(`google-reader-not-allowed-${r.status}`);
+  const until = Date.parse(j.expireTime || "");
+  googlePass = { token: j.accessToken, until: (Number.isNaN(until) ? Date.now() + 3600 * 1000 : until) - 5 * 60 * 1000 };
   return googlePass.token;
 }
 
 // One reading of the Sheet: the Available number for every size the shop sells, and which
 // website order refs the Orders tab already holds. Only the cells named in "stock_sheet"
 // (walkabout-shop.json) are asked for, so no buyer's name or contact ever leaves the Sheet.
-async function readSheet(shop) {
+async function readSheet(shop, vercelNote) {
   const cfg = shop.stock_sheet || {};
   const id = String(process.env.WALKABOUT_STOCK_SHEET_ID || "").trim();
   if (!id) throw fault("no-sheet-id");
   if (!cfg.stock || !cfg.order_refs || !cfg.order_status) throw fault("no-sheet-settings");
   const signal = AbortSignal.timeout(GOOGLE_WAIT_MS);
-  const token = await googleToken(signal);
+  const token = await googleToken(vercelNote, signal);
   const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(id)}/values:batchGet` +
     "?valueRenderOption=UNFORMATTED_VALUE&majorDimension=ROWS&" +
     [cfg.stock, cfg.order_refs, cfg.order_status].map((a) => "ranges=" + encodeURIComponent(a)).join("&"),
@@ -194,7 +190,7 @@ async function readSheet(shop) {
   if (!r.ok) {
     const said = await r.json().then((b) => String((b && b.error && b.error.message) || ""), () => "");
     if (r.status === 400 && /parse range/i.test(said)) throw fault("sheet-tab-not-found");
-    if (r.status === 403) throw fault(/disabled|not been used/i.test(said) ? "sheets-api-not-switched-on" : "sheet-not-shared-with-the-key");
+    if (r.status === 403) throw fault(/disabled|not been used/i.test(said) ? "sheets-api-not-switched-on" : "sheet-not-shared-with-the-reader");
     if (r.status === 404) throw fault("sheet-id-wrong");
     throw fault(`sheet-${r.status}`);
   }
@@ -244,11 +240,11 @@ async function readSheet(shop) {
 //   "sheet"  read from the Sheet within the last 20 seconds
 //   "saved"  the Sheet could not be read; this is the last good reading (under 30 minutes old)
 //   "none"   no reading at all: shirts, shorts and kits wait until the Sheet is back
-async function sheetStock(shop) {
+async function sheetStock(shop, vercelNote) {
   if (sheetSeen && Date.now() - sheetSeen.at < SHEET_FRESH_MS) return { ...sheetSeen, from: "sheet" };
   if (!sheetFailed || Date.now() - sheetFailed.at >= SHEET_RETRY_MS) {
     try {
-      sheetSeen = await readSheet(shop);
+      sheetSeen = await readSheet(shop, vercelNote);
       sheetFailed = null;
       return { ...sheetSeen, from: "sheet" };
     } catch (e) {
@@ -260,8 +256,8 @@ async function sheetStock(shop) {
 }
 
 // Everything the page and the checkout need to know about stock, in one go.
-async function stockNow(shop) {
-  const [paid, sheet] = await Promise.all([sold(shop), sheetStock(shop)]);
+async function stockNow(shop, vercelNote) {
+  const [paid, sheet] = await Promise.all([sold(shop), sheetStock(shop, vercelNote)]);
   return status(shop, paid, sheet);
 }
 
@@ -353,11 +349,21 @@ export default async function handler(req, res) {
   catch (e) { return res.status(502).json({ ok: false, error: "The shop settings did not load. Please try again." }); }
 
   const ready = !!process.env.STRIPE_SECRET_KEY && shop.open === true;
+  const vercelNote = req.headers["x-vercel-oidc-token"];
+
+  // Health check for the stock Sheet alone: /api/walkabout-checkout?stock=check
+  // Works whether or not the shop is open. It shows only what the Sheet says is Available.
+  if (req.method === "GET" && /[?&]stock=check(&|$)/.test(String(req.url || ""))) {
+    const sheet = await sheetStock(shop, vercelNote);
+    res.setHeader("Cache-Control", "no-store");
+    return res.status(200).json({ ok: true, from: sheet.from, problem: sheet.problem || null,
+      read: sheet.at ? new Date(sheet.at).toISOString() : null, missing: sheet.missing || [], available: sheet.available || null });
+  }
 
   if (req.method === "GET") {
     if (!ready) return res.status(200).json({ ok: true, open: false, message: shop.closed_message });
     try {
-      const st = await stockNow(shop);
+      const st = await stockNow(shop, vercelNote);
       res.setHeader("Cache-Control", "s-maxage=20");
       return res.status(200).json({ ok: true, open: true, ...st, waitlist: waitlistOpen(shop, st) });
     } catch (e) {
@@ -378,7 +384,7 @@ export default async function handler(req, res) {
   }
 
   let st;
-  try { st = await stockNow(shop); }
+  try { st = await stockNow(shop, vercelNote); }
   catch (e) { return res.status(502).json({ ok: false, error: "Could not check stock just now. Please try again." }); }
 
   const origin = `https://${host}`;
