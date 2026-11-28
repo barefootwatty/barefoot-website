@@ -1,5 +1,5 @@
 {
-  "_readme": "Walkabout shop settings. Prices are AUD cents, GST included. The page and the checkout both read this file, so a change here changes both. 'stock' is how many we started with: the checkout takes off what Stripe says has sold.",
+  "_readme": "Walkabout shop settings. Prices are AUD cents, GST included. The page and the checkout both read this file, so a change here changes both. Rod 'stock' is how many rods we started with: the checkout takes off what Stripe says has sold. Shirt and shorts stock is NOT in this file: it is read from the Barefoot Merch Manifest Google Sheet (see stock_sheet).",
   "open": true,
   "closed_message": "Founding rods open on Sunday 29 November.",
   "launch_ts": 1795400000,
@@ -21,10 +21,12 @@
     "pair": { "name": "Walkabout Pair (1 spin, 1 baitcast, each with a spare tip)", "short": "The Pair", "founding": 55000, "full": 65000, "rods": { "spin": 1, "baitcast": 1 } }
   },
   "kit": { "name": "Walkabout Expedition Kit (the Pair with spare tips, a Guide Series shirt and footy shorts)", "short": "Expedition Kit", "founding": 65000, "full": 75000, "limit": 30, "shirts": ["shirt-collared", "shirt-hooded"], "shorts": "shorts", "rods": { "spin": 1, "baitcast": 1 } },
+  "stock_sheet": { "_readme": "Where shirt and shorts stock comes from: the Barefoot Merch Manifest Google Sheet. Under 'extras', each size names its line (the SKU) on the Stock tab, and the site sells that line's Available number. A paid website order also comes off straight away, and keeps coming off until its order ref (order_ref_prefix plus the last 6 characters of its Stripe id) is on the Orders tab with a Status on every one of its lines; from then on the Sheet's own numbers cover it. 'stock' is the block of the Stock tab that is read (the SKU and Available columns are found by their headings). 'order_refs' and 'order_status' are the Order ref and Status columns of the Orders tab. If a tab is renamed, or one of those headings is renamed or its column moved, the site stops selling shirts, shorts and Expedition Kits until these lines are corrected. Rods keep selling.",
+    "stock": "Stock!A1:Z400", "order_refs": "Orders!A1:A5000", "order_status": "Orders!K1:K5000", "order_ref_prefix": "WKB-" },
   "extras": {
-    "shirt-collared": { "name": "Guide Series collared shirt", "price": 8900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 4, "Kids 10": 5, "Kids 12": 5 } },
-    "shirt-hooded": { "name": "Guide Series hooded shirt", "price": 7900, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 5, "Kids 10": 5, "Kids 12": 5 } },
-    "shorts": { "name": "Barefoot footy shorts", "price": 5500, "sizes": { "M": 5, "L": 10, "XL": 10, "2XL": 5, "Kids 10": 5, "Kids 12": 5 } }
+    "shirt-collared": { "name": "Guide Series collared shirt", "price": 8900, "sizes": { "M": "BFS-CLS-M", "L": "BFS-CLS-L", "XL": "BFS-CLS-XL", "2XL": "BFS-CLS-2XL", "Kids 10": "BFS-CLS-K10", "Kids 12": "BFS-CLS-K12" } },
+    "shirt-hooded": { "name": "Guide Series hooded shirt", "price": 7900, "sizes": { "M": "BFS-HLS-M", "L": "BFS-HLS-L", "XL": "BFS-HLS-XL", "2XL": "BFS-HLS-2XL", "Kids 10": "BFS-HLS-K10", "Kids 12": "BFS-HLS-K12" } },
+    "shorts": { "name": "Barefoot footy shorts", "price": 5500, "sizes": { "M": "BFS-FS-M", "L": "BFS-FS-L", "XL": "BFS-FS-XL", "2XL": "BFS-FS-2XL", "Kids 10": "BFS-FS-K10", "Kids 12": "BFS-FS-K12" } }
   },
   "postage": {
     "AU": { "label": "Australia", "founding_rod": 0, "rod": 2500, "rod_express": 3000, "no_rod": 2070 },

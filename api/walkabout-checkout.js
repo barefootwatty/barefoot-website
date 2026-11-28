@@ -5,9 +5,12 @@
 // assets/walkabout-shop.json (never from what the browser says), checks
 // nothing is sold out, and opens a Stripe checkout page for the buyer.
 //
-// SETUP (one environment variable, set in the Vercel dashboard):
-//   STRIPE_SECRET_KEY   a Stripe secret key (test key on Preview, live on Production)
-// Until that is set, or while "open" is false in walkabout-shop.json, the page
+// SETUP (three environment variables, set in the Vercel dashboard, never in this repo):
+//   STRIPE_SECRET_KEY            a Stripe secret key (test key on Preview, live on Production)
+//   GOOGLE_SERVICE_ACCOUNT_KEY   the whole key file (JSON) of a Google service account that
+//                                has been given Viewer access to the Barefoot Merch Manifest Sheet
+//   WALKABOUT_STOCK_SHEET_ID     that Sheet's id (the long code in its web address)
+// Until the Stripe key is set, or while "open" is false in walkabout-shop.json, the page
 // shows the "opens Sunday" message and nobody can be charged.
 //
 // DEPOSIT WAITLIST: once a rod has sold out, and only while "waitlist.enabled"
@@ -15,9 +18,31 @@
 // next-batch price in "waitlist.prices") to hold a rod from the next batch. Deposits are marked
 // "walkabout-waitlist" so they are never counted as stock sold.
 //
-// STOCK AND THE FOUNDING 100: there is no database. Every completed order
+// ROD STOCK AND THE FOUNDING 100: there is no database. Every completed order
 // carries a short list of what was bought (in Stripe "metadata"). This adds
-// those up to know how many rods and shirts are left.
+// those up to know how many rods are left.
+//
+// SHIRT AND SHORTS STOCK comes from the Google Sheet "Barefoot Merch Manifest".
+// No shirt or shorts number is typed into this repo. The rule, for each size:
+//
+//   left to sell = "Available" on the Sheet's Stock tab
+//                  minus paid website orders the Sheet has not caught up with yet
+//
+// The Sheet's Available already has everything on its Orders tab taken off (Paid,
+// Posted, Reserved, Kept or given away, and the Freebies tab). A website order is
+// typed onto the Orders tab after the fact, with the order ref "WKB-" plus the
+// last 6 characters of its Stripe id. So:
+//   - until that ref is on the Orders tab with a Status on every one of its
+//     lines, this takes the order off by itself (so a sale is never missed);
+//   - from then on the Sheet's own numbers cover it and this stops taking it off
+//     (so a sale is never taken off twice).
+// To put a refunded shirt back on sale, set its Orders line to "Cancelled".
+// Do not delete the line: with no ref on the Sheet the order counts as sold again.
+//
+// IF THE SHEET CANNOT BE READ: the last good reading is used for up to 30
+// minutes, still taking off new paid orders. With no reading at all, shirts,
+// shorts and Expedition Kits cannot be ordered ("checking stock") until the
+// Sheet is back. Rods keep selling the whole time. Nothing is ever guessed.
 
 const STRIPE = "https://api.stripe.com/v1";
 const ROW = ["US","CA","GB","IE","FR","DE","ES","IT","PT","NL","BE","CH","AT","DK","SE","NO","FI","IS",
@@ -69,9 +94,11 @@ function parseItems(s) {
   return out;
 }
 
-// Adds up everything sold so far from completed Stripe checkouts.
+// Adds up everything sold so far from completed Stripe checkouts. "orders" keeps each
+// paid order's items beside the last 6 characters of its Stripe id (its ref on the Sheet).
 async function sold(shop) {
   const totals = {};
+  const orders = [];
   let after;
   for (let page = 0; page < 20; page++) {
     const res = await stripe("GET", "/checkout/sessions", {
@@ -79,15 +106,156 @@ async function sold(shop) {
     });
     for (const s of res.data) {
       if (!s.metadata || s.metadata.shop !== "walkabout" || s.payment_status !== "paid") continue;
-      for (const [k, n] of Object.entries(parseItems(s.metadata.items))) totals[k] = (totals[k] || 0) + n;
+      const items = parseItems(s.metadata.items);
+      orders.push({ tail: String(s.id).slice(-6), items });
+      for (const [k, n] of Object.entries(items)) totals[k] = (totals[k] || 0) + n;
     }
     if (!res.has_more) break;
     after = res.data[res.data.length - 1].id;
   }
-  return totals;
+  return { totals, orders };
 }
 
-function status(shop, totals) {
+// ---------- Shirt and shorts stock: the "Barefoot Merch Manifest" Google Sheet ----------
+
+const SHEET_FRESH_MS = 20 * 1000;      // the Sheet is re-read at most this often
+const SHEET_TRUST_MS = 30 * 60 * 1000; // if it cannot be read, the last good reading is used for this long
+const GOOGLE_WAIT_MS = 4000;           // a buyer is never kept waiting on Google longer than this
+let googlePass = null;                 // { token, until }: Google's hour-long pass, kept between requests
+let sheetSeen = null;                  // the last good reading of the Sheet
+
+function b64url(bytes) {
+  let s = "";
+  for (const b of bytes) s += String.fromCharCode(b);
+  return btoa(s).replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
+}
+
+// Problems are named with short codes (shown under "stock" in the GET answer) so a fault can be
+// found without the server logs. Nothing secret is ever in a code.
+const fault = (code) => Object.assign(new Error(code), { fault: code });
+
+function serviceAccount() {
+  let raw = String(process.env.GOOGLE_SERVICE_ACCOUNT_KEY || "").trim();
+  if (!raw) throw fault("no-google-key");
+  let key;
+  try { key = JSON.parse(raw[0] === "{" ? raw : atob(raw)); } catch (e) { throw fault("bad-google-key"); }
+  if (!key || !key.client_email || !key.private_key) throw fault("bad-google-key");
+  return key;
+}
+
+// Signs in to Google as the service account (read-only access to Sheets) and returns the pass.
+async function googleToken(signal) {
+  if (googlePass && Date.now() < googlePass.until) return googlePass.token;
+  const key = serviceAccount();
+  const now = Math.floor(Date.now() / 1000);
+  const enc = new TextEncoder();
+  const part = (o) => b64url(enc.encode(JSON.stringify(o)));
+  const unsigned = part({ alg: "RS256", typ: "JWT" }) + "." + part({
+    iss: key.client_email, scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
+    aud: "https://oauth2.googleapis.com/token", iat: now, exp: now + 3600,
+  });
+  let signature;
+  try {
+    const subtle = (globalThis.crypto && globalThis.crypto.subtle) || (await import("node:crypto")).webcrypto.subtle;
+    const der = Uint8Array.from(atob(String(key.private_key).replace(/-----[^-]+-----/g, "").replace(/\s+/g, "")), (c) => c.charCodeAt(0));
+    const k = await subtle.importKey("pkcs8", der, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
+    signature = new Uint8Array(await subtle.sign("RSASSA-PKCS1-v1_5", k, enc.encode(unsigned)));
+  } catch (e) { throw fault("bad-google-key"); }
+  const r = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST", signal,
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: "grant_type=" + encodeURIComponent("urn:ietf:params:oauth:grant-type:jwt-bearer") + "&assertion=" + unsigned + "." + b64url(signature),
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.access_token) throw fault(`google-sign-in-${r.status}`);
+  googlePass = { token: j.access_token, until: Date.now() + (Math.min(3600, Number(j.expires_in) || 3600) - 300) * 1000 };
+  return googlePass.token;
+}
+
+// One reading of the Sheet: the Available number for every size the shop sells, and which
+// website order refs the Orders tab already holds. Only the cells named in "stock_sheet"
+// (walkabout-shop.json) are asked for, so no buyer's name or contact ever leaves the Sheet.
+async function readSheet(shop) {
+  const cfg = shop.stock_sheet || {};
+  const id = String(process.env.WALKABOUT_STOCK_SHEET_ID || "").trim();
+  if (!id) throw fault("no-sheet-id");
+  if (!cfg.stock || !cfg.order_refs || !cfg.order_status) throw fault("no-sheet-settings");
+  const signal = AbortSignal.timeout(GOOGLE_WAIT_MS);
+  const token = await googleToken(signal);
+  const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(id)}/values:batchGet` +
+    "?valueRenderOption=UNFORMATTED_VALUE&majorDimension=ROWS&" +
+    [cfg.stock, cfg.order_refs, cfg.order_status].map((a) => "ranges=" + encodeURIComponent(a)).join("&"),
+    { headers: { Authorization: `Bearer ${token}` }, signal });
+  if (r.status === 401) googlePass = null;
+  if (!r.ok) throw fault(`sheet-${r.status}`);
+  const j = await r.json();
+  const [stock, refs, states] = [0, 1, 2].map((i) => (j.valueRanges && j.valueRanges[i] && j.valueRanges[i].values) || []);
+  const text = (v) => String(v === undefined || v === null ? "" : v).trim();
+
+  // Stock tab: find the SKU and Available columns by their headings, so a column added beside them does no harm.
+  // Available must sit in the same unbroken run of headings as SKU: the "Totals by item" block further
+  // along the tab has an Available heading of its own, and that one must never be read as stock.
+  const head = (stock[0] || []).map((h) => text(h).toLowerCase());
+  const skuCol = head.indexOf("sku");
+  const gap = head.indexOf("", skuCol + 1);
+  const availCol = head.indexOf("available", skuCol + 1);
+  if (skuCol < 0 || availCol < 0 || (gap > -1 && availCol > gap)) throw fault("stock-tab-headings");
+  const bySku = new Map();
+  for (const row of stock.slice(1)) {
+    const sku = text(row[skuCol]).toUpperCase();
+    if (sku && typeof row[availCol] === "number" && Number.isFinite(row[availCol])) bySku.set(sku, Math.floor(row[availCol]));
+  }
+  const available = {};
+  const missing = [];
+  let found = 0;
+  for (const [sku, x] of Object.entries(shop.extras)) {
+    for (const [size, line] of Object.entries(x.sizes)) {
+      const code = text(line).toUpperCase();
+      if (bySku.has(code)) { available[`${sku}|${size}`] = Math.max(0, bySku.get(code)); found++; }
+      else { available[`${sku}|${size}`] = 0; missing.push(code); } // a line that is missing or not a number sells as sold out
+    }
+  }
+  if (!found) throw fault("stock-tab-lines");
+
+  // Orders tab: a ref counts as "on the Sheet" only when every one of its lines has a Status.
+  if (!text((refs[0] || [])[0]).toLowerCase().startsWith("order ref") || text((states[0] || [])[0]).toLowerCase() !== "status") throw fault("orders-tab-headings");
+  const lines = new Map();
+  for (let i = 1; i < refs.length; i++) {
+    const ref = text((refs[i] || [])[0]).toLowerCase();
+    if (!ref) continue;
+    const hasStatus = !!text((states[i] || [])[0]);
+    lines.set(ref, lines.has(ref) ? lines.get(ref) && hasStatus : hasStatus);
+  }
+  const recorded = new Set([...lines.keys()].filter((ref) => lines.get(ref)));
+  return { at: Date.now(), available, recorded, missing };
+}
+
+// The stock reading to use right now. Never throws: "from" says where the numbers came from.
+//   "sheet"  read from the Sheet within the last 20 seconds
+//   "saved"  the Sheet could not be read; this is the last good reading (under 30 minutes old)
+//   "none"   no reading at all: shirts, shorts and kits wait until the Sheet is back
+async function sheetStock(shop) {
+  if (sheetSeen && Date.now() - sheetSeen.at < SHEET_FRESH_MS) return { ...sheetSeen, from: "sheet" };
+  try {
+    sheetSeen = await readSheet(shop);
+    return { ...sheetSeen, from: "sheet" };
+  } catch (e) {
+    const problem = e && e.fault ? e.fault : (e && (e.name === "TimeoutError" || e.name === "AbortError") ? "google-too-slow" : "google-unreachable");
+    if (sheetSeen && Date.now() - sheetSeen.at < SHEET_TRUST_MS) return { ...sheetSeen, from: "saved", problem };
+    return { from: "none", problem };
+  }
+}
+
+// Everything the page and the checkout need to know about stock, in one go.
+async function stockNow(shop) {
+  const [paid, sheet] = await Promise.all([sold(shop), sheetStock(shop)]);
+  return status(shop, paid, sheet);
+}
+
+const CHECKING_CLOTHING = "Sorry, we are checking shirt and shorts stock right now, so they can't be ordered for a few minutes. Rods are fine to order. Please try again shortly.";
+
+function status(shop, paid, sheet) {
+  const totals = paid.totals;
   const rodsSold = { spin: 0, baitcast: 0 };
   for (const [sku, rod] of Object.entries(shop.rods)) {
     const n = totals[sku] || 0;
@@ -95,31 +263,49 @@ function status(shop, totals) {
   }
   // Expedition Kits: "kit|shirt-collared|L|XL" = one Pair, that shirt, those shorts.
   let kitsSold = 0;
-  const kitUse = {};
   for (const [key, n] of Object.entries(totals)) {
     if (!key.startsWith("kit|")) continue;
-    const [, shirt, shirtSize, shortsSize] = key.split("|");
     kitsSold += n;
     rodsSold.spin += n; rodsSold.baitcast += n;
-    kitUse[`${shirt}|${shirtSize}`] = (kitUse[`${shirt}|${shirtSize}`] || 0) + n;
-    kitUse[`${shop.kit.shorts}|${shortsSize}`] = (kitUse[`${shop.kit.shorts}|${shortsSize}`] || 0) + n;
   }
   const allRods = rodsSold.spin + rodsSold.baitcast;
   const left = {
     spin: Math.max(0, shop.rods["rod-spin"].stock - rodsSold.spin),
     baitcast: Math.max(0, shop.rods["rod-baitcast"].stock - rodsSold.baitcast),
   };
-  const extras = {};
-  for (const [sku, x] of Object.entries(shop.extras)) {
-    for (const [size, n] of Object.entries(x.sizes)) {
-      extras[`${sku}|${size}`] = Math.max(0, n - (totals[`${sku}|${size}`] || 0) - (kitUse[`${sku}|${size}`] || 0));
+  // Shirts and shorts: the Sheet's Available, less paid website orders the Sheet has not caught up with.
+  const haveSheet = !!sheet.available;
+  const waiting = {};
+  const prefix = String((shop.stock_sheet || {}).order_ref_prefix || "").toLowerCase();
+  if (haveSheet) for (const order of paid.orders) {
+    if (sheet.recorded.has(prefix + order.tail.toLowerCase())) continue;
+    for (const [key, n] of Object.entries(order.items)) {
+      let keys = [];
+      if (key.startsWith("kit|")) {
+        const [, shirt, shirtSize, shortsSize] = key.split("|");
+        keys = [`${shirt}|${shirtSize}`, `${shop.kit.shorts}|${shortsSize}`];
+      } else if (!shop.rods[key]) keys = [key];
+      for (const k of keys) waiting[k] = (waiting[k] || 0) + n;
     }
   }
+  const extras = {};
+  for (const [sku, x] of Object.entries(shop.extras)) {
+    for (const size of Object.keys(x.sizes)) {
+      const key = `${sku}|${size}`;
+      extras[key] = haveSheet ? Math.max(0, (sheet.available[key] || 0) - (waiting[key] || 0)) : 0;
+    }
+  }
+  // "stock" is for fault-finding: where the shirt and shorts numbers came from, and anything odd about them.
+  const stock = { from: sheet.from };
+  if (haveSheet) stock.read = new Date(sheet.at).toISOString();
+  if (sheet.problem) stock.problem = sheet.problem;
+  if (haveSheet && sheet.missing.length) stock.missing = sheet.missing;
+  if (Object.keys(waiting).length) stock.waiting = waiting;
   // Founding prices end when the limit is reached OR at "founding_ends", whichever comes first.
   const ends = Date.parse(shop.founding_ends || "");
   const inTime = Number.isNaN(ends) || Date.now() < ends;
   return { founding: allRods < shop.founding_limit && inTime, foundingLeft: Math.max(0, shop.founding_limit - allRods), foundingEnds: Number.isNaN(ends) ? null : shop.founding_ends, left, extras,
-    kitsLeft: Math.max(0, shop.kit.limit - kitsSold) };
+    kitsLeft: Math.max(0, shop.kit.limit - kitsSold), clothing: haveSheet ? "ok" : "checking", stock };
 }
 
 // Which rods can take a deposit right now: sold out, and the waitlist is switched on.
@@ -158,7 +344,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     if (!ready) return res.status(200).json({ ok: true, open: false, message: shop.closed_message });
     try {
-      const st = status(shop, await sold(shop));
+      const st = await stockNow(shop);
       res.setHeader("Cache-Control", "s-maxage=20");
       return res.status(200).json({ ok: true, open: true, ...st, waitlist: waitlistOpen(shop, st) });
     } catch (e) {
@@ -179,7 +365,7 @@ export default async function handler(req, res) {
   }
 
   let st;
-  try { st = status(shop, await sold(shop)); }
+  try { st = await stockNow(shop); }
   catch (e) { return res.status(502).json({ ok: false, error: "Could not check stock just now. Please try again." }); }
 
   const origin = `https://${host}`;
@@ -282,6 +468,7 @@ export default async function handler(req, res) {
   if (wantKits > st.kitsLeft) {
     return res.status(409).json({ ok: false, error: st.kitsLeft ? `Sorry, only ${st.kitsLeft} Expedition Kit${st.kitsLeft === 1 ? "" : "s"} left.` : "Sorry, the Expedition Kits have sold." });
   }
+  if (st.clothing !== "ok" && Object.keys(wantX).length) return res.status(503).json({ ok: false, error: CHECKING_CLOTHING });
   for (const [k, n] of Object.entries(wantX)) {
     if (n > st.extras[k]) return res.status(409).json({ ok: false, error: `Sorry, only ${st.extras[k]} left of the ${xName[k]}.` });
   }

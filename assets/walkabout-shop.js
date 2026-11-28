@@ -1,7 +1,9 @@
 /* Walkabout shop — the order panel on walkabout.html.
-   Prices, sizes and stock come from assets/walkabout-shop.json. The checkout
-   itself (api/walkabout-checkout.js) re-checks every price and stock count on
-   the server, so nothing here is trusted with money. */
+   Prices and sizes come from assets/walkabout-shop.json. What is left to sell
+   comes from the checkout (api/walkabout-checkout.js): rods from Stripe, shirts
+   and shorts from the Barefoot Merch Manifest Google Sheet. The checkout
+   re-checks every price and stock count on the server, so nothing here is
+   trusted with money. */
 (function(){
   var shop, live = {open:false}, cart = {};
   var checked = false; // true once the stock check has answered; until then the box says it is checking
@@ -9,6 +11,10 @@
   var money = function(c){ return '$' + (c % 100 ? (c/100).toFixed(2) : (c/100)); };
 
   function founding(){ return !live.open || live.founding !== false; }
+  // True while the checkout cannot read shirt and shorts stock from the Sheet. Rods are not affected.
+  function checking(){ return live.open === true && live.clothing === 'checking'; }
+  function outWords(){ return checking() ? ' (checking stock)' : ' (sold out)'; }
+  var CHECKING = 'We are checking shirt and shorts stock right now, so they can\'t be ordered for a few minutes. Rods are fine to order.';
   function foundingOver(){ return live.foundingLeft > 0 ? 'The Founding price has ended.' : 'The Founding rods have sold.'; }
 
   // Countdown under the offer heading. While Founding prices are on it counts down to "founding_ends",
@@ -141,6 +147,7 @@
 
   function add(sku){
     var have = cart[sku] || 0;
+    if (checking() && !shop.rods[sku]) { $('cart-status').textContent = CHECKING; return; }
     if (have + 1 > leftOf(sku)) { $('cart-status').textContent = 'Sorry, that is all we have left of that one.'; return; }
     cart[sku] = have + 1; render();
   }
@@ -158,8 +165,8 @@
     var sizeOpts = function(sku){
       var o = '', x = shop.extras[sku];
       Object.keys(x.sizes).forEach(function(size){
-        var left = live.open ? leftOf(sku + '|' + size) : x.sizes[size];
-        o += '<option value="' + size + '"' + (left < 1 ? ' disabled' : '') + '>' + size + (left < 1 ? ' (sold out)' : '') + '</option>';
+        var left = live.open ? leftOf(sku + '|' + size) : 1;
+        o += '<option value="' + size + '"' + (left < 1 ? ' disabled' : '') + '>' + size + (left < 1 ? outWords() : '') + '</option>';
       });
       return o;
     };
@@ -173,8 +180,8 @@
     Object.keys(shop.extras).forEach(function(sku){
       var x = shop.extras[sku], opts = '';
       Object.keys(x.sizes).forEach(function(size){
-        var left = live.open ? leftOf(sku + '|' + size) : x.sizes[size];
-        opts += '<option value="' + size + '"' + (left < 1 ? ' disabled' : '') + '>' + size + (left < 1 ? ' (sold out)' : '') + '</option>';
+        var left = live.open ? leftOf(sku + '|' + size) : 1;
+        opts += '<option value="' + size + '"' + (left < 1 ? ' disabled' : '') + '>' + size + (left < 1 ? outWords() : '') + '</option>';
       });
       html += '<div class="card shopextra"><h4>' + x.name + '</h4><div class="xprice">' + money(x.price) + '</div>' +
         '<label class="small" for="size-' + sku + '">Size</label><select id="size-' + sku + '">' + opts + '</select>' +
@@ -185,6 +192,10 @@
     render();
     switchWords();
     clock();
+    // While shirt and shorts stock is being checked, no size on the page is marked as sold out.
+    if (checking()) [].forEach.call(document.querySelectorAll('[data-sizes] [data-size]'), function(li){
+      li.className = ''; li.textContent = li.getAttribute('data-size');
+    });
   }
 
   document.addEventListener('click', function(e){
