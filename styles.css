@@ -958,3 +958,65 @@ section.navy .shopwait #waitlist-status{color:#9a3412;font-weight:600;margin:.8r
 .readnext h2{font-size:1.5rem;margin-bottom:1rem}
 .readnext ul{list-style:none;margin:0 0 1rem;padding:0;columns:2 320px;column-gap:2.5rem}
 .readnext li{break-inside:avoid;padding:.55rem 0;border-bottom:1px solid var(--dune)}
+
+/* Kit showcase (Walkabout "What's in the kit"): a lead photo, then one card per item.
+   Every photo keeps its own shape. The frame on each card takes its main photo's ratio
+   (--ar = width / height, set on the card) and is never taller than --kh. Photos sit in
+   the frame with object-fit:contain, so nothing is cropped, stretched or shown bigger than
+   it is. Thumbnails keep their own shape too (--th = thumbnail height). The script on the
+   page swaps the tapped thumbnail into the frame. */
+figure.kitlead{margin:0}
+.kititems{display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem;margin-top:1.6rem}
+.kititem{padding:18px;display:flex;flex-direction:column;min-width:0}
+.kitstage{width:min(100%,calc(var(--kh,440px)*var(--ar,1)));aspect-ratio:var(--ar,1);margin:0 auto;border-radius:12px;overflow:hidden}
+.kitstage picture{display:block;width:100%;height:100%}
+.kitstage img{display:block;width:100%;height:100%;object-fit:contain}
+.kitthumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:12px}
+.kitthumb{display:flex;justify-content:center;min-width:44px;line-height:0;padding:2px;border:2px solid transparent;border-radius:10px}
+.kitthumb img{display:block;height:var(--th,72px);width:auto;border-radius:6px}
+.kitthumb[aria-current="true"]{border-color:var(--navy)}
+.kitthumb:hover{border-color:var(--slate)}
+.kitthumb[aria-current="true"]:hover{border-color:var(--navy)}
+.kitcopy{margin-top:1rem}
+.kititem h3{margin:0 0 .3rem;font-size:1.12rem}
+.kititem .kitsizes-h{font-family:'Montserrat';font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin:.9rem 0 .45rem}
+.kitsizes{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:0}
+.kitsizes li{font-family:'Montserrat';font-weight:700;font-size:.74rem;color:var(--navy);border:1px solid var(--slate);border-radius:999px;padding:.32em .68em;white-space:nowrap}
+.kitsizes li.out{color:var(--slate);border-color:var(--dune)}
+.kitcal{padding:28px}
+.kitcal .season{color:var(--navy)}
+.kitcal .kitcal-line{color:var(--charcoal);font-size:1.02rem;margin:0 0 .4rem}
+.kitcal .small{color:var(--charcoal);font-size:.9rem;font-weight:600}
+@media(min-width:620px){
+  .kititems{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kitcal{grid-column:1/-1}
+}
+@media(min-width:1000px){
+  .kititems{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .kititem{grid-column:span 2}
+  .kititem.side,.kitcal{grid-column:span 3}
+  /* A wide item (the reel cover): photo and thumbnails on the left, words beside them. */
+  .kititem.side{display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);column-gap:1.4rem;align-content:start;padding:22px}
+  .kititem.side .kitstage{width:100%}
+  .kititem.side .kitthumbs{grid-column:1;grid-row:2}
+  .kititem.side .kitcopy{grid-column:2;grid-row:1;margin-top:.4rem}
+}
+/* Offer cards: the kit photo on the Expedition Kit card, and a small photo beside each
+   merch line that jumps to that item's card. */
+.shopcard figure.kitshot{margin:0 0 1.1rem;box-shadow:none}
+.shopcard .kitbody{display:flex;flex-direction:column}
+/* On a wide screen the card with the photo goes full width under the other two, photo beside the
+   details, so the other cards aren't stretched to match a tall one. */
+@media(min-width:901px){
+  .shopcards.kitbelow{grid-template-columns:1fr 1.12fr}
+  .shopcards.kitbelow .shopcard.hero-offer{order:0;grid-column:auto}
+  .shopcards.kitbelow .shopcard.kitwide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:2rem;align-items:start}
+  .shopcards.kitbelow .kitwide figure.kitshot{margin:0}
+}
+.checklist li.merchline{display:flex;align-items:center;justify-content:space-between;gap:.7rem}
+.linethumbs{display:flex;gap:4px;flex:0 0 auto}
+.linethumb{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;line-height:0}
+.linethumb img{display:block;height:56px;width:auto;border-radius:6px}
+/* A plain dot-point list, for lines that aren't selling points (returns). */
+.dotlist{margin:.6rem 0 1.2rem;padding-left:1.2rem;display:grid;gap:.35rem}
+.dotlist li{font-size:.95rem}
