@@ -167,7 +167,9 @@
     if (ks && kss && kso){
       var keep = [kss.value, kso.value];
       kss.innerHTML = sizeOpts(ks.value); kso.innerHTML = sizeOpts(shop.kit.shorts);
-      if (keep[0]) kss.value = keep[0]; if (keep[1]) kso.value = keep[1];
+      // Put the buyer's size back only if it can still be ordered. A sold-out size is never left selected.
+      var pick = function(sel, v){ if (v && [].some.call(sel.options, function(o){ return o.value === v && !o.disabled; })) sel.value = v; };
+      pick(kss, keep[0]); pick(kso, keep[1]);
     }
     var box = $('shop-extras'), html = '';
     Object.keys(shop.extras).forEach(function(sku){
@@ -181,6 +183,13 @@
         '<button type="button" class="btn btn-primary" data-addx="' + sku + '">Add to order</button></div>';
     });
     box.innerHTML = html;
+    // Size lists on the "What's in the kit" cards: a size that has sold out is crossed through.
+    [].forEach.call(document.querySelectorAll('[data-sizes] [data-size]'), function(li){
+      var size = li.getAttribute('data-size'), sku = li.parentNode.getAttribute('data-sizes');
+      var out = live.open && shop.extras[sku] && leftOf(sku + '|' + size) < 1;
+      li.className = out ? 'out' : '';
+      li.innerHTML = out ? '<s>' + size + '</s> sold out' : size;
+    });
     waitlist();
     render();
     switchWords();
