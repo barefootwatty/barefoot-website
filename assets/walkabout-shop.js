@@ -33,30 +33,41 @@
 
   var clockOn = false;
   function clock(){
-    var el = $('founding-clock');
+    // "head-clock" is the strip in the page header. It shows this same countdown in short form, and hides whenever this one does.
+    var el = $('founding-clock'), head = $('head-clock');
     if (!el || !shop) return;
-    if (!live.open) { el.hidden = true; return; }
+    if (!live.open) { el.hidden = true; if (head) head.hidden = true; return; }
     var two = function(n){ return (n < 10 ? '0' : '') + n; };
+    var brief = function(ms){
+      var s = Math.floor(ms / 1000);
+      return '<b class="hc-keep">' + Math.floor(s / 86400) + 'd ' + two(Math.floor(s % 86400 / 3600)) + 'h ' + two(Math.floor(s % 3600 / 60)) + 'm ' + two(s % 60) + 's</b>';
+    };
     var time = function(ms){
       var s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
       return '<span class="fc-time"><b>' + d + '</b> ' + (d === 1 ? 'day' : 'days') + ' <b>' + two(h) + '</b> hrs <b>' + two(m) + '</b> min <b>' + two(s % 60) + '</b> sec</span>';
     };
-    var html = '';
+    var html = '', top = '';
     if (live.founding !== false) {
       var ends = shop.founding_ends ? Date.parse(shop.founding_ends) : NaN, ms = ends - Date.now();
-      if (ms <= 0) { el.hidden = true; live.founding = false; build(); return; }
+      if (ms <= 0) { el.hidden = true; if (head) head.hidden = true; live.founding = false; build(); return; }
       if (!isNaN(ends)) {
         var gone = shop.founding_limit - live.foundingLeft;
         var leftWords = live.foundingLeft === 1 ? 'is 1 Founding rod' : 'are ' + live.foundingLeft + ' Founding rods';
         var countWords = gone > 0 ? gone + (gone === 1 ? ' rod has' : ' rods have') + ' gone so far, and there ' + leftWords + ' left.' : live.foundingLeft + ' of ' + shop.founding_limit + ' Founding rods left.';
-        var count = live.foundingLeft > 0 && live.foundingLeft < shop.founding_count_below ? '<span class="fc-count">' + countWords + '</span> ' : '';
+        var showCount = live.foundingLeft > 0 && live.foundingLeft < shop.founding_count_below;
+        var count = showCount ? '<span class="fc-count">' + countWords + '</span> ' : '';
         html = count + 'Founding price ends in ' + time(ms) + ', or when the first ' + shop.founding_limit + ' rods are gone.';
+        top = 'Founding price ends in ' + brief(ms) + (showCount ? ' <span class="hc-dot">&middot;</span> <span class="hc-keep hc-line"><b>' + live.foundingLeft + '</b> Founding ' + (live.foundingLeft === 1 ? 'rod' : 'rods') + ' left</span>' : '');
       }
     } else {
       var by = shop.christmas_order_by ? Date.parse(shop.christmas_order_by) : NaN, left = by - Date.now();
-      if (left > 0) html = 'Order in the next ' + time(left) + ' for Parcel Post before Christmas.';
+      if (left > 0) {
+        html = 'Order in the next ' + time(left) + ' for Parcel Post before Christmas.';
+        top = '<span class="hc-long">Order in the next ' + brief(left) + ' <span class="hc-keep hc-line">for Parcel Post before Christmas</span></span>';
+      }
     }
     el.hidden = !html;
+    if (head) { head.hidden = !top; if (top) head.innerHTML = top; }
     if (!html) return;
     el.innerHTML = html;
     if (!clockOn) { clockOn = true; setInterval(clock, 1000); }
