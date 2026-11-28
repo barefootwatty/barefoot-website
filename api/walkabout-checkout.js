@@ -76,8 +76,10 @@ async function stripe(method, path, params) {
   return j;
 }
 
-async function loadShop(host) {
-  const r = await fetch(`https://${host}/assets/walkabout-shop.json`, { cache: "no-store" });
+// A Vercel preview sits behind Vercel's own login. Passing on the visitor's cookie lets this read
+// the settings file there too, so a preview can be tested. On the live site it makes no difference.
+async function loadShop(host, cookie) {
+  const r = await fetch(`https://${host}/assets/walkabout-shop.json`, { cache: "no-store", headers: cookie ? { cookie } : {} });
   if (!r.ok) throw new Error(`walkabout-shop.json ${r.status}`);
   return r.json();
 }
@@ -336,7 +338,7 @@ function checkoutNote(shop) {
 export default async function handler(req, res) {
   const host = req.headers["x-forwarded-host"] || req.headers.host;
   let shop;
-  try { shop = await loadShop(host); }
+  try { shop = await loadShop(host, req.headers.cookie); }
   catch (e) { return res.status(502).json({ ok: false, error: "The shop settings did not load. Please try again." }); }
 
   const ready = !!process.env.STRIPE_SECRET_KEY && shop.open === true;
