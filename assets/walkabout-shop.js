@@ -136,7 +136,7 @@
       body: JSON.stringify({deposit: true, from: location.pathname.replace(/\.html$/, ''), waitlist: $('cart-waitlist').checked, items: [{sku: sku, qty: 1}]})})
       .then(function(r){ return r.json(); })
       .then(function(j){ if (j.ok && j.url) { location.href = j.url; return; } fail(j.error || 'The checkout did not open. Please try again.'); })
-      .catch(function(){ fail('The checkout did not open. Please try again, or call Watty on 0417 272 871.'); });
+      .catch(function(){ fail('The checkout did not open. Please try again, or flick Watty an email at glenn@barefootfishingsafaris.com.au.'); });
   }
 
   function add(sku){
@@ -218,7 +218,7 @@
           go.disabled = false; go.textContent = 'Go to checkout';
         })
         .catch(function(){
-          $('cart-status').textContent = 'The checkout did not open. Please try again, or call Watty on 0417 272 871.';
+          $('cart-status').textContent = 'The checkout did not open. Please try again, or flick Watty an email at glenn@barefootfishingsafaris.com.au.';
           go.disabled = false; go.textContent = 'Go to checkout';
         });
     });

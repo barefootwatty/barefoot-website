@@ -228,7 +228,7 @@ export default async function handler(req, res) {
       const session = await stripe("POST", "/checkout/sessions", dParams);
       return res.status(200).json({ ok: true, url: session.url });
     } catch (e) {
-      return res.status(502).json({ ok: false, error: "The checkout did not open. Please try again, or call Watty on 0417 272 871." });
+      return res.status(502).json({ ok: false, error: "The checkout did not open. Please try again, or flick Watty an email at glenn@barefootfishingsafaris.com.au." });
     }
   }
 
@@ -332,6 +332,6 @@ export default async function handler(req, res) {
     const session = await stripe("POST", "/checkout/sessions", params);
     return res.status(200).json({ ok: true, url: session.url });
   } catch (e) {
-    return res.status(502).json({ ok: false, error: "The checkout did not open. Please try again, or call Watty on 0417 272 871." });
+    return res.status(502).json({ ok: false, error: "The checkout did not open. Please try again, or flick Watty an email at glenn@barefootfishingsafaris.com.au." });
   }
 }
