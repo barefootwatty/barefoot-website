@@ -123,8 +123,10 @@ async function sold(shop) {
 const SHEET_FRESH_MS = 20 * 1000;      // the Sheet is re-read at most this often
 const SHEET_TRUST_MS = 30 * 60 * 1000; // if it cannot be read, the last good reading is used for this long
 const GOOGLE_WAIT_MS = 4000;           // a buyer is never kept waiting on Google longer than this
+const SHEET_RETRY_MS = 10 * 1000;      // after a failed read, Google is left alone this long before the next try
 let googlePass = null;                 // { token, until }: Google's hour-long pass, kept between requests
 let sheetSeen = null;                  // the last good reading of the Sheet
+let sheetFailed = null;                // { at, problem }: the last failed read, if it came after the last good one
 
 function b64url(bytes) {
   let s = "";
@@ -189,7 +191,13 @@ async function readSheet(shop) {
     [cfg.stock, cfg.order_refs, cfg.order_status].map((a) => "ranges=" + encodeURIComponent(a)).join("&"),
     { headers: { Authorization: `Bearer ${token}` }, signal });
   if (r.status === 401) googlePass = null;
-  if (!r.ok) throw fault(`sheet-${r.status}`);
+  if (!r.ok) {
+    const said = await r.json().then((b) => String((b && b.error && b.error.message) || ""), () => "");
+    if (r.status === 400 && /parse range/i.test(said)) throw fault("sheet-tab-not-found");
+    if (r.status === 403) throw fault(/disabled|not been used/i.test(said) ? "sheets-api-not-switched-on" : "sheet-not-shared-with-the-key");
+    if (r.status === 404) throw fault("sheet-id-wrong");
+    throw fault(`sheet-${r.status}`);
+  }
   const j = await r.json();
   const [stock, refs, states] = [0, 1, 2].map((i) => (j.valueRanges && j.valueRanges[i] && j.valueRanges[i].values) || []);
   const text = (v) => String(v === undefined || v === null ? "" : v).trim();
@@ -238,14 +246,17 @@ async function readSheet(shop) {
 //   "none"   no reading at all: shirts, shorts and kits wait until the Sheet is back
 async function sheetStock(shop) {
   if (sheetSeen && Date.now() - sheetSeen.at < SHEET_FRESH_MS) return { ...sheetSeen, from: "sheet" };
-  try {
-    sheetSeen = await readSheet(shop);
-    return { ...sheetSeen, from: "sheet" };
-  } catch (e) {
-    const problem = e && e.fault ? e.fault : (e && (e.name === "TimeoutError" || e.name === "AbortError") ? "google-too-slow" : "google-unreachable");
-    if (sheetSeen && Date.now() - sheetSeen.at < SHEET_TRUST_MS) return { ...sheetSeen, from: "saved", problem };
-    return { from: "none", problem };
+  if (!sheetFailed || Date.now() - sheetFailed.at >= SHEET_RETRY_MS) {
+    try {
+      sheetSeen = await readSheet(shop);
+      sheetFailed = null;
+      return { ...sheetSeen, from: "sheet" };
+    } catch (e) {
+      sheetFailed = { at: Date.now(), problem: e && e.fault ? e.fault : (e && (e.name === "TimeoutError" || e.name === "AbortError") ? "google-too-slow" : "google-unreachable") };
+    }
   }
+  if (sheetSeen && Date.now() - sheetSeen.at < SHEET_TRUST_MS) return { ...sheetSeen, from: "saved", problem: sheetFailed.problem };
+  return { from: "none", problem: sheetFailed.problem };
 }
 
 // Everything the page and the checkout need to know about stock, in one go.
