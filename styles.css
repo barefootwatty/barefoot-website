@@ -996,7 +996,7 @@ figure.kitlead{margin:0}
   .kititem{grid-column:span 2}
   .kititem.side,.kitcal{grid-column:span 3}
   /* A wide item (the reel cover): photo and thumbnails on the left, words beside them. */
-  .kititem.side{display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);column-gap:1.4rem;align-content:start;padding:22px}
+  .kititem.side{display:grid;grid-template-columns:minmax(0,272px) minmax(0,1fr);column-gap:1.4rem;align-content:start;padding:22px}
   .kititem.side .kitstage{width:100%}
   .kititem.side .kitthumbs{grid-column:1;grid-row:2}
   .kititem.side .kitcopy{grid-column:2;grid-row:1;margin-top:.4rem}
