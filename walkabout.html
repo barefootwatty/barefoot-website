@@ -6,7 +6,7 @@
 <title>The Walkabout fishing rod | Barefoot Fishing Safaris</title>
 <meta name="description" content="The Walkabout: a 7'2&quot; 4-piece spin and baitcast rod designed by Top End guide Watty. Tips swap between both rods, every rod comes with a spare tip, and every section can be replaced.">
 <link rel="icon" type="image/png" href="assets/fish-icon.png">
-<link rel="stylesheet" href="styles.css?v=38">
+<link rel="stylesheet" href="styles.css?v=39">
 <link rel="canonical" href="https://barefootfishingsafaris.com.au/walkabout">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Walkabout fishing rod">
@@ -38,7 +38,15 @@
   </div>
 </section>
 
-<!-- VIDEO (sales video, Watty to camera): when the file exists, add a cream section here holding a "videoframe" div with the video inside it. -->
+<!-- VIDEO (sales video, Watty to camera). Square picture. The photo is a button: pressing it swaps in the YouTube player, so nothing loads from YouTube until then. To change the video, change data-yt. -->
+<section class="cream" id="video" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="videoframe square" data-yt="DMlTuNYO3ho" role="button" tabindex="0" aria-label="Play the video: Watty on the Walkabout rod">
+      <img src="assets/img/walkabout-video-poster-1080.jpg" srcset="assets/img/walkabout-video-poster-640.jpg 640w, assets/img/walkabout-video-poster-1080.jpg 1080w" sizes="(max-width:640px) 100vw, 600px" alt="Watty in his shed holding a Walkabout rod, with the boxed rods stacked behind him" width="1080" height="1080">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+  </div>
+</section>
 
 <!-- TIPS -->
 <section class="cream" id="tips">
@@ -631,6 +639,24 @@ document.addEventListener('click', function(e){
     if (x === t) x.setAttribute('aria-current', 'true'); else x.removeAttribute('aria-current');
   });
 });
+</script>
+<script>
+/* Sales video: the photo is a button. Pressing it swaps in the YouTube player and starts it. */
+(function(){
+  var box=document.querySelector('.videoframe[data-yt]'); if(!box) return;
+  function play(){
+    var id=box.getAttribute('data-yt'); if(!id||box.querySelector('iframe')) return;
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+    f.title='The Walkabout rod: Watty to camera';
+    f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+    f.setAttribute('allowfullscreen','');
+    box.innerHTML=''; box.appendChild(f);
+    box.removeAttribute('role'); box.removeAttribute('tabindex'); box.removeAttribute('aria-label'); box.style.cursor='default';
+  }
+  box.addEventListener('click',play);
+  box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
+})();
 </script>
 <script src="assets/walkabout-shop.js?v=12" defer></script>
 </body>

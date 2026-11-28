@@ -303,6 +303,14 @@ section.navy .eyebrow{color:var(--copper)}
 
 .videoframe{max-width:960px;margin:0 auto;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000}
 .videoframe video{display:block;width:100%;height:auto;aspect-ratio:16/9}
+/* Square video that plays from YouTube when pressed (Walkabout sales video) */
+.videoframe.square{position:relative;max-width:600px;aspect-ratio:1/1;cursor:pointer}
+.videoframe.square img{display:block;width:100%;height:100%;object-fit:cover}
+.videoframe.square iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.videoframe.square .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:rgba(22,49,78,.86);display:flex;align-items:center;justify-content:center;transition:background .2s ease;box-shadow:0 6px 22px rgba(0,0,0,.35)}
+.videoframe.square:hover .play{background:var(--copper)}
+.videoframe.square .play svg{width:30px;height:30px;fill:#fff;margin-left:4px}
+.videoframe.square:focus-visible{outline:3px solid var(--copper);outline-offset:3px}
 
 .wrap-wide{max-width:1400px;margin:0 auto;padding:0 22px}
 .gallery{display:grid;gap:12px}
